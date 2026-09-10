@@ -14,6 +14,11 @@ import {
 } from "./content";
 
 const dataDir = path.join(process.cwd(), "data");
+const writableDir = process.env.VERCEL
+  ? path.join("/tmp", "gradex-data")
+  : dataDir;
+
+const memory = new Map<string, unknown>();
 
 export type QuoteRequest = {
   id: string;
@@ -42,25 +47,41 @@ const defaultSettings: SiteSettings = {
   googleAnalyticsId: "",
 };
 
-async function ensureDir() {
-  await fs.mkdir(dataDir, { recursive: true });
+async function readFrom(full: string) {
+  const raw = await fs.readFile(full, "utf8");
+  return JSON.parse(raw);
 }
 
 async function readJson<T>(file: string, fallback: T): Promise<T> {
-  await ensureDir();
-  const full = path.join(dataDir, file);
-  try {
-    const raw = await fs.readFile(full, "utf8");
-    return JSON.parse(raw) as T;
-  } catch {
-    await fs.writeFile(full, JSON.stringify(fallback, null, 2), "utf8");
-    return fallback;
+  if (memory.has(file)) return memory.get(file) as T;
+
+  const locations = [path.join(dataDir, file), path.join(writableDir, file)];
+  for (const full of locations) {
+    try {
+      const parsed = (await readFrom(full)) as T;
+      memory.set(file, parsed);
+      return parsed;
+    } catch {
+      /* try next location */
+    }
   }
+
+  memory.set(file, fallback);
+  return fallback;
 }
 
 async function writeJson<T>(file: string, value: T) {
-  await ensureDir();
-  await fs.writeFile(path.join(dataDir, file), JSON.stringify(value, null, 2), "utf8");
+  memory.set(file, value);
+  try {
+    await fs.mkdir(writableDir, { recursive: true });
+    await fs.writeFile(
+      path.join(writableDir, file),
+      JSON.stringify(value, null, 2),
+      "utf8",
+    );
+  } catch {
+    // Vercel serverless filesystem is read-only except /tmp.
+  }
 }
 
 export const store = {
