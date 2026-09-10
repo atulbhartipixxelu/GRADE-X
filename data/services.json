@@ -1,0 +1,258 @@
+[
+  {
+    "slug": "kitchen-exhaust-cleaning",
+    "name": "Kitchen Exhaust Cleaning",
+    "category": "kitchen-exhaust",
+    "featured": true,
+    "excerpt": "Full-system exhaust hygiene with measured grease thickness, interior steam washing and documented after-clean evidence.",
+    "description": "Grade X treats kitchen exhaust as a compliance asset, not a cosmetic wipe-down. Interior ductwork, canopy plenums and accessible exhaust components are cleaned using professional steam extraction, then verified with digital grease-thickness readings before and after the job. Facility managers receive photographic evidence and a written service record with every clean — so fire-risk and food-safety files stay audit-ready.",
+    "outcomes": [
+      "Interior steam washing of ducts and canopy systems",
+      "Before/after micron readings, not visual guesswork",
+      "Photographic evidence and a job report on every visit"
+    ]
+  },
+  {
+    "slug": "canopy-cleaning",
+    "name": "Canopy Cleaning",
+    "category": "kitchen-exhaust",
+    "featured": true,
+    "excerpt": "Canopy interiors, filters and capture zones cleaned to food-safe standard with protected prep areas below.",
+    "description": "Grease that collects in canopy interiors and filter banks is a fire load and a hygiene failure waiting to happen. Grade X isolates and protects the work zone, then deep-cleans canopy surfaces, baffles and accessible plenums so extraction actually captures what the cookline produces. The work is sequenced with exhaust cleaning so the whole capture-and-extract path is treated as one system.",
+    "outcomes": [
+      "Canopy, filter and plenum hygiene in one visit",
+      "Work-area protection for live commercial kitchens",
+      "Aligned with full exhaust-system methodology"
+    ]
+  },
+  {
+    "slug": "robotic-exhaust-cleaning",
+    "name": "Robotic Exhaust Cleaning Technology",
+    "category": "kitchen-exhaust",
+    "featured": true,
+    "excerpt": "Stainless tracked crawler with dual-hose turret jets and a forward camera — currently the only robotic kitchen exhaust platform of this kind in WA.",
+    "description": "Grade X is currently the only company in Western Australia operating robotic kitchen exhaust cleaning technology. The platform is a stainless tracked crawler: chevron drive plates, dual high-pressure hoses, an articulating turret with twin nozzles, LED work lights and a forward inspection camera. It enters duct runs that are unsafe or impractical to occupy, cleans under live visual confirmation, and leaves the interior on record — not just the canopy face.",
+    "outcomes": [
+      "Tracked crawler access without manned duct entry",
+      "Twin turret jets fed by a dual-hose high-pressure circuit",
+      "Live camera + LED interior view during the clean"
+    ]
+  },
+  {
+    "slug": "steam-cleaning",
+    "name": "Steam Cleaning",
+    "category": "kitchen-exhaust",
+    "featured": true,
+    "excerpt": "Professional-grade steam and extraction that lifts grease with reduced reliance on harsh chemicals.",
+    "description": "Interior steam washing is how Grade X gets inside exhaust systems without flooding a kitchen in aggressive chemistry. High-temperature steam and extraction lift accumulated grease and contaminants from duct interiors and equipment surfaces while supporting sites that are moving toward less chemically-intensive commercial cleaning. It is a process step in the methodology, not a marketing add-on.",
+    "outcomes": [
+      "Deep interior clean with steam and extraction",
+      "Reduced reliance on harsh chemical programmes",
+      "Suitable for food-production environments"
+    ]
+  },
+  {
+    "slug": "kitchen-equipment-hygiene",
+    "name": "Kitchen Equipment Hygiene",
+    "category": "kitchen-exhaust",
+    "excerpt": "UHC, grill, shake machine, steamer, oven and allied cookline assets returned to a food-safe operating condition.",
+    "description": "Exhaust hygiene fails if the cookline itself is carrying soil. Grade X programmes cover UHC cabinets, grills, shake machines, steamers, ovens and related production equipment so grease, carbon and food residue are removed from the assets that create the exhaust load. Each asset type is treated with the right recovery method rather than a generic degrease.",
+    "outcomes": [
+      "Asset-specific hygiene for cookline equipment",
+      "Supports both nightly maintenance and deep-clean cycles",
+      "Documented as part of the site service record"
+    ]
+  },
+  {
+    "slug": "grill-recovery",
+    "name": "Grill Recovery",
+    "category": "kitchen-equipment",
+    "excerpt": "Carbon and grease recovery on grill surfaces so heat transfer, appearance and food quality come back into spec.",
+    "description": "Grill recovery is a production issue as much as a cleaning issue. Built-up carbon changes cook times and product quality. Grade X restores grill surfaces through controlled recovery methods suited to commercial cooklines, then leaves the asset ready for service without overnight chemical soaks that the kitchen cannot afford.",
+    "outcomes": [
+      "Carbon and grease recovery on working grill surfaces",
+      "Minimal disruption to service windows",
+      "Fits scheduled deep-clean or recovery call-outs"
+    ]
+  },
+  {
+    "slug": "fryer-vat-boil-outs",
+    "name": "Fryer Vat Boil-Outs",
+    "category": "kitchen-equipment",
+    "excerpt": "Controlled boil-out programmes that remove polymerised oil from vats without damaging equipment.",
+    "description": "Polymerised oil in fryer vats is a quality, safety and equipment-life problem. Grade X performs professional boil-outs as a controlled process: isolation, boil-out, extraction and rinse, then return-to-service. Sites get a cleaner vat and a record of the work — useful for brand standards and for the technicians who inherit the asset next.",
+    "outcomes": [
+      "Professional boil-out and extraction sequence",
+      "Protects vat integrity while removing baked-on soil",
+      "Service record supplied with the job"
+    ]
+  },
+  {
+    "slug": "shake-machine-cleaning",
+    "name": "Shake Machine Cleaning",
+    "category": "kitchen-equipment",
+    "excerpt": "Hygienic strip-and-clean for shake and frozen-beverage machines used in QSR environments.",
+    "description": "Shake machines are a food-safety hotspot. Grade X follows a disciplined disassembly, clean and reassembly process so dairy and sugar soils are removed from parts that daily wipe-downs never reach. The work is documented and scheduled so franchise operators can show a hygiene programme rather than an ad-hoc clean.",
+    "outcomes": [
+      "Full hygienic clean of production parts",
+      "Aligned to QSR operating windows",
+      "Supports audit-ready kitchen hygiene files"
+    ]
+  },
+  {
+    "slug": "cool-room-cleaning",
+    "name": "Cool Room Cleaning",
+    "category": "kitchen-equipment",
+    "excerpt": "Floors, walls, racking and seals cleaned to a food-storage standard, including condensate and soil traps.",
+    "description": "Cool rooms accumulate soil at floor junctions, racking feet and door seals — the places auditors look first. Grade X deep-cleans storage environments with food-safe methods, paying attention to drainage, seals and high-touch hardware so the room returns to a condition a facility manager can stand behind.",
+    "outcomes": [
+      "Food-storage hygiene, not a floor mop only",
+      "Seals, racking and junctions included",
+      "Fits monthly deep-clean cycles"
+    ]
+  },
+  {
+    "slug": "nightly-kitchen-maintenance",
+    "name": "Nightly Kitchen Maintenance",
+    "category": "kitchen-equipment",
+    "excerpt": "After-close programmes that reset cooklines, floors and hygiene points before the next service.",
+    "description": "Nightly maintenance is how high-volume kitchens stay inside brand and food-safety spec between deep cleans. Grade X can run a structured after-close programme covering cookline reset, floor hygiene and nominated equipment — with the same reporting discipline as project work, so multi-site managers can see what was done last night, not just that someone attended.",
+    "outcomes": [
+      "Structured after-close scope, not ad-hoc wiping",
+      "Designed for QSR and hospitality close windows",
+      "Attendance and scope recorded"
+    ]
+  },
+  {
+    "slug": "monthly-kitchen-deep-cleaning",
+    "name": "Monthly Kitchen Deep Cleaning",
+    "category": "kitchen-equipment",
+    "excerpt": "Periodic deep cleans that reach behind, under and into assets daily teams cannot take offline.",
+    "description": "Monthly deep cleaning is the layer that nightly maintenance cannot reach: behind equipment, into junctions, high-level surfaces and accumulated grease that only comes off with time and the right plant. Grade X schedules these around trading, documents the scope, and ties them to exhaust and equipment programmes so the kitchen is treated as one hygiene system.",
+    "outcomes": [
+      "Scheduled deep-clean scope with access planning",
+      "Complements exhaust and equipment recovery",
+      "Evidence pack for compliance files"
+    ]
+  },
+  {
+    "slug": "lobby-cleaning",
+    "name": "Lobby Cleaning",
+    "category": "lobby",
+    "excerpt": "Daily-standard lobby hygiene for QSR and hospitality entries that take the same traffic as the kitchen.",
+    "description": "Lobbies are the brand surface customers actually touch. Grade X delivers lobby programmes that match the operational tempo of QSR and clubs: floors, touchpoints, glazing at entry, and the hygiene details that make a site look controlled rather than merely mopped.",
+    "outcomes": [
+      "Entry, floor and touchpoint programmes",
+      "Timed around trading, not against it",
+      "Can be packaged with kitchen contracts"
+    ]
+  },
+  {
+    "slug": "monthly-lobby-deep-cleaning",
+    "name": "Monthly Lobby Deep Cleaning",
+    "category": "lobby",
+    "excerpt": "Periodic restoration of lobby finishes, edges and high-level surfaces that daily cleans leave behind.",
+    "description": "A monthly lobby deep clean restores edges, high-level dusting, furniture bases and finish recovery that daily attendance never has time for. For shopping-centre food courts and QSR dining rooms it is the difference between a site that looks maintained and one that looks tired under fluorescent light.",
+    "outcomes": [
+      "High-level, edge and finish recovery",
+      "Scheduled with kitchen deep-clean windows where useful",
+      "Clear scope for facility managers"
+    ]
+  },
+  {
+    "slug": "play-place",
+    "name": "Play Place",
+    "category": "lobby",
+    "excerpt": "Hygienic cleaning of play environments, including attention to staff certification where the site requires it.",
+    "description": "Play places sit at the intersection of hygiene, parent confidence and site compliance. Grade X cleans these environments as a defined service — not an afterthought on a lobby run — and can support sites that require Working With Children Check credentials for nominated staff. Scope, frequency and evidence are agreed with the operator so the area stays both presentable and defensible.",
+    "outcomes": [
+      "Defined play-area hygiene scope",
+      "WWCC-ready staffing where the site requires it",
+      "Documented attendance for brand and landlord files"
+    ]
+  },
+  {
+    "slug": "floor-detailing-scrubbing",
+    "name": "Floor Detailing & Floor Scrubbing",
+    "category": "exterior",
+    "excerpt": "Mechanical scrubbing and edge detailing for kitchen, back-of-house and front-of-house floor systems.",
+    "description": "Commercial kitchen floors fail at the edges, grout and under-equipment lines. Grade X uses mechanical scrubbing and detailing to recover slip resistance and appearance, including the transitions between cookline, wash-up and customer floor that a mop never resets.",
+    "outcomes": [
+      "Mechanical scrub plus edge and grout attention",
+      "Kitchen and FOH floor systems",
+      "Improves both presentation and cleanability"
+    ]
+  },
+  {
+    "slug": "exterior-high-pressure-washing",
+    "name": "Exterior High-Pressure Washing",
+    "category": "exterior",
+    "excerpt": "Controlled high-pressure washing for building aprons, docks and grease-affected exterior fabric.",
+    "description": "Exhaust discharge, dock traffic and kitchen waste paths stain the building envelope. Grade X pressure-washes exteriors with control over run-off and adjacent finishes so the site presents cleanly to landlords, brand auditors and the public — without treating the building like a driveway.",
+    "outcomes": [
+      "Grease-affected exterior fabric recovered",
+      "Controlled method around glazing and joints",
+      "Pairs with exhaust discharge-point hygiene"
+    ]
+  },
+  {
+    "slug": "building-drive-thru-pressure-cleaning",
+    "name": "Building & Drive-Thru Pressure Cleaning",
+    "category": "exterior",
+    "excerpt": "Drive-thru lanes, building skirts and customer approach paths cleaned to a brand-presentation standard.",
+    "description": "Drive-thru is a brand stage. Oil, rubber and food soil collect in lanes and on building skirts where every customer looks. Grade X pressure-cleans these zones as a scheduled presentation service for QSR groups that need the approach path to match the kitchen standard inside.",
+    "outcomes": [
+      "Lanes, skirts and customer approach",
+      "Scheduled around trading peaks",
+      "Multi-site programmes available"
+    ]
+  },
+  {
+    "slug": "window-cleaning",
+    "name": "Window Cleaning",
+    "category": "exterior",
+    "excerpt": "Interior and exterior glazing programmes for dining rooms, entries and kitchen-adjacent glass.",
+    "description": "Grease film on kitchen-adjacent glass is visible from the dining room. Grade X includes window cleaning as a defined commercial service so glazing is not left as a casual add-on. Interior and exterior programmes can be aligned with lobby and exterior cycles.",
+    "outcomes": [
+      "Interior and exterior glazing",
+      "Kitchen-adjacent film addressed, not ignored",
+      "Can sit inside a site-wide hygiene contract"
+    ]
+  },
+  {
+    "slug": "line-marking",
+    "name": "Line Marking",
+    "category": "exterior",
+    "excerpt": "Carpark and drive-thru line marking to keep traffic, compliance and brand presentation intact.",
+    "description": "Faded line marking is a safety and presentation defect on QSR and shopping-centre sites. Grade X delivers line marking as part of the exterior commercial offering so facility managers can keep pavement marks, bays and drive-thru guidance readable without briefing a second contractor.",
+    "outcomes": [
+      "Bays, guidance and drive-thru marks",
+      "Coordinated with pressure-cleaning programmes",
+      "One accountable commercial contractor"
+    ]
+  },
+  {
+    "slug": "general-commercial-cleaning",
+    "name": "General Commercial Cleaning",
+    "category": "exterior",
+    "excerpt": "Broader commercial cleaning for sites that want kitchen-grade accountability across the property.",
+    "description": "Many Grade X clients need more than the kitchen. General commercial cleaning is offered as a disciplined programme — scoped, scheduled and reported — for offices, back-of-house corridors, amenities and shared property spaces that sit alongside the cookline. It is not a generic office-cleaning pitch; it is the same contractor already inside the kitchen.",
+    "outcomes": [
+      "Scoped programmes with the kitchen contractor",
+      "Amenities, BOH and property spaces",
+      "Single point of accountability for facility managers"
+    ]
+  },
+  {
+    "slug": "hygiene-sanitation-services",
+    "name": "Hygiene & Sanitation Services",
+    "category": "exterior",
+    "excerpt": "Targeted hygiene and sanitation for high-touch and food-adjacent zones that sit outside the cookline.",
+    "description": "Hygiene and sanitation services cover the high-touch, waste and food-adjacent zones that sit around a commercial kitchen: amenities, waste paths, sanitisation of nominated surfaces, and the supporting work that keeps a site inside its food-safety plan. Grade X treats this as specified work with records, not a perfume-and-mop round.",
+    "outcomes": [
+      "Specified high-touch and food-adjacent zones",
+      "Food-safe methods in production environments",
+      "Records suitable for compliance files"
+    ]
+  }
+]
