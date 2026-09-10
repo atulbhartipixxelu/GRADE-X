@@ -1,3 +1,19 @@
+function resolveSiteUrl() {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (raw) {
+    try {
+      return new URL(raw).origin;
+    } catch {
+      /* fall through */
+    }
+  }
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  if (vercel) {
+    return vercel.startsWith("http") ? vercel : `https://${vercel}`;
+  }
+  return "http://localhost:3000";
+}
+
 export const site = {
   name: "Grade X Commercial Solutions",
   legalName: "Grade X Commercial Solutions Pty Ltd",
@@ -5,7 +21,7 @@ export const site = {
   tagline: "Precision. Technology. Compliance.",
   description:
     "Western Australia's only robotic kitchen exhaust cleaning specialist. Commercial kitchen hygiene, digital grease measurement, and documented compliance for QSR, hospitality, and facility managers.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: resolveSiteUrl(),
   abn: "45 684 073 345",
   address: {
     street: "5 Elward Way",

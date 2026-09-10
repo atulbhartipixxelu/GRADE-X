@@ -37,23 +37,21 @@ export function ScrollVideoBanner() {
     if (!stageEl || !wrapEl || !videoEl || !heroEl || !washEl || !secondEl || !hudEl) return;
 
     videoEl.muted = true;
+    videoEl.defaultMuted = true;
     videoEl.loop = true;
     videoEl.playsInline = true;
-    const tryPlay = () => {
-      void videoEl.play().catch(() => undefined);
-    };
-    tryPlay();
-    const playRetry = window.setTimeout(tryPlay, 1200);
+    videoEl.autoplay = true;
 
-    let takeover = false;
-    const startScrub = () => {
-      if (takeover) return;
-      takeover = true;
-      videoEl.loop = false;
-      videoEl.pause();
+    const keepPlaying = () => {
+      if (videoEl.paused) {
+        void videoEl.play().catch(() => undefined);
+      }
     };
-    window.addEventListener("wheel", startScrub, { passive: true });
-    window.addEventListener("touchmove", startScrub, { passive: true });
+    keepPlaying();
+    const playRetry = window.setInterval(keepPlaying, 2000);
+    videoEl.addEventListener("pause", keepPlaying);
+    videoEl.addEventListener("stalled", keepPlaying);
+    videoEl.addEventListener("suspend", keepPlaying);
 
     const counters = secondEl.querySelectorAll<HTMLElement>("[data-pin-count]");
     let counted = false;
@@ -76,20 +74,8 @@ export function ScrollVideoBanner() {
     };
 
     const ctx = gsap.context(() => {
-      const desktop = {
-        top: "10%",
-        left: "54%",
-        width: "42%",
-        height: "80%",
-        borderRadius: 22,
-      };
-      const mobile = {
-        top: "48%",
-        left: "6%",
-        width: "88%",
-        height: "46%",
-        borderRadius: 18,
-      };
+      const desktop = "inset(10% 4% 10% 54% round 22px)";
+      const mobile = "inset(48% 6% 6% 6% round 18px)";
 
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
@@ -99,7 +85,7 @@ export function ScrollVideoBanner() {
         buildTl(mobile);
       });
 
-      function buildTl(endState: typeof desktop) {
+      function buildTl(endClip: string) {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: stageEl,
@@ -108,22 +94,20 @@ export function ScrollVideoBanner() {
             scrub: 1.15,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
-              const media = video.current;
-              const d = media?.duration;
-              if (!media || !d || Number.isNaN(d)) return;
-              if (!takeover) return;
-              const t = self.progress * d * 0.999;
-              if (Math.abs(media.currentTime - t) > 0.03) {
-                media.currentTime = t;
-              }
+              keepPlaying();
               if (self.progress > 0.48) runCounts();
             },
           },
         });
 
-        tl.to(
+        tl.fromTo(
           wrapEl,
-          { ...endState, boxShadow: "0 24px 60px rgba(26,23,18,0.16)", ease: "none", duration: 0.62 },
+          { clipPath: "inset(0% 0% 0% 0% round 0px)" },
+          {
+            clipPath: endClip,
+            ease: "none",
+            duration: 0.62,
+          },
           0.22,
         )
           .to(heroEl, { opacity: 0, y: -36, ease: "none", duration: 0.28 }, 0.16)
@@ -149,10 +133,11 @@ export function ScrollVideoBanner() {
 
     return () => {
       window.removeEventListener("resize", refresh);
-      window.removeEventListener("wheel", startScrub);
-      window.removeEventListener("touchmove", startScrub);
+      videoEl.removeEventListener("pause", keepPlaying);
+      videoEl.removeEventListener("stalled", keepPlaying);
+      videoEl.removeEventListener("suspend", keepPlaying);
       window.clearTimeout(t);
-      window.clearTimeout(playRetry);
+      window.clearInterval(playRetry);
       ctx.revert();
     };
   }, []);
@@ -162,7 +147,7 @@ export function ScrollVideoBanner() {
       <div className="sticky top-[var(--header-h)] h-[calc(100vh-var(--header-h))] overflow-hidden">
         <div
           ref={wrap}
-          className="scroll-video-wrap absolute top-0 left-0 z-[1] h-full w-full overflow-hidden will-change-[top,left,width,height,border-radius]"
+          className="scroll-video-wrap absolute inset-0 z-[1] h-full w-full overflow-hidden"
         >
           <video
             ref={video}
@@ -172,7 +157,9 @@ export function ScrollVideoBanner() {
             loop
             playsInline
             preload="auto"
-            className="h-full w-full object-cover"
+            disablePictureInPicture
+            controls={false}
+            className="scroll-video-el h-full w-full object-cover"
           />
           <div
             ref={hud}

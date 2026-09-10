@@ -136,7 +136,16 @@ button {
   cursor: pointer;
 }
 
-.banner-rail {
+.scroll-video-wrap {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: clip-path;
+}
+
+.scroll-video-el {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   letter-spacing: 0.42em;
