@@ -1,20 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MachinePassCard } from "@/components/home/MachinePassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { n: "1", l: "Of a kind in WA", pad: "1", k: "01" },
-  { n: "100", l: "Percent interior view", pad: "3", k: "02" },
-  { n: "0", l: "Guessed microns", pad: "1", k: "03" },
-  { n: "21", l: "Services on file", pad: "2", k: "04" },
+  { n: "1", l: "Robotic operator in WA", pad: "1", k: "01" },
+  { n: "8", l: "Methodology steps", pad: "1", k: "02" },
+  { n: "21", l: "Services listed", pad: "2", k: "03" },
 ];
 
 export function ScrollVideoBanner() {
@@ -74,8 +73,20 @@ export function ScrollVideoBanner() {
     };
 
     const ctx = gsap.context(() => {
-      const desktop = "inset(10% 4% 10% 54% round 22px)";
-      const mobile = "inset(48% 6% 6% 6% round 18px)";
+      const desktop = {
+        top: "12%",
+        left: "52%",
+        width: "44%",
+        height: "76%",
+        borderRadius: 22,
+      };
+      const mobile = {
+        top: "48%",
+        left: "6%",
+        width: "88%",
+        height: "46%",
+        borderRadius: 18,
+      };
 
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
@@ -85,11 +96,11 @@ export function ScrollVideoBanner() {
         buildTl(mobile);
       });
 
-      function buildTl(endClip: string) {
+      function buildTl(endState: typeof desktop) {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: stageEl,
-            start: "top 76px",
+            start: "top 84px",
             end: "bottom bottom",
             scrub: 1.15,
             invalidateOnRefresh: true,
@@ -102,9 +113,16 @@ export function ScrollVideoBanner() {
 
         tl.fromTo(
           wrapEl,
-          { clipPath: "inset(0% 0% 0% 0% round 0px)" },
           {
-            clipPath: endClip,
+            top: "0%",
+            left: "0%",
+            width: "100%",
+            height: "100%",
+            borderRadius: 0,
+          },
+          {
+            ...endState,
+            boxShadow: "0 24px 60px rgba(10,42,94,0.22)",
             ease: "none",
             duration: 0.62,
           },
@@ -143,11 +161,11 @@ export function ScrollVideoBanner() {
   }, []);
 
   return (
-    <section ref={stage} className="relative h-[240vh] bg-[#f3eee4]">
+    <section ref={stage} className="relative h-[240vh] bg-navy">
       <div className="sticky top-[var(--header-h)] h-[calc(100vh-var(--header-h))] overflow-hidden">
         <div
           ref={wrap}
-          className="scroll-video-wrap absolute inset-0 z-[1] h-full w-full overflow-hidden"
+          className="scroll-video-wrap absolute top-0 left-0 z-[1] h-full w-full overflow-hidden bg-brand"
         >
           <video
             ref={video}
@@ -159,73 +177,50 @@ export function ScrollVideoBanner() {
             preload="auto"
             disablePictureInPicture
             controls={false}
-            className="scroll-video-el h-full w-full object-cover"
+            className="scroll-video-el h-full w-full object-cover object-center"
           />
-          <div
-            ref={hud}
-            className="pointer-events-none absolute inset-0 opacity-0"
-          >
+          <div ref={hud} className="pointer-events-none absolute inset-0 opacity-0">
             <span className="absolute top-4 left-4 size-3.5 border-t border-l border-white/80" />
             <span className="absolute top-4 right-4 size-3.5 border-t border-r border-white/80" />
             <span className="absolute bottom-4 left-4 size-3.5 border-b border-l border-white/80" />
             <span className="absolute right-4 bottom-4 size-3.5 border-b border-r border-white/80" />
             <p className="absolute top-4 left-10 flex items-center gap-2 text-[10px] tracking-[0.22em] text-white uppercase">
-              <span className="live-dot size-1.5 rounded-full bg-[#9dce8a]" />
-              Live interior
-            </p>
-            <p className="absolute right-10 bottom-4 text-[10px] tracking-[0.22em] text-white/80 uppercase">
-              Pass 01 · WA
+              <span className="live-dot size-1.5 rounded-full bg-gold-2" />
+              Live video during the clean
             </p>
           </div>
         </div>
 
         <div
           ref={heroWash}
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[55%] bg-gradient-to-t from-black/70 via-black/25 to-transparent"
+          className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(to_top,rgba(7,22,50,0.88)_0%,rgba(7,22,50,0.55)_38%,rgba(7,22,50,0.12)_68%,transparent_100%)] lg:bg-[linear-gradient(90deg,rgba(7,22,50,0.82)_0%,rgba(7,22,50,0.55)_42%,rgba(7,22,50,0.12)_70%,transparent_100%)]"
         />
 
         <div ref={heroCopy} className="relative z-10 h-full">
-          <p className="pointer-events-none absolute top-1/2 right-3 hidden origin-center -translate-y-1/2 rotate-90 text-[11px] tracking-[0.45em] text-white/80 uppercase lg:block">
-            Perth
-          </p>
-
           <div className="absolute inset-x-0 bottom-0 flex flex-col gap-8 p-5 sm:p-8 lg:flex-row lg:items-end lg:justify-between lg:p-10">
             <div className="max-w-xl lg:max-w-2xl">
               <SectionHeading
                 as="h1"
                 invert
-                kicker="Robotic exhaust cleaning"
-                title="Kitchen exhaust, cleaned from inside the duct."
-                body="Grade X is Western Australia’s robotic kitchen exhaust specialist. Crawler, camera and micron gauge on the same visit — a clean file every time."
+                kicker="Western Australia · Kitchen exhaust specialists"
+                title="Precision. Technology. Compliance."
+                body="Advanced equipment and proven methodology for professional commercial kitchen exhaust cleaning."
               />
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/contact" className="gx-cta pointer-events-auto">
+                  Request a quote
+                  <span aria-hidden>→</span>
+                </Link>
+                <a
+                  href={site.phoneHref}
+                  className="pointer-events-auto text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]"
+                >
+                  Emergency: {site.phone}
+                </a>
+              </div>
             </div>
 
-            <div className="w-full max-w-[320px] shrink-0 overflow-hidden bg-white shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
-              <div className="relative aspect-[16/10] bg-[#efe8da]">
-                <Image
-                  src="/robot/front.jpg"
-                  alt="Grade X tracked crawler"
-                  fill
-                  className="object-cover object-center"
-                  sizes="320px"
-                  priority
-                />
-              </div>
-              <div className="grid grid-cols-2">
-                <Link
-                  href="/contact"
-                  className="bg-[#1a1712] px-3 py-3.5 text-center text-[12px] tracking-[0.08em] text-white sm:text-[13px]"
-                >
-                  Get a Quote
-                </Link>
-                <Link
-                  href="/technology"
-                  className="bg-[#3d5c45] px-3 py-3.5 text-center text-[12px] tracking-[0.08em] text-white sm:text-[13px]"
-                >
-                  View the crawler
-                </Link>
-              </div>
-            </div>
+            <MachinePassCard />
           </div>
         </div>
 
@@ -233,45 +228,38 @@ export function ScrollVideoBanner() {
           ref={secondCopy}
           className="absolute inset-x-0 top-0 z-10 flex h-[46%] items-end px-5 pb-4 opacity-0 sm:px-8 lg:inset-y-0 lg:left-0 lg:h-full lg:w-[50%] lg:items-center lg:pb-0 lg:pl-10 lg:pr-6"
         >
-          <div className="w-full max-w-[34rem] border-l border-[var(--line)] pl-5 sm:pl-7">
+          <div className="w-full max-w-[36rem] pl-1 sm:pl-2">
             <SectionHeading
-              kicker="What the camera records"
-              title="The file is taken from inside the duct."
-              body="Grease used to hide in the run. Grade X puts a crawler, a camera and a gauge on the same visit — so the proof is interior, not a canopy wipe."
+              kicker="WA-only robotic technology"
+              title="Currently the only robotic kitchen exhaust cleaner in WA."
+              body="Most competitors still service exhaust interiors manually. Grade X operates robotic kitchen exhaust cleaning technology — a genuine, verifiable point of differentiation."
             />
-            <a
-              href={site.phoneHref}
-              className="pointer-events-auto mt-3 inline-block text-[12px] text-mist hover:text-ivory"
-            >
-              {site.phone} · Perth metro
-            </a>
+            <p className="gx-meta mt-4">
+              Emergency response is a genuine Grade X service.{" "}
+              <a href={site.phoneHref} className="pointer-events-auto text-ivory hover:text-gold">
+                {site.phone}
+              </a>
+            </p>
 
-            <div className="mt-8 grid grid-cols-2 border-t border-[var(--line)]">
+            <div className="gx-stat-grid mt-8">
               {stats.map((s) => (
-                <div
-                  key={s.k}
-                  className="border-[var(--line)] py-4 pr-4 even:pl-4 odd:border-r [&:nth-child(n+3)]:border-t"
-                >
-                  <p className="font-mono text-[10px] tracking-[0.18em] text-gold">
-                    {s.k}
-                  </p>
+                <div key={s.k} className="gx-stat-cell">
+                  <p className="font-mono text-[10px] tracking-[0.18em] text-gold">{s.k}</p>
                   <p
                     data-pin-count={s.n}
                     data-pad={s.pad}
-                    className="font-display mt-1 text-4xl leading-none tracking-tight text-ivory sm:text-5xl"
+                    className="font-display mt-1 text-[2.35rem] leading-none tracking-tight text-ivory sm:text-[2.75rem]"
                   >
                     {s.n}
                   </p>
-                  <p className="mt-2 text-[12px] leading-snug text-mist">{s.l}</p>
+                  <p className="gx-meta mt-2">{s.l}</p>
                 </div>
               ))}
             </div>
 
-            <Link
-              href="/digital-evidence"
-              className="pointer-events-auto mt-7 inline-flex text-sm tracking-[0.16em] text-ivory uppercase"
-            >
-              See the file →
+            <Link href="/contact" className="gx-cta pointer-events-auto mt-8">
+              Request a quote
+              <span aria-hidden>→</span>
             </Link>
           </div>
         </div>

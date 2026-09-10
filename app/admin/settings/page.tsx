@@ -64,7 +64,7 @@ export default function AdminSettingsPage() {
               }
             />
           </label>
-          <button className="rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.18em] uppercase text-navy">
+          <button className="rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.18em] uppercase text-white">
             Save
           </button>
           {status ? <p className="text-sm text-gold">{status}</p> : null}

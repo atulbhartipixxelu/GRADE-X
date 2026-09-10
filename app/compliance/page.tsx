@@ -14,8 +14,8 @@ export default function CompliancePage() {
     <>
       <PageHero
         kicker="Compliance and WHS"
-        title="The file a facility manager looks for."
-        body="Insurance, safe work, food-safe kitchen practice and documentation — in more depth than a homepage badge strip. Exact certificate wording is supplied by Grade X; this page is the credible frame for it."
+        title="Insurance, WHS, food-safe practice and certifications."
+        body="This page covers Grade X’s own compliance credentials in more depth than a homepage trust-badge strip. Exact wording and current certificate details will be provided by Grade X; this page presents them clearly and credibly."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/compliance", label: "Compliance" },
@@ -36,7 +36,7 @@ export default function CompliancePage() {
             Procedures are designed around recognised industry standards and best practice: detailed reporting and service records for every job; risk assessments, SWMS and site-specific safety procedures where required; ongoing quality inspections and continuous improvement. This sits with the same weight as insurance — because it is how Grade X actually operates.
           </p>
           <div className="mt-8">
-            <Button href="/contact">Request current certificates</Button>
+            <Button href="/contact">Request a quote</Button>
           </div>
         </div>
       </section>

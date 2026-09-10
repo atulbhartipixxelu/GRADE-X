@@ -53,24 +53,23 @@ export const categoryMeta: Record<
   { title: string; description: string }
 > = {
   "kitchen-exhaust": {
-    title: "Kitchen exhaust & hygiene specialty",
+    title: "Kitchen Exhaust & Hygiene Specialty",
     description:
-      "The core of Grade X: robotic and steam-based exhaust hygiene for commercial kitchens that cannot afford guesswork.",
+      "Kitchen Exhaust Cleaning, Canopy Cleaning, Robotic Exhaust Cleaning Technology, Steam Cleaning, and Kitchen Equipment Hygiene (UHC, Grill, Shake Machine, Steamer, Oven etc.).",
   },
   "kitchen-equipment": {
-    title: "Kitchen equipment cleaning",
+    title: "Kitchen Equipment Cleaning",
     description:
-      "Recovery, boil-outs and scheduled deep cleans for the equipment that actually produces food — not just the surfaces around it.",
+      "Grill Recovery, Fryer Vat Boil-Outs, Shake Machine Cleaning, Cool Room Cleaning, Nightly Kitchen Maintenance, and Monthly Kitchen Deep Cleaning.",
   },
   lobby: {
-    title: "Lobby & front-of-house",
-    description:
-      "Guest-facing spaces that sit next to high-volume kitchens, cleaned to the same documented standard as the back of house.",
+    title: "Lobby & Front-of-House",
+    description: "Lobby Cleaning, Monthly Lobby Deep Cleaning, and Play Place.",
   },
   exterior: {
-    title: "Exterior & general commercial",
+    title: "Exterior & General Commercial",
     description:
-      "Pressure, floors, glazing and hygiene programmes for sites that need one accountable contractor across kitchen and property.",
+      "Floor Detailing & Floor Scrubbing, Exterior High-Pressure Washing, Building & Drive-Thru Pressure Cleaning, Window Cleaning, Line Marking, General Commercial Cleaning, and Hygiene & Sanitation Services.",
   },
 };
 
@@ -469,55 +468,9 @@ export const faqs: Faq[] = [
   },
 ];
 
-export const testimonials: Testimonial[] = [
-  {
-    id: "t1",
-    quote:
-      "We needed a contractor who could show micron readings and photos, not a before-and-after that looked staged. Grade X treated the exhaust as a compliance system. The robotic access also cut the downtime we used to budget for interior work.",
-    name: "Operations lead",
-    role: "Multi-site QSR group",
-    organisation: "Perth metropolitan",
-  },
-  {
-    id: "t2",
-    quote:
-      "Facility files for the hotel kitchens were always the weak point in audits. The measurement records and job reports are now the part of the pack I do not have to chase.",
-    name: "Facilities manager",
-    role: "Hospitality venue group",
-    organisation: "Western Australia",
-  },
-];
+export const testimonials: Testimonial[] = [];
 
-export const caseStudies: CaseStudy[] = [
-  {
-    slug: "qsr-multi-site-perth",
-    title: "Programmed exhaust hygiene for a multi-site QSR cookline",
-    sector: "Quick-service restaurant group",
-    location: "Perth metropolitan",
-    summary:
-      "A franchise group needed a single, documented exhaust programme across stores with inconsistent previous contractors and no grease-thickness baseline.",
-    challenge:
-      "Stores were being cleaned on visual judgement only. Interior duct condition was unknown, disruption windows were long, and brand auditors were asking for evidence the incumbent could not produce.",
-    approach:
-      "Grade X established a digital grease-thickness baseline at each site, introduced robotic interior access where duct geometry required it, and issued a standard evidence pack after every clean so the group file looked the same from store to store.",
-    result:
-      "The group now holds before/after micron readings, photographs and interval recommendations per site. Downtime for interior work reduced where robotic access replaced manned entry.",
-  },
-  {
-    slug: "hotel-kitchen-hygiene",
-    title: "Hotel kitchen exhaust and canopy programme with audit-ready reporting",
-    sector: "Hotel & hospitality",
-    location: "Perth",
-    summary:
-      "A hotel facilities team required exhaust, canopy and equipment hygiene that would stand up in WHS and food-safety review, including SWMS on request.",
-    challenge:
-      "Live kitchen constraints, guest-adjacent plant, and a history of chemical-heavy cleans that the culinary team wanted to move away from.",
-    approach:
-      "Steam-led interior washing, canopy and filter hygiene, and a documented methodology with risk assessment and site-specific procedures. Evidence included photos, measurements and a clear next-interval recommendation.",
-    result:
-      "The facilities file now contains a repeatable process and objective measurements. Culinary leadership reported less chemical odour in the kitchen after service windows.",
-  },
-];
+export const caseStudies: CaseStudy[] = [];
 
 export const posts: BlogPost[] = [
   {

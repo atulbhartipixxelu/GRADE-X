@@ -14,8 +14,8 @@ export default function ContactPage() {
     <>
       <PageHero
         kicker="Request a quote"
-        title="Book a clean for your Perth kitchen."
-        body="Service type, site details, contact information. Perth metropolitan / WA. Emergency response is real — use the phone for urgent grease, odour or after-hours failures."
+        title="Request a quote"
+        body="Service type, site details, and contact information. Service area: Perth metropolitan / WA. Emergency response is available — call for urgent issues."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/contact", label: "Contact" },
@@ -26,8 +26,8 @@ export default function ContactPage() {
           <QuoteForm />
         </div>
         <aside className="lg:col-span-5">
-          <div className="border border-gold/20 bg-navy-2 p-8">
-            <p className="font-mono text-[11px] tracking-[0.24em] text-gold uppercase">
+          <div className="gx-panel">
+            <p className="font-sans text-[11px] font-semibold tracking-[0.18em] text-gold uppercase">
               Direct
             </p>
             <p className="mt-4 font-display text-3xl text-ivory">

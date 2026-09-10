@@ -14,8 +14,8 @@ export default function AboutPage() {
     <>
       <PageHero
         kicker="About Grade X"
-        title="A WA specialist in robotic exhaust cleaning."
-        body="Grade X Commercial Solutions Pty Ltd is a Western Australian commercial cleaning company whose core is kitchen exhaust systems and kitchen hygiene — with a broader commercial offering around that specialty."
+        title="A specialist, not a generalist."
+        body="Grade X Commercial Solutions Pty Ltd is a Western Australian commercial cleaning company specialising in kitchen exhaust systems and kitchen hygiene, with a broader commercial cleaning offering alongside this core specialty."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/about", label: "About" },
@@ -23,19 +23,19 @@ export default function AboutPage() {
       />
       <section className="mx-auto grid max-w-7xl gap-16 px-5 py-20 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <h2 className="font-display text-3xl text-ivory">The robotic technology story</h2>
-          <p className="mt-5 text-mist leading-8">
-            Most competitors still service exhaust interiors manually. Grade X operates robotic kitchen exhaust cleaning technology — currently the only company in WA doing so. That is not a slogan. It is why facility managers get live interior video, safer access, and less disruption on live cooklines.
+          <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] text-ivory">The robotic technology story</h2>
+          <p className="gx-body mt-5">
+            Grade X is currently the only company in WA operating robotic kitchen exhaust cleaning technology, a genuine, verifiable point of differentiation in a category most competitors service manually. For clients that means safer access, verifiable results, and less disruption.
           </p>
-          <p className="mt-4 text-mist leading-8">
-            The same discipline runs through digital grease-thickness measurement, steam-led interior washing, and a reporting pack designed for QSR compliance teams and hotel facilities files. Precision, technology and compliance are the throughline of the brand, not a single page.
+          <p className="gx-body mt-4">
+            This is a technology-forward, precision, and compliance-driven business, not a general cleaning company. Across the site, advanced equipment, robotic technology, digital measurement, and professional expertise are the throughline of the brand.
           </p>
-          <p className="mt-4 text-mist leading-8">
-            Who we speak to: QSR franchises and multi-site restaurant groups, commercial kitchens in hotels, clubs and hospitality venues, facility managers responsible for compliance across sites, and property and shopping-centre managers who need general commercial cleaning beside kitchen-specific work.
+          <p className="gx-body mt-4">
+            Who Grade X serves: quick-service restaurant (QSR) franchises and multi-site restaurant groups; commercial kitchens in hotels, clubs, and hospitality venues; facility managers responsible for compliance across multiple sites; and property and shopping centre managers requiring general commercial cleaning alongside kitchen-specific services.
           </p>
         </div>
-        <aside className="border border-gold/20 bg-navy-2 p-8 lg:col-span-5">
-          <p className="font-mono text-[11px] tracking-[0.28em] text-gold uppercase">Company</p>
+        <aside className="gx-panel lg:col-span-5">
+          <p className="font-sans text-[11px] font-semibold tracking-[0.18em] text-gold uppercase">Company</p>
           <dl className="mt-6 space-y-4 text-sm">
             <div>
               <dt className="text-mist">Legal name</dt>
@@ -57,7 +57,7 @@ export default function AboutPage() {
             </div>
           </dl>
           <div className="mt-8">
-            <Button href="/contact">Work with Grade X</Button>
+            <Button href="/contact">Request a quote</Button>
           </div>
         </aside>
       </section>

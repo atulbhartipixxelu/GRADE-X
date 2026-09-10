@@ -18,7 +18,7 @@ export function PhotoGrid() {
       </div>
       <div className="mx-auto grid max-w-[1400px] gap-4 md:grid-cols-3">
         {shots.map((s) => (
-          <div key={s.src} className="relative aspect-[4/5] overflow-hidden bg-[#efe8da]">
+          <div key={s.src} className="relative aspect-[4/5] overflow-hidden bg-navy-2">
             <Image src={s.src} alt={s.alt} fill className="object-contain p-4" sizes="33vw" />
           </div>
         ))}

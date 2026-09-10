@@ -17,7 +17,7 @@ export function PageHero({
     <section className="relative overflow-hidden pt-8">
       <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 sm:py-24">
         {crumbs ? (
-          <p className="mb-8 text-[13px] text-mist">
+          <p className="gx-meta mb-8">
             {crumbs.map((c, i) => (
               <span key={c.href}>
                 <Link href={c.href} className="hover:text-ivory">

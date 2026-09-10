@@ -51,9 +51,9 @@ export default function TechnologyPage() {
   return (
     <>
       <PageHero
-        kicker="The Grade X crawler"
-        title="The stainless machine we send into the duct."
-        body="A stainless tracked robot built for kitchen exhaust interiors: dual high-pressure hoses, twin turret nozzles, LED lighting and a forward camera. The 3D on this site is that platform, crawling a duct cutaway and opening into a service explode."
+        kicker="Technology / Robotic Exhaust Cleaning"
+        title="Robotic kitchen exhaust cleaning technology."
+        body="A dedicated page for Grade X’s core differentiator. Reference photos of the robotic platform are shown below. The 3D scene visualises the process inside a duct — not a generic abstract shape."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/technology", label: "Technology" },
@@ -63,7 +63,7 @@ export default function TechnologyPage() {
       <section className="mx-auto grid max-w-7xl gap-4 px-5 py-12 sm:px-8 md:grid-cols-3">
         {photos.map((p) => (
           <figure key={p.src} className="border border-gold/20 bg-navy-2">
-            <div className="relative aspect-[4/3] bg-[#efe8da]">
+            <div className="relative aspect-[4/3] bg-navy-2">
               <Image src={p.src} alt={p.alt} fill className="object-contain p-3" sizes="(min-width: 768px) 33vw, 100vw" />
             </div>
             <figcaption className="border-t border-gold/15 px-4 py-3 font-mono text-[11px] tracking-[0.14em] text-gold uppercase">
@@ -75,13 +75,13 @@ export default function TechnologyPage() {
 
       <section className="relative h-[70vh] min-h-[480px] border-y border-gold/15">
         <HeroScene mode="tech" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/40" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand via-transparent to-brand/40" />
         <div className="absolute bottom-8 left-8 max-w-md">
-          <p className="font-mono text-[11px] tracking-[0.28em] text-gold uppercase">
+          <p className="font-mono text-[11px] tracking-[0.28em] text-gold-2 uppercase">
             Live interior pass
           </p>
-          <p className="mt-2 text-sm text-mist">
-            The crawler drives the duct floor. Turret jets fire. Camera and LEDs stay on so the clean is visible, not assumed.
+          <p className="mt-2 text-sm text-white/80">
+            The crawler drives the duct floor. Turret jets fire. Camera and LEDs stay on so the clean is visible during the work.
           </p>
         </div>
       </section>
@@ -96,7 +96,7 @@ export default function TechnologyPage() {
               Tracks, turret, hoses — the real architecture.
             </h2>
             <p className="mt-4 leading-8 text-mist">
-              The third photograph is an exploded build of this crawler. The 3D loop separates the same assemblies: chevron track plates, rollers, front camera barrel and the dual-hose turret. Facility managers can see this is plant, not a render of a toy.
+              The third photograph is an exploded build of this platform. The 3D loop separates the same assemblies: track plates, rollers, front camera barrel and the dual-hose turret.
             </p>
           </div>
           <div className="relative h-[420px] overflow-hidden border border-gold/20">

@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #f3eee4;
-  --navy-2: #ebe4d6;
-  --navy-3: #e2d8c6;
-  --gold: #3d5c45;
-  --gold-2: #2c4333;
-  --ivory: #1a1712;
-  --mist: #6e675c;
-  --line: rgba(26, 23, 18, 0.12);
-  --paper: #f3eee4;
-  --ink: #1a1712;
-  --header-h: 4.75rem;
+  --navy: #f4f7fb;
+  --navy-2: #e8eef8;
+  --navy-3: #d5e3f4;
+  --gold: #1e6fd4;
+  --gold-2: #1557a8;
+  --ivory: #0a2a5e;
+  --mist: #5a6b82;
+  --line: rgba(10, 42, 94, 0.14);
+  --paper: #f4f7fb;
+  --ink: #0a2a5e;
+  --brand: #0a2a5e;
+  --brand-2: #123d8c;
+  --header-h: 5.25rem;
 }
 
 @theme inline {
@@ -22,8 +24,10 @@
   --color-gold-2: var(--gold-2);
   --color-ivory: var(--ivory);
   --color-mist: var(--mist);
-  --font-sans: var(--font-outfit);
-  --font-display: var(--font-serif);
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --font-sans: var(--font-figtree);
+  --font-display: var(--font-fraunces);
   --font-mono: var(--font-mono-jb);
 }
 
@@ -38,17 +42,36 @@ body {
 }
 
 body {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
+}
+
+p,
+li,
+label,
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+}
+
+p {
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
 h1,
 h2,
 h3,
 .font-display {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  font-family: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", serif;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
 }
 
 ::selection {
@@ -69,15 +92,63 @@ html.lenis body {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
-.grid-overlay {
-  background-image:
-    linear-gradient(rgba(26, 23, 18, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 23, 18, 0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
+.gx-body {
+  font-family: var(--font-figtree), ui-sans-serif, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: var(--mist);
+}
+
+.gx-meta {
+  font-family: var(--font-figtree), ui-sans-serif, sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--mist);
+}
+
+.gx-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  background: var(--gold);
+  padding: 0.7rem 1.2rem;
+  font-family: var(--font-figtree), ui-sans-serif, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.gx-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .gx-stat-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.gx-stat-cell {
+  border-radius: 1rem;
+  background: rgba(10, 42, 94, 0.06);
+  padding: 1rem 1.1rem;
+}
+
+.gx-panel {
+  border-radius: 1.25rem;
+  background: var(--navy-2);
+  padding: 1.75rem 1.5rem;
 }
 
 .scan-line {
-  background: linear-gradient(180deg, transparent, rgba(61, 92, 69, 0.16), transparent);
+  background: linear-gradient(180deg, transparent, rgba(30, 111, 212, 0.18), transparent);
   animation: scan 6.5s linear infinite;
 }
 
@@ -139,13 +210,15 @@ button {
 .scroll-video-wrap {
   transform: translateZ(0);
   backface-visibility: hidden;
-  will-change: clip-path;
+  will-change: top, left, width, height, border-radius;
 }
 
 .scroll-video-el {
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+
+.banner-rail {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   letter-spacing: 0.42em;
@@ -225,9 +298,9 @@ button {
   background-image: repeating-linear-gradient(
     90deg,
     transparent 0 10px,
-    #1a1712 10px 12px,
+    #0a2a5e 10px 12px,
     transparent 12px 18px,
-    #1a1712 18px 28px,
+    #0a2a5e 18px 28px,
     transparent 28px 36px
   );
   animation: crawler-track 1.4s linear infinite;

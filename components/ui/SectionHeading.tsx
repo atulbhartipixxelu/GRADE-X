@@ -9,7 +9,7 @@ export function Kicker({
 }) {
   return (
     <p
-      className={`flex items-center gap-2.5 text-[12px] font-semibold tracking-[0.16em] text-[#c45c28] uppercase ${className}`}
+      className={`flex items-center gap-2.5 font-sans text-[12px] font-semibold tracking-[0.16em] text-gold uppercase ${className}`}
     >
       <span className="size-[7px] shrink-0 rounded-full bg-current" aria-hidden />
       {children}
@@ -37,18 +37,22 @@ export function SectionHeading({
   const centered = align === "center";
   return (
     <div className={`${centered ? "mx-auto max-w-4xl text-center" : "max-w-4xl"} ${className}`}>
-      <Kicker className={centered ? "justify-center" : undefined}>{kicker}</Kicker>
+      <Kicker className={`${centered ? "justify-center" : ""} ${invert ? "text-white" : ""}`}>
+        {kicker}
+      </Kicker>
       <Tag
-        className={`${centered ? "mx-auto" : ""} mt-3 max-w-[16ch] font-sans text-[clamp(2.2rem,5.4vw,4.55rem)] font-extrabold leading-[1.02] tracking-[-0.038em] ${
-          invert ? "text-white" : "text-[#1a1712]"
+        className={`${centered ? "mx-auto" : ""} font-display mt-4 max-w-[20ch] text-[clamp(2rem,4.4vw,3.65rem)] font-semibold leading-[1.08] tracking-[-0.038em] ${
+          invert ? "text-white" : "text-ivory"
         }`}
       >
         {title}
       </Tag>
       {body ? (
         <p
-          className={`${centered ? "mx-auto" : ""} mt-4 max-w-xl text-[17px] leading-7 ${
-            invert ? "text-white/80" : "text-mist"
+          className={`${centered ? "mx-auto" : ""} mt-5 max-w-[36rem] font-sans text-[1.0625rem] leading-[1.7] tracking-[0.01em] ${
+            invert
+              ? "font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_8px_24px_rgba(0,0,0,0.35)]"
+              : "gx-body"
           }`}
         >
           {body}

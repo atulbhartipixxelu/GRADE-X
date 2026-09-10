@@ -13,9 +13,9 @@ export default function BlogPage() {
   return (
     <>
       <PageHero
-        kicker="Resources"
-        title="Notes on exhaust cleaning in WA."
-        body="Optional in the brief, included here for long-term SEO: exhaust intervals, measurement vs visual inspection, and what robotics actually changes on a WA site."
+        kicker="Blog / Resources"
+        title="Kitchen exhaust compliance and technology notes."
+        body="Recommended in the brief for long-term SEO: kitchen exhaust compliance, fire-risk measurement, and robotic cleaning for Western Australian sites."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/blog", label: "Resources" },

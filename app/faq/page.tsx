@@ -15,9 +15,9 @@ export default async function FaqPage() {
   return (
     <>
       <PageHero
-        kicker="Questions operators ask"
-        title="Kitchen exhaust FAQs in Perth."
-        body="Frequency, robotics, urgent response, evidence, and whether we cover the site. Written for facility managers and QSR operators — and for search."
+        kicker="FAQ"
+        title="Questions before requesting a quote."
+        body="Service frequency, what the robotic process involves, response times for urgent issues, and how compliance evidence is provided. Written for facility managers and QSR operators."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/faq", label: "FAQ" },
@@ -26,11 +26,11 @@ export default async function FaqPage() {
       <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
         <div className="space-y-4">
           {faqs.map((f) => (
-            <details key={f.id} className="border border-gold/15 bg-navy-2 px-6 py-5">
-              <summary className="cursor-pointer font-display text-lg text-ivory">
+            <details key={f.id} className="gx-panel px-6 py-5">
+              <summary className="cursor-pointer font-display text-[1.2rem] leading-snug text-ivory">
                 {f.question}
               </summary>
-              <p className="mt-4 text-sm leading-7 text-mist">{f.answer}</p>
+              <p className="gx-body mt-4 text-[15px]">{f.answer}</p>
             </details>
           ))}
         </div>

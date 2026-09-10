@@ -38,7 +38,7 @@ export function QuoteForm({
   }
 
   const field =
-    "w-full border border-gold/20 bg-navy/40 px-4 py-3 text-sm text-ivory outline-none placeholder:text-mist/50 focus:border-gold";
+    "w-full border border-gold/20 bg-white px-4 py-3 text-sm text-ivory outline-none placeholder:text-mist/50 focus:border-gold";
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -96,7 +96,7 @@ export function QuoteForm({
       <button
         type="submit"
         disabled={status === "sending"}
-        className="rounded-full bg-gold px-8 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase text-navy disabled:opacity-60"
+        className="rounded-full bg-gold px-8 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase text-white disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : "Submit quote request"}
       </button>

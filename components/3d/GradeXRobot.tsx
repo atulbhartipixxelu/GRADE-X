@@ -164,7 +164,7 @@ function Spray() {
       positions[i * 3] = 0;
       positions[i * 3 + 1] = 0;
       positions[i * 3 + 2] = 0;
-      speeds[i] = 0.4 + Math.random() * 0.8;
+      speeds[i] = 0.4 + ((i * 17) % 80) / 100;
     }
     g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     g.setAttribute("speed", new THREE.BufferAttribute(speeds, 1));

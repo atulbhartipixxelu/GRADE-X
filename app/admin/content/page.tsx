@@ -50,7 +50,7 @@ export default function AdminContentPage() {
         <button
           type="button"
           onClick={save}
-          className="mt-4 rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.18em] uppercase text-navy"
+          className="mt-4 rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.18em] uppercase text-white"
         >
           Save content
         </button>

@@ -13,9 +13,9 @@ export default function MethodologyPage() {
   return (
     <>
       <PageHero
-        kicker="How a Grade X visit runs"
-        title="Eight steps on every exhaust job."
-        body="This is evidence of a repeatable professional process — the same eight steps on every exhaust job, from baseline microns to the client file."
+        kicker="Our Methodology"
+        title="How Grade X actually operates."
+        body="This methodology is presented as its own numbered sequence — evidence of a repeatable, professional process, not folded into general service descriptions."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/methodology", label: "Methodology" },
@@ -31,13 +31,13 @@ export default function MethodologyPage() {
               <p className="font-mono text-[11px] tracking-[0.28em] text-gold uppercase">
                 Step {m.step}
               </p>
-              <h2 className="mt-2 font-display text-3xl text-ivory">{m.title}</h2>
-              <p className="mt-4 leading-8 text-mist">{m.body}</p>
+              <h2 className="mt-2 font-display text-[clamp(1.7rem,2.6vw,2.15rem)] text-ivory">{m.title}</h2>
+              <p className="gx-body mt-4">{m.body}</p>
             </li>
           ))}
         </ol>
         <div className="mt-16">
-          <Button href="/contact">Brief a site</Button>
+          <Button href="/contact">Request a quote</Button>
         </div>
       </section>
     </>

@@ -24,9 +24,9 @@ export default async function ServicesPage() {
   return (
     <>
       <PageHero
-        kicker="What we take on"
-        title="Kitchen exhaust services for Perth sites."
-        body="Each service has a real description. Exhaust remains the specialty; equipment, lobby and exterior work sit beside it so a facility manager can keep one accountable contractor."
+        kicker="Services"
+        title="All 21 Grade X services."
+        body="Organised into kitchen exhaust & hygiene specialty, kitchen equipment cleaning, lobby & front-of-house, and exterior & general commercial. Each service has its own short description."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/services", label: "Services" },

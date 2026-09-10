@@ -22,9 +22,9 @@ export default function ServiceAreaPage() {
   return (
     <>
       <PageHero
-        kicker="Where we work"
-        title="Kitchen exhaust cleaning across Perth."
-        body="A prospective client should confirm coverage in seconds. Grade X is based in Balga and attends commercial kitchens across the metro — with wider WA by arrangement."
+        kicker="Service Area"
+        title="Perth metropolitan / Western Australia."
+        body="A prospective client can confirm Grade X services their location: Perth metropolitan and Western Australia, based at 5 Elward Way, Balga WA 6061."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/service-area", label: "Service area" },
@@ -47,8 +47,7 @@ export default function ServiceAreaPage() {
             <Button href="/contact">Confirm your site</Button>
           </div>
         </div>
-        <div className="min-h-[360px] border border-gold/20 bg-navy-2 relative overflow-hidden">
-          <div className="grid-overlay absolute inset-0" />
+        <div className="min-h-[360px] overflow-hidden rounded-[1.25rem] bg-navy-2">
           <svg viewBox="0 0 400 360" className="relative h-full w-full p-8 text-gold">
             <rect x="40" y="30" width="320" height="300" fill="none" stroke="currentColor" strokeOpacity="0.25" />
             <path
@@ -58,11 +57,11 @@ export default function ServiceAreaPage() {
               strokeWidth="1.4"
             />
             <circle cx="188" cy="150" r="7" fill="currentColor" />
-            <text x="202" y="154" fill="#f3eee4" fontSize="12">
+            <text x="202" y="154" fill="#0a2a5e" fontSize="12">
               Balga HQ
             </text>
             <circle cx="200" cy="175" r="48" fill="none" stroke="currentColor" strokeDasharray="4 4" />
-            <text x="70" y="330" fill="#b7c0cc" fontSize="11">
+            <text x="70" y="330" fill="#5a6b82" fontSize="11">
               Perth metropolitan schematic — not a street map
             </text>
           </svg>

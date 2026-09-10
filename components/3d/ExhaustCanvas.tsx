@@ -39,11 +39,16 @@ function CutawayDuct({ length = 12 }: { length?: number }) {
           position={[-length / 2 + 1 + i * 0.9, 0, 0]}
         >
           <torusGeometry args={[1.66, 0.04, 8, 40, Math.PI * 1.64]} />
-          <meshStandardMaterial color="#c9a44a" metalness={0.85} roughness={0.3} />
+          <meshStandardMaterial color="#1e6fd4" metalness={0.85} roughness={0.3} />
         </mesh>
       ))}
     </group>
   );
+}
+
+function seed(i: number) {
+  const x = Math.sin(i * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
 }
 
 function GreaseMist() {
@@ -53,10 +58,10 @@ function GreaseMist() {
     const count = 160;
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const a = Math.random() * Math.PI;
-      positions[i * 3] = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 1] = -0.2 + Math.random() * 0.9;
-      positions[i * 3 + 2] = Math.cos(a) * (0.4 + Math.random() * 1.1);
+      const a = seed(i) * Math.PI;
+      positions[i * 3] = (seed(i + 17) - 0.5) * 10;
+      positions[i * 3 + 1] = -0.2 + seed(i + 31) * 0.9;
+      positions[i * 3 + 2] = Math.cos(a) * (0.4 + seed(i + 53) * 1.1);
     }
     g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     return g;
@@ -72,7 +77,7 @@ function GreaseMist() {
   });
   return (
     <points ref={ref} geometry={geo}>
-      <pointsMaterial color="#c9a44a" size={0.025} transparent opacity={0.4} />
+      <pointsMaterial color="#4a9ae8" size={0.025} transparent opacity={0.4} />
     </points>
   );
 }
@@ -122,10 +127,10 @@ function CameraRig({ mode }: { mode: SceneMode }) {
 function DuctScene({ mode }: { mode: "hero" | "tech" }) {
   return (
     <>
-      <color attach="background" args={["#050b14"]} />
-      <fog attach="fog" args={["#050b14", 5, 16]} />
+      <color attach="background" args={["#0a2a5e"]} />
+      <fog attach="fog" args={["#0a2a5e", 5, 16]} />
       <ambientLight intensity={0.35} />
-      <directionalLight position={[5, 6, 4]} intensity={1.35} color="#f3ead2" />
+      <directionalLight position={[5, 6, 4]} intensity={1.35} color="#e8f1fc" />
       <pointLight position={[-3, 2, 2]} intensity={0.7} color="#4d7aaa" />
       <CameraRig mode={mode} />
       <group rotation={[0.12, -0.42, 0.04]} position={[0, 0.15, 0]}>
@@ -135,7 +140,7 @@ function DuctScene({ mode }: { mode: "hero" | "tech" }) {
       </group>
       {mode === "tech" ? (
         <Html position={[1.6, 1.15, 0]} transform distanceFactor={8}>
-          <div className="rounded border border-gold/40 bg-navy/80 px-3 py-2 font-mono text-[10px] tracking-widest text-gold uppercase">
+          <div className="rounded border border-gold/40 bg-brand/80 px-3 py-2 font-mono text-[10px] tracking-widest text-gold-2 uppercase">
             Tracked crawler · live interior
           </div>
         </Html>
@@ -147,9 +152,9 @@ function DuctScene({ mode }: { mode: "hero" | "tech" }) {
 function StudioScene({ explode = false }: { explode?: boolean }) {
   return (
     <>
-      <color attach="background" args={["#f3eee4"]} />
+      <color attach="background" args={["#0a2a5e"]} />
       <ambientLight intensity={0.85} />
-      <spotLight position={[4, 6, 3]} intensity={2.4} angle={0.55} color="#fff7ea" />
+      <spotLight position={[4, 6, 3]} intensity={2.4} angle={0.55} color="#e8f1fc" />
       <directionalLight position={[-3, 4, 2]} intensity={1.1} />
       <CameraRig mode={explode ? "studio" : "hero"} />
       <group scale={explode ? 1.35 : 1.55} position={[0, 0.08, 0]}>

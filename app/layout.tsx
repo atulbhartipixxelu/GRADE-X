@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
+import { Figtree, Fraunces, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Loader } from "@/components/layout/Loader";
@@ -8,17 +8,19 @@ import { localBusinessJsonLd, pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const sans = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const serif = Instrument_Serif({
-  variable: "--font-serif",
+const display = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
+  style: ["normal", "italic"],
 });
 
 const mono = JetBrains_Mono({
@@ -30,7 +32,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   ...pageMeta(site.tagline, site.description, "/"),
   metadataBase: new URL(site.url),
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.png", apple: "/brand/logo-shield.png" },
   keywords: [
     "kitchen exhaust cleaning Perth",
     "robotic exhaust cleaning Western Australia",
@@ -47,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-AU"
-      className={`${outfit.variable} ${serif.variable} ${mono.variable} h-full antialiased`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-navy text-ivory">
         <script

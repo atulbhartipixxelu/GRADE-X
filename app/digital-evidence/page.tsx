@@ -13,9 +13,9 @@ export default function EvidencePage() {
   return (
     <>
       <PageHero
-        kicker="Digital evidence"
-        title="Proof from inside the exhaust run."
-        body="Objective grease-thickness measurement before and after every clean. Live video during the clean itself. Photographic evidence with every job. Same weight as the robotic platform — because facility managers look for both."
+        kicker="Digital evidence & reporting"
+        title="Verification of completed work."
+        body="Objective grease-thickness measurement before and after every clean, live video during the clean itself, and before/after photographic evidence supplied with every job. This is a genuine operational differentiator, presented with the same weight as the robotic technology."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/digital-evidence", label: "Digital evidence" },
@@ -38,22 +38,23 @@ export default function EvidencePage() {
         </div>
         <div className="border border-gold/20 bg-navy-2 p-8">
           <p className="font-mono text-[11px] tracking-[0.24em] text-gold uppercase">
-            Sample job file
+            Client reporting system
           </p>
           <div className="mt-6 space-y-5">
-            <Row k="Site" v="QSR cookline · Perth metro" />
-            <Row k="Baseline" v="412 µm canopy plenum / 268 µm duct sample" />
-            <Row k="After clean" v="18 µm / 22 µm" />
-            <Row k="Method" v="Steam wash + robotic interior pass" />
-            <Row k="Next interval" v="90 days · high fryer load" />
+            <Row k="Before-and-after photos" v="Supplied with every job" />
+            <Row k="Digital grease measurement" v="Before and after, objective micron readings" />
+            <Row k="Live video" v="During the clean itself" />
+            <Row k="Service reports" v="Areas cleaned and inspected" />
+            <Row k="Compliance documentation" v="Held with the job record" />
+            <Row k="Maintenance" v="Recommendations for future intervals" />
           </div>
           <p className="mt-8 text-xs leading-6 text-mist">
-            Illustrative layout. Grade X replaces this with a redacted real report once supplied. The structure is ready for CMS upload.
+            A visual example of a redacted real report can be added here once supplied by Grade X. The page structure is ready for that upload.
           </p>
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
-        <Button href="/contact">Ask for a sample evidence pack</Button>
+        <Button href="/contact">Request a quote</Button>
       </section>
     </>
   );

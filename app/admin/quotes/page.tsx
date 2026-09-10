@@ -7,14 +7,16 @@ import type { QuoteRequest } from "@/lib/store";
 export default function AdminQuotesPage() {
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
 
-  async function load() {
-    const res = await fetch("/api/admin/quotes");
-    const data = await res.json();
-    setQuotes(data.quotes || []);
-  }
-
   useEffect(() => {
-    load();
+    let live = true;
+    fetch("/api/admin/quotes")
+      .then((r) => r.json())
+      .then((data) => {
+        if (live) setQuotes(data.quotes || []);
+      });
+    return () => {
+      live = false;
+    };
   }, []);
 
   async function setStatus(id: string, status: QuoteRequest["status"]) {
@@ -23,7 +25,9 @@ export default function AdminQuotesPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
-    load();
+    const res = await fetch("/api/admin/quotes");
+    const data = await res.json();
+    setQuotes(data.quotes || []);
   }
 
   return (

@@ -27,8 +27,8 @@ export function Loader() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setGone(true);
-      return;
+      const skip = window.setTimeout(() => setGone(true), 0);
+      return () => window.clearTimeout(skip);
     }
     let v = 0;
     const id = window.setInterval(() => {
@@ -53,12 +53,12 @@ export function Loader() {
 
   return (
     <div
-      className={`fixed inset-0 z-[90] grid place-items-center bg-[#f3eee4] transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
+      className={`fixed inset-0 z-[90] grid place-items-center bg-brand transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
         hide ? "-translate-y-full" : ""
       }`}
     >
       <p className="sr-only">{n} percent loaded</p>
-      <p className="font-display flex items-end text-[22vw] leading-none text-[#1a1712]">
+      <p className="font-display flex items-end text-[22vw] leading-none text-white">
         <Column digit={a} />
         <Column digit={b} />
         <Column digit={c} />
