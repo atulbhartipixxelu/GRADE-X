@@ -37,7 +37,7 @@ export default async function ServicesPage() {
           const meta = categoryMeta[key];
           const items = services.filter((s) => s.category === key);
           return (
-            <section key={key}>
+            <section key={key} id={key}>
               <p className="font-mono text-[11px] tracking-[0.28em] text-gold uppercase">
                 {meta.title}
               </p>

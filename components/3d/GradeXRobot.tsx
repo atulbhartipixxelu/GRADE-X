@@ -28,23 +28,25 @@ const brass = {
   roughness: 0.22,
 } as const;
 
-function stadiumPoint(t: number, length: number, height: number) {
+const _stad = new THREE.Vector3();
+
+function stadiumPoint(t: number, length: number, height: number, out = _stad) {
   const r = height / 2;
   const straight = length;
   const cap = Math.PI * r;
   const peri = 2 * straight + 2 * cap;
   let d = ((t % 1) + 1) % 1 * peri;
-  if (d < straight) return new THREE.Vector3(-length / 2 + d, -r, 0);
+  if (d < straight) return out.set(-length / 2 + d, -r, 0);
   d -= straight;
   if (d < cap) {
     const a = -Math.PI / 2 + (d / cap) * Math.PI;
-    return new THREE.Vector3(length / 2, Math.sin(a) * r, 0);
+    return out.set(length / 2, Math.sin(a) * r, 0);
   }
   d -= cap;
-  if (d < straight) return new THREE.Vector3(length / 2 - d, r, 0);
+  if (d < straight) return out.set(length / 2 - d, r, 0);
   d -= straight;
   const a = Math.PI / 2 + (d / cap) * Math.PI;
-  return new THREE.Vector3(-length / 2, Math.sin(a) * r, 0);
+  return out.set(-length / 2, Math.sin(a) * r, 0);
 }
 
 function Track({ side }: { side: 1 | -1 }) {
@@ -230,7 +232,7 @@ export function GradeXRobot({
 
   return (
     <group ref={root} dispose={null}>
-      <mesh position={[0, 0.02, 0]} castShadow>
+      <mesh position={[0, 0.02, 0]}>
         <boxGeometry args={[0.78, 0.2, 0.42]} />
         <meshStandardMaterial {...steel} />
       </mesh>

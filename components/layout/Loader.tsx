@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 
 function Column({ digit }: { digit: number }) {
   return (
-    <span className="inline-block h-[0.85em] overflow-hidden">
+    <span className="gx-loader-col">
       <span
-        className="block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{ transform: `translateY(-${digit * 0.85}em)` }}
+        className="gx-loader-strip"
+        style={{ transform: `translateY(-${digit}em)` }}
       >
         {Array.from({ length: 10 }, (_, n) => (
-          <span key={n} className="block h-[0.85em] leading-[0.85em]">
+          <span key={n} className="gx-loader-digit">
             {n}
           </span>
         ))}
@@ -53,16 +53,16 @@ export function Loader() {
 
   return (
     <div
-      className={`fixed inset-0 z-[90] grid place-items-center bg-brand transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
+      className={`gx-loader fixed inset-0 z-[90] grid place-items-center bg-brand transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
         hide ? "-translate-y-full" : ""
       }`}
     >
       <p className="sr-only">{n} percent loaded</p>
-      <p className="font-display flex items-end text-[22vw] leading-none text-white">
+      <p className="gx-loader-num" aria-hidden>
         <Column digit={a} />
         <Column digit={b} />
         <Column digit={c} />
-        <span className="mb-[0.08em] text-[8vw]">%</span>
+        <span className="gx-loader-pct">%</span>
       </p>
     </div>
   );

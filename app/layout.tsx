@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Figtree, Fraunces, JetBrains_Mono } from "next/font/google";
+import { Figtree, Lexend, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Loader } from "@/components/layout/Loader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { localBusinessJsonLd, pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -15,12 +16,11 @@ const sans = Figtree({
   display: "swap",
 });
 
-const display = Fraunces({
-  variable: "--font-fraunces",
+const display = Lexend({
+  variable: "--font-lexend",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  style: ["normal", "italic"],
 });
 
 const mono = JetBrains_Mono({
@@ -49,8 +49,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-AU"
+      data-theme="dark"
+      suppressHydrationWarning
       className={`${sans.variable} ${display.variable} ${mono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("gx-theme");if(t!=="light"&&t!=="dark")t="dark";document.documentElement.setAttribute("data-theme",t);document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.setAttribute("data-theme","dark");document.documentElement.style.colorScheme="dark";}})();`,
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-navy text-ivory">
         <script
           type="application/ld+json"
@@ -58,12 +67,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify(localBusinessJsonLd()),
           }}
         />
-        <Loader />
-        <SmoothScroll>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <ThemeProvider>
+          <Loader />
+          <SmoothScroll>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -23,7 +23,6 @@ export function ScrollVideoBanner() {
   const heroCopy = useRef<HTMLDivElement>(null);
   const heroWash = useRef<HTMLDivElement>(null);
   const secondCopy = useRef<HTMLDivElement>(null);
-  const hud = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stageEl = stage.current;
@@ -32,8 +31,7 @@ export function ScrollVideoBanner() {
     const heroEl = heroCopy.current;
     const washEl = heroWash.current;
     const secondEl = secondCopy.current;
-    const hudEl = hud.current;
-    if (!stageEl || !wrapEl || !videoEl || !heroEl || !washEl || !secondEl || !hudEl) return;
+    if (!stageEl || !wrapEl || !videoEl || !heroEl || !washEl || !secondEl) return;
 
     videoEl.muted = true;
     videoEl.defaultMuted = true;
@@ -41,16 +39,25 @@ export function ScrollVideoBanner() {
     videoEl.playsInline = true;
     videoEl.autoplay = true;
 
+    let heroVisible = true;
     const keepPlaying = () => {
+      if (!heroVisible) return;
       if (videoEl.paused) {
         void videoEl.play().catch(() => undefined);
       }
     };
     keepPlaying();
-    const playRetry = window.setInterval(keepPlaying, 2000);
-    videoEl.addEventListener("pause", keepPlaying);
     videoEl.addEventListener("stalled", keepPlaying);
-    videoEl.addEventListener("suspend", keepPlaying);
+
+    const heroIo = new IntersectionObserver(
+      ([entry]) => {
+        heroVisible = Boolean(entry?.isIntersecting && (entry.intersectionRatio ?? 0) > 0.12);
+        if (heroVisible) keepPlaying();
+        else videoEl.pause();
+      },
+      { threshold: [0, 0.12, 0.4] },
+    );
+    heroIo.observe(wrapEl);
 
     const counters = secondEl.querySelectorAll<HTMLElement>("[data-pin-count]");
     let counted = false;
@@ -72,43 +79,44 @@ export function ScrollVideoBanner() {
       });
     };
 
+    const cardVid = heroEl.querySelector("video");
+
     const ctx = gsap.context(() => {
-      const desktop = {
-        top: "12%",
-        left: "52%",
-        width: "44%",
-        height: "76%",
-        borderRadius: 22,
-      };
-      const mobile = {
-        top: "48%",
-        left: "6%",
-        width: "88%",
-        height: "46%",
-        borderRadius: 18,
-      };
-
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px)", () => {
-        buildTl(desktop);
-      });
-      mm.add("(max-width: 1023px)", () => {
-        buildTl(mobile);
-      });
-
-      function buildTl(endState: typeof desktop) {
+      function buildTl(endState: {
+        top: string;
+        left: string;
+        width: string;
+        height: string;
+        borderRadius: number;
+      }) {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: stageEl,
             start: "top 84px",
             end: "bottom bottom",
-            scrub: 1.15,
+            scrub: 0.45,
             invalidateOnRefresh: true,
+            onToggle: (self) => {
+              if (self.isActive && heroVisible) keepPlaying();
+            },
             onUpdate: (self) => {
-              keepPlaying();
               if (self.progress > 0.48) runCounts();
+              if (!cardVid) return;
+              const hideCard = self.progress > 0.16;
+              if (hideCard && !cardVid.paused) cardVid.pause();
+              if (!hideCard && heroVisible && cardVid.paused) {
+                void cardVid.play().catch(() => undefined);
+              }
             },
           },
+        });
+
+        gsap.set(wrapEl, {
+          xPercent: 0,
+          yPercent: 0,
+          scale: 1,
+          clipPath: "none",
+          clearProps: "clipPath,transform",
         });
 
         tl.fromTo(
@@ -121,8 +129,12 @@ export function ScrollVideoBanner() {
             borderRadius: 0,
           },
           {
-            ...endState,
-            boxShadow: "0 24px 60px rgba(10,42,94,0.22)",
+            top: endState.top,
+            left: endState.left,
+            width: endState.width,
+            height: endState.height,
+            borderRadius: endState.borderRadius,
+            boxShadow: "0 24px 60px rgba(10, 42, 94, 0.22)",
             ease: "none",
             duration: 0.62,
           },
@@ -135,14 +147,28 @@ export function ScrollVideoBanner() {
             { opacity: 0, y: 28 },
             { opacity: 1, y: 0, ease: "none", duration: 0.3 },
             0.42,
-          )
-          .fromTo(
-            hudEl,
-            { opacity: 0 },
-            { opacity: 1, ease: "none", duration: 0.22 },
-            0.48,
           );
       }
+
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        buildTl({
+          top: "12%",
+          left: "52%",
+          width: "44%",
+          height: "76%",
+          borderRadius: 22,
+        });
+      });
+      mm.add("(max-width: 1023px)", () => {
+        buildTl({
+          top: "48%",
+          left: "6%",
+          width: "88%",
+          height: "46%",
+          borderRadius: 18,
+        });
+      });
     }, stageEl);
 
     const refresh = () => ScrollTrigger.refresh();
@@ -151,11 +177,10 @@ export function ScrollVideoBanner() {
 
     return () => {
       window.removeEventListener("resize", refresh);
-      videoEl.removeEventListener("pause", keepPlaying);
       videoEl.removeEventListener("stalled", keepPlaying);
-      videoEl.removeEventListener("suspend", keepPlaying);
+      heroIo.disconnect();
+      videoEl.pause();
       window.clearTimeout(t);
-      window.clearInterval(playRetry);
       ctx.revert();
     };
   }, []);
@@ -174,21 +199,11 @@ export function ScrollVideoBanner() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             disablePictureInPicture
             controls={false}
             className="scroll-video-el h-full w-full object-cover object-center"
           />
-          <div ref={hud} className="pointer-events-none absolute inset-0 opacity-0">
-            <span className="absolute top-4 left-4 size-3.5 border-t border-l border-white/80" />
-            <span className="absolute top-4 right-4 size-3.5 border-t border-r border-white/80" />
-            <span className="absolute bottom-4 left-4 size-3.5 border-b border-l border-white/80" />
-            <span className="absolute right-4 bottom-4 size-3.5 border-b border-r border-white/80" />
-            <p className="absolute top-4 left-10 flex items-center gap-2 text-[10px] tracking-[0.22em] text-white uppercase">
-              <span className="live-dot size-1.5 rounded-full bg-gold-2" />
-              Live video during the clean
-            </p>
-          </div>
         </div>
 
         <div

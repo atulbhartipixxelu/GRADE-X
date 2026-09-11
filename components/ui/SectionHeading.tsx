@@ -41,7 +41,7 @@ export function SectionHeading({
         {kicker}
       </Kicker>
       <Tag
-        className={`${centered ? "mx-auto" : ""} font-display mt-4 max-w-[20ch] text-[clamp(2rem,4.4vw,3.65rem)] font-semibold leading-[1.08] tracking-[-0.038em] ${
+        className={`${centered ? "mx-auto" : ""} font-display mt-4 max-w-[20ch] text-[clamp(2rem,4.4vw,3.65rem)] font-semibold leading-[1.08] ${
           invert ? "text-white" : "text-ivory"
         }`}
       >

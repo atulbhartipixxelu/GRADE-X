@@ -3,32 +3,33 @@ import Link from "next/link";
 
 export function Logo({
   href = "/",
-  variant = "color",
   className = "",
 }: {
   href?: string;
-  variant?: "color" | "onDark";
   className?: string;
 }) {
-  const src =
-    variant === "onDark"
-      ? "/brand/logo-lockup-dark.png"
-      : "/brand/logo-lockup.png";
-
   return (
     <Link
       href={href}
-      className={`relative block h-[3.35rem] w-[8.1rem] sm:h-[3.6rem] sm:w-[8.7rem] ${className}`}
+      className={`gx-logo flex items-center gap-2.5 ${className}`}
       aria-label="Grade X Commercial Solutions home"
     >
-      <Image
-        src={src}
-        alt="Grade X Commercial Solutions Pty Ltd"
-        fill
-        className="object-contain object-left"
-        sizes="140px"
-        priority
-      />
+      <span className="gx-logo-mark relative size-[2.85rem] shrink-0 overflow-hidden sm:size-[3.1rem]">
+        <Image
+          src="/brand/logo-shield.png"
+          alt=""
+          fill
+          className="object-contain p-[3px]"
+          sizes="50px"
+          priority
+        />
+      </span>
+      <span className="gx-logo-type min-w-0 leading-none">
+        <span className="gx-logo-name">
+          GRADE<span>X</span>
+        </span>
+        <span className="gx-logo-sub">Commercial Solutions Pty Ltd</span>
+      </span>
     </Link>
   );
 }

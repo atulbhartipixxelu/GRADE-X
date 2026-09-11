@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { SceneMode } from "./ExhaustCanvas";
 
 const ExhaustCanvas = dynamic(
@@ -10,25 +10,36 @@ const ExhaustCanvas = dynamic(
 );
 
 export function HeroScene({ mode = "hero" }: { mode?: SceneMode }) {
+  const wrap = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const saveData = Boolean(conn?.saveData);
-    const mobile = window.matchMedia("(max-width: 720px)").matches;
-    if (motion.matches || saveData) return;
-    const t = window.setTimeout(() => setReady(true), mobile ? 250 : 80);
-    return () => window.clearTimeout(t);
+    if (motion.matches || conn?.saveData) return;
+
+    const el = wrap.current;
+    if (!el) return;
+    let timer = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        io.disconnect();
+        const mobile = window.matchMedia("(max-width: 720px)").matches;
+        timer = window.setTimeout(() => setReady(true), mobile ? 250 : 80);
+      },
+      { rootMargin: "160px" },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(timer);
+    };
   }, []);
 
-  if (!ready) {
-    return <HeroFallback />;
-  }
-
   return (
-    <div className="absolute inset-0">
-      <ExhaustCanvas mode={mode} />
+    <div ref={wrap} className="absolute inset-0">
+      {ready ? <ExhaustCanvas mode={mode} /> : <HeroFallback />}
     </div>
   );
 }

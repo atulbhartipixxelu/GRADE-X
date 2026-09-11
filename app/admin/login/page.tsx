@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
             className="mt-2 w-full border border-gold/20 bg-navy px-3 py-2 text-ivory"
           />
         </label>
-        {error ? <p className="mt-3 text-sm text-red-300">{error}</p> : null}
+        {error ? <p className="mt-3 text-sm text-red-500">{error}</p> : null}
         <button
           type="submit"
           disabled={loading}

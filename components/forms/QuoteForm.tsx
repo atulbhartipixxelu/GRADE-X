@@ -38,7 +38,7 @@ export function QuoteForm({
   }
 
   const field =
-    "w-full border border-gold/20 bg-white px-4 py-3 text-sm text-ivory outline-none placeholder:text-mist/50 focus:border-gold";
+    "w-full border border-gold/20 bg-surface px-4 py-3 text-sm text-ivory outline-none placeholder:text-mist/50 focus:border-gold";
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -105,7 +105,7 @@ export function QuoteForm({
           Received. Grade X will respond to this enquiry. For emergencies call {site.phone}.
         </p>
       ) : null}
-      {status === "err" ? <p className="text-sm text-red-300">{error}</p> : null}
+      {status === "err" ? <p className="text-sm text-red-500">{error}</p> : null}
     </form>
   );
 }

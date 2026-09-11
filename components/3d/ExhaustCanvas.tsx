@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, ContactShadows, Html } from "@react-three/drei";
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { GradeXRobot } from "./GradeXRobot";
 
@@ -99,26 +99,24 @@ function CrawlerInDuct() {
 
 function CameraRig({ mode }: { mode: SceneMode }) {
   const { pointer } = useThree();
+  const aim = useMemo(() => new THREE.Vector3(), []);
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     if (mode === "hero") {
-      state.camera.position.lerp(
-        new THREE.Vector3(1.8 + pointer.x * 0.55, 0.95 + pointer.y * 0.25, 2.55),
-        0.05,
-      );
+      aim.set(1.8 + pointer.x * 0.55, 0.95 + pointer.y * 0.25, 2.55);
+      state.camera.position.lerp(aim, 0.05);
       state.camera.lookAt(0, 0.1, 0);
       return;
     }
     if (mode === "studio") {
       const r = 2.4;
-      state.camera.position.lerp(
-        new THREE.Vector3(Math.sin(t * 0.22) * r, 1.15, Math.cos(t * 0.22) * r),
-        0.06,
-      );
+      aim.set(Math.sin(t * 0.22) * r, 1.15, Math.cos(t * 0.22) * r);
+      state.camera.position.lerp(aim, 0.06);
       state.camera.lookAt(0, 0.12, 0);
       return;
     }
-    state.camera.position.lerp(new THREE.Vector3(3.2, 0.55, 2.1), 0.05);
+    aim.set(3.2, 0.55, 2.1);
+    state.camera.position.lerp(aim, 0.05);
     state.camera.lookAt(0.2, -0.55, 0);
   });
   return null;
@@ -160,20 +158,36 @@ function StudioScene({ explode = false }: { explode?: boolean }) {
       <group scale={explode ? 1.35 : 1.55} position={[0, 0.08, 0]}>
         <GradeXRobot explodeLoop={explode} />
       </group>
-      <ContactShadows position={[0, -0.28, 0]} opacity={0.22} scale={7} blur={2.8} />
+      {explode ? (
+        <ContactShadows position={[0, -0.28, 0]} opacity={0.22} scale={7} blur={2.8} />
+      ) : null}
     </>
   );
 }
 
 export function ExhaustCanvas({ mode = "hero" }: { mode?: SceneMode }) {
+  const host = useRef<HTMLDivElement>(null);
+  const [live, setLive] = useState(true);
+
+  useEffect(() => {
+    const el = host.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setLive(Boolean(entry?.isIntersecting)),
+      { rootMargin: "80px", threshold: 0.05 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className="h-full w-full">
+    <div ref={host} className="h-full w-full">
       <Canvas
-        dpr={[1, 1.6]}
-        gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
+        dpr={[1, 1.25]}
+        frameloop={live ? "always" : "never"}
+        gl={{ antialias: false, powerPreference: "high-performance", alpha: true }}
         camera={{ fov: 40, position: [4.2, 0.9, 2.8], near: 0.1, far: 40 }}
         style={{ width: "100%", height: "100%" }}
-        shadows
       >
         <AdaptiveDpr pixelated />
         <Suspense fallback={null}>

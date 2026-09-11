@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { site } from "@/lib/site";
 
 const topNav = [
@@ -31,7 +32,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 z-50 h-[var(--header-h)] border-b border-[var(--line)] bg-white">
+      <header className="fixed top-0 right-0 left-0 z-50 h-[var(--header-h)] border-b border-[var(--line)] bg-[var(--header-bg)]">
         <div className="mx-auto flex h-full max-w-[1500px] items-center justify-between gap-4 px-5 sm:px-8">
           <Logo />
           <nav className="hidden items-center gap-7 lg:flex">
@@ -50,13 +51,14 @@ export function Header() {
               );
             })}
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <a
               href={site.phoneHref}
-              className="hidden text-[12px] tracking-[0.08em] text-ivory sm:inline-flex"
+              className="hidden text-[12px] tracking-[0.08em] text-ivory lg:inline-flex"
             >
               {site.phone}
             </a>
+            <ThemeToggle />
             <Link
               href="/contact"
               className="hidden bg-gold px-4 py-2.5 text-[12px] tracking-[0.16em] text-white uppercase sm:inline-flex"
@@ -76,7 +78,7 @@ export function Header() {
       <div className="h-[var(--header-h)]" aria-hidden />
 
       <div
-        className={`fixed inset-0 z-40 bg-white transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+        className={`fixed inset-0 z-40 bg-navy transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
           open ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -94,7 +96,10 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <p className="mt-10 text-sm text-mist">{site.email}</p>
+          <div className="mt-10 flex items-center gap-4">
+            <ThemeToggle />
+            <p className="text-sm text-mist">{site.email}</p>
+          </div>
           <a href={site.phoneHref} className="mt-2 text-sm text-ivory">
             {site.phone}
           </a>

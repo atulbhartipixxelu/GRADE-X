@@ -13,10 +13,10 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (reduce) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.9,
       smoothWheel: true,
-      wheelMultiplier: 0.92,
-      touchMultiplier: 1.1,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -25,7 +25,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     const onResize = () => ScrollTrigger.refresh();
     window.addEventListener("resize", onResize);
@@ -33,6 +33,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     return () => {
       window.removeEventListener("resize", onResize);
       gsap.ticker.remove(ticker);
+      gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
