@@ -119,7 +119,7 @@ function tween(target: gsap.TweenTarget, vars: gsap.TweenVars) {
 }
 
 export function CredentialsSlider() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
   const marquee = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -227,6 +227,7 @@ export function CredentialsSlider() {
       }
 
       function layoutStatic(opening = false) {
+        if (!stage) return;
         m = measure(stage);
         const [active, ...rest] = order;
         const detailsActive = detailsSel(true);
@@ -654,7 +655,7 @@ function CertPhrase() {
   );
 }
 
-function CertCursor({ host }: { host: React.RefObject<HTMLElement | null> }) {
+function CertCursor({ host }: { host: React.RefObject<HTMLDivElement | null> }) {
   const el = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -715,7 +716,7 @@ function CertCursor({ host }: { host: React.RefObject<HTMLElement | null> }) {
   );
 }
 
-function InspectCursor({ host }: { host: React.RefObject<HTMLElement | null> }) {
+function InspectCursor({ host }: { host: React.RefObject<HTMLDivElement | null> }) {
   const el = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
