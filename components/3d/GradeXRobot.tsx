@@ -3,6 +3,7 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
+import { storyDrive } from "@/lib/storyDrive";
 
 const steel = {
   color: "#c5ccd4",
@@ -56,8 +57,12 @@ function Track({ side }: { side: 1 | -1 }) {
   const sprocketB = useRef<THREE.Group>(null);
   const z = side * 0.268;
 
+  const last = useRef(0);
+
   useFrame((_, delta) => {
-    const spin = delta * 2.4;
+    const v = Math.abs(storyDrive.progress - last.current) * 36;
+    last.current = storyDrive.progress;
+    const spin = delta * (storyDrive.active ? 4.6 + v : 1.6);
     if (group.current) group.current.userData.t = (group.current.userData.t || 0) + spin * 0.12;
     const t = group.current?.userData.t || 0;
     group.current?.children.forEach((child, i) => {

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { caseStudies, testimonials } from "@/lib/content";
 import { PageHero } from "@/components/ui/PageHero";
 import { pageMeta } from "@/lib/seo";
@@ -71,10 +71,8 @@ export default function CaseStudiesPage() {
             Testimonials will display here as soon as Grade X supplies them.
           </p>
         )}
-        <p className="mt-10 text-sm text-mist">
-          <Link href="/contact" className="text-gold">
-            Request a quote
-          </Link>
+        <p className="mt-10">
+          <Button href="/contact">Request a quote</Button>
         </p>
       </section>
     </>

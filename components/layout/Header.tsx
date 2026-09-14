@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
 const topNav = [
@@ -18,6 +18,8 @@ const topNav = [
 export function Header() {
   const pathname = usePathname();
   const [menuPath, setMenuPath] = useState<string | null>(null);
+  const isHome = pathname === "/";
+  const [overHero, setOverHero] = useState(isHome);
   const open = menuPath === pathname;
   const isAdmin = pathname.startsWith("/admin");
 
@@ -28,12 +30,36 @@ export function Header() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!isHome) {
+      setOverHero(false);
+      return;
+    }
+    const hero = document.querySelector(".gx-hero");
+    const onScroll = () => {
+      if (!hero) {
+        setOverHero(true);
+        return;
+      }
+      setOverHero(hero.getBoundingClientRect().bottom > 88);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const id = window.setInterval(onScroll, 200);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearInterval(id);
+    };
+  }, [isHome]);
+
   if (isAdmin) return null;
+
+  const onVideo = isHome && overHero;
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 z-50 h-[var(--header-h)] border-b border-[var(--line)] bg-[var(--header-bg)]">
-        <div className="mx-auto flex h-full max-w-[1500px] items-center justify-between gap-4 px-5 sm:px-8">
+      <header className={`gx-nav ${onVideo ? "gx-nav--over" : ""}`}>
+        <div className="gx-nav-inner">
           <Logo />
           <nav className="hidden items-center gap-7 lg:flex">
             {topNav.map((item) => {
@@ -42,8 +68,8 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-[13px] tracking-[0.12em] uppercase transition ${
-                    active ? "text-ivory" : "text-mist hover:text-ivory"
+                  className={`gx-nav-link text-[13px] tracking-[0.12em] uppercase transition ${
+                    active ? "is-on" : ""
                   }`}
                 >
                   {item.label}
@@ -52,30 +78,23 @@ export function Header() {
             })}
           </nav>
           <div className="flex items-center gap-3 sm:gap-4">
-            <a
-              href={site.phoneHref}
-              className="hidden text-[12px] tracking-[0.08em] text-ivory lg:inline-flex"
-            >
+            <a href={site.phoneHref} className="gx-nav-phone hidden lg:inline-flex">
               {site.phone}
             </a>
-            <ThemeToggle />
-            <Link
-              href="/contact"
-              className="hidden bg-gold px-4 py-2.5 text-[12px] tracking-[0.16em] text-white uppercase sm:inline-flex"
-            >
+            <Button href="/contact" className="hidden sm:inline-flex">
               Request a quote
-            </Link>
+            </Button>
             <button
               type="button"
               onClick={() => setMenuPath(open ? null : pathname)}
-              className="text-[12px] tracking-[0.2em] text-ivory uppercase lg:hidden"
+              className="gx-nav-menu lg:hidden"
             >
               {open ? "Close" : "Menu"}
             </button>
           </div>
         </div>
       </header>
-      <div className="h-[var(--header-h)]" aria-hidden />
+      {!isHome ? <div className="h-[var(--header-h)]" aria-hidden /> : null}
 
       <div
         className={`fixed inset-0 z-40 bg-navy transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
@@ -96,8 +115,7 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <div className="mt-10 flex items-center gap-4">
-            <ThemeToggle />
+          <div className="mt-10">
             <p className="text-sm text-mist">{site.email}</p>
           </div>
           <a href={site.phoneHref} className="mt-2 text-sm text-ivory">

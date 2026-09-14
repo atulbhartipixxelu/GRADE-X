@@ -4,6 +4,7 @@ import { InspectPlay } from "@/components/home/InspectPlay";
 import { ServicesOverview } from "@/components/home/ServicesOverview";
 import { TrustStrip } from "@/components/home/TrustStrip";
 import { CtaBanner } from "@/components/home/CtaBanner";
+import { StoryReveal } from "@/components/home/StoryReveal";
 import { ScrollVideoBanner } from "@/components/home/ScrollVideoBanner";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -17,7 +18,10 @@ export const metadata = pageMeta(
 export default function HomePage() {
   return (
     <HomeMotion>
-      <ScrollVideoBanner />
+      <div className="gx-hero-stack">
+        <ScrollVideoBanner />
+        <StoryReveal />
+      </div>
       <TrustStrip />
       <ServicesOverview />
       <EvidencePreview />

@@ -57,7 +57,7 @@ export default function ServiceAreaPage() {
               strokeWidth="1.4"
             />
             <circle cx="188" cy="150" r="7" fill="currentColor" />
-            <text x="202" y="154" fill="#0a2a5e" fontSize="12">
+            <text x="202" y="154" fill="#f4f7fb" fontSize="12">
               Balga HQ
             </text>
             <circle cx="200" cy="175" r="48" fill="none" stroke="currentColor" strokeDasharray="4 4" />

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { SiteSettings } from "@/lib/store";
+import { Button } from "@/components/ui/Button";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -64,9 +65,7 @@ export default function AdminSettingsPage() {
               }
             />
           </label>
-          <button className="rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.18em] uppercase text-white">
-            Save
-          </button>
+          <Button type="submit">Save</Button>
           {status ? <p className="text-sm text-gold">{status}</p> : null}
         </form>
       </div>

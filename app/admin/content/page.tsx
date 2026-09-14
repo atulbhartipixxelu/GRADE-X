@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 export default function AdminContentPage() {
   const [json, setJson] = useState("");
@@ -47,13 +48,9 @@ export default function AdminContentPage() {
           onChange={(e) => setJson(e.target.value)}
           className="mt-6 h-[560px] w-full border border-gold/20 bg-navy-2 p-4 font-mono text-xs text-ivory"
         />
-        <button
-          type="button"
-          onClick={save}
-          className="mt-4 rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.18em] uppercase text-white"
-        >
+        <Button type="button" onClick={save} className="mt-4">
           Save content
-        </button>
+        </Button>
         {status ? <p className="mt-3 text-sm text-gold">{status}</p> : null}
       </div>
     </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/components/brand/Logo";
+import { Button } from "@/components/ui/Button";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -58,13 +59,9 @@ export default function AdminLoginPage() {
           />
         </label>
         {error ? <p className="mt-3 text-sm text-red-500">{error}</p> : null}
-        <button
-          type="submit"
-          disabled={loading}
-          className="mt-6 w-full rounded-full bg-gold py-3 text-xs font-semibold tracking-[0.18em] uppercase text-white"
-        >
+        <Button type="submit" disabled={loading} className="mt-6 w-full">
           {loading ? "Signing in…" : "Enter"}
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { services as fallbackServices, type Service } from "@/lib/content";
 import { site } from "@/lib/site";
+import { Button } from "@/components/ui/Button";
 
 const urgencies = ["Planned programme", "This month", "Urgent / emergency"];
 
@@ -93,13 +94,9 @@ export function QuoteForm({
         Site notes
         <textarea name="message" rows={5} className={`${field} mt-2`} />
       </label>
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="rounded-full bg-gold px-8 py-3 text-[12px] font-semibold tracking-[0.18em] uppercase text-white disabled:opacity-60"
-      >
+      <Button type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending…" : "Submit quote request"}
-      </button>
+      </Button>
       {status === "ok" ? (
         <p className="text-sm text-gold">
           Received. Grade X will respond to this enquiry. For emergencies call {site.phone}.

@@ -5,16 +5,21 @@ type Props = {
   children: React.ReactNode;
   variant?: "gold" | "ghost" | "line";
   className?: string;
+  type?: "button" | "submit";
+  disabled?: boolean;
+  onClick?: () => void;
 };
 
-export function Button({ href, children, variant = "gold", className = "" }: Props) {
-  const styles = {
-    gold: "bg-gold text-white hover:bg-gold-2 border-gold",
-    ghost: "bg-transparent text-ivory hover:border-gold border-ivory/20",
-    line: "bg-transparent text-ivory border-transparent px-0 underline-offset-4 hover:underline",
-  }[variant];
-
-  const cls = `inline-flex items-center justify-center rounded-full border px-7 py-3.5 font-sans text-[12px] font-semibold tracking-[0.12em] uppercase transition ${styles} ${className}`;
+export function Button({
+  href,
+  children,
+  variant = "gold",
+  className = "",
+  type = "button",
+  disabled,
+  onClick,
+}: Props) {
+  const cls = `gx-btn gx-btn--${variant} ${className}`;
 
   if (href) {
     return (
@@ -23,5 +28,10 @@ export function Button({ href, children, variant = "gold", className = "" }: Pro
       </Link>
     );
   }
-  return <span className={cls}>{children}</span>;
+
+  return (
+    <button type={type} className={cls} disabled={disabled} onClick={onClick}>
+      {children}
+    </button>
+  );
 }

@@ -39,7 +39,13 @@ export function HeroScene({ mode = "hero" }: { mode?: SceneMode }) {
 
   return (
     <div ref={wrap} className="absolute inset-0">
-      {ready ? <ExhaustCanvas mode={mode} /> : <HeroFallback />}
+      {ready ? (
+        <ExhaustCanvas mode={mode} />
+      ) : mode === "story" || mode === "reveal" ? (
+        <div className="absolute inset-0 bg-transparent" />
+      ) : (
+        <HeroFallback />
+      )}
     </div>
   );
 }
