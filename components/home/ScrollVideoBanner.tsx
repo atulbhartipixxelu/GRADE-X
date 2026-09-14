@@ -24,8 +24,6 @@ function bindVideo(el: HTMLVideoElement) {
   };
 }
 
-const linear = [0, 0, 0, 0] as const;
-
 export function ScrollVideoBanner() {
   const hero = useRef<HTMLElement>(null);
   const media = useRef<HTMLDivElement>(null);
@@ -35,8 +33,8 @@ export function ScrollVideoBanner() {
     target: hero,
     offset: ["start start", "end start"],
   });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"], { ease: linear });
-  const rotate = useTransform(scrollYProgress, [0, 1], ["0deg", "-15deg"], { ease: linear });
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const rotate = useTransform(scrollYProgress, [0, 1], ["0deg", "-15deg"]);
 
   useEffect(() => {
     if (!heroVideo.current) return;
@@ -77,7 +75,7 @@ export function ScrollVideoBanner() {
 
       <div className="gx-hero-flow">
         <section ref={hero} className="gx-hero">
-          <motion.div className="gx-hero-scaler" style={{ x, rotate, transformOrigin: "0% 100%" }}>
+          <motion.div className="gx-hero-scaler" style={{ x, rotate }}>
             <div className="gx-hero-frame">
               <div className="gx-hero-clip">
                 <div ref={media} className="gx-hero-media">
