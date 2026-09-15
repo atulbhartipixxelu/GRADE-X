@@ -198,7 +198,7 @@ function Spray() {
 
   return (
     <points ref={ref} geometry={geo}>
-      <pointsMaterial color="#d7ecff" size={0.018} transparent opacity={0.55} depthWrite={false} />
+      <pointsMaterial color="#f4e27a" size={0.018} transparent opacity={0.55} depthWrite={false} />
     </points>
   );
 }

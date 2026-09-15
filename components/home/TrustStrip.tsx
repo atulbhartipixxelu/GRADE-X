@@ -6,15 +6,31 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CredentialsSlider } from "@/components/home/CredentialsSlider";
 import { Kicker } from "@/components/ui/SectionHeading";
-import { VoidParticles } from "@/components/home/VoidParticles";
+import { CoreParticles } from "@/components/home/CoreParticles";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const specs = [
-  { n: "01", t: "Robotic exhaust cleaning platform" },
-  { n: "02", t: "Digital grease thickness measurement" },
-  { n: "03", t: "Interior steam washing and extraction" },
-  { n: "04", t: "Live video during the clean" },
+  {
+    n: "01",
+    t: "Robotic exhaust cleaning platform",
+    b: "Currently the only company in WA operating this technology.",
+  },
+  {
+    n: "02",
+    t: "Digital grease thickness gauge",
+    b: "Instant, real-time micron readings, including technology such as the Teinnova Grasmeter.",
+  },
+  {
+    n: "03",
+    t: "Interior steam washing",
+    b: "Professional-grade steam and extraction, reducing reliance on harsh chemicals.",
+  },
+  {
+    n: "04",
+    t: "Live video during the clean",
+    b: "Plus before-and-after photographic evidence with every job.",
+  },
 ];
 
 export function TrustStrip() {
@@ -61,14 +77,32 @@ export function TrustStrip() {
         autoAlpha: 0,
         transformOrigin: "center center",
       });
-      gsap.set(rows, { y: 24, autoAlpha: 0 });
+      const from = [
+        { x: -42, y: -36 },
+        { x: 42, y: -36 },
+        { x: -42, y: 36 },
+        { x: 42, y: 36 },
+      ];
+      rows.forEach((row, i) => {
+        const origin = from[i] ?? { x: 0, y: 24 };
+        gsap.set(row, { x: origin.x, y: origin.y, autoAlpha: 0 });
+      });
       if (cta) gsap.set(cta, { y: 16, autoAlpha: 0 });
 
-      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const tl = gsap.timeline({
+        paused: true,
+        defaults: { ease: "power3.out" },
+        onStart: () => stageEl.classList.add("is-in"),
+        onReverseComplete: () => stageEl.classList.remove("is-in"),
+      });
 
       tl.to(copyEl, { y: 0, autoAlpha: 1, duration: 0.9 }, 0)
         .to(photoEl, { y: 0, scale: 1, autoAlpha: 1, duration: 1 }, 0.08)
-        .to(rows, { y: 0, autoAlpha: 1, duration: 0.45, stagger: 0.07 }, 0.32)
+        .to(
+          rows,
+          { x: 0, y: 0, autoAlpha: 1, duration: 0.72, stagger: 0.12, ease: "power3.out" },
+          0.42,
+        )
         .to(cta, { y: 0, autoAlpha: 1, duration: 0.35 }, 0.55);
 
       ScrollTrigger.create({
@@ -77,8 +111,14 @@ export function TrustStrip() {
         end: "bottom 16%",
         onEnter: () => tl.restart(),
         onEnterBack: () => tl.restart(),
-        onLeave: () => tl.pause(0),
-        onLeaveBack: () => tl.pause(0),
+        onLeave: () => {
+          stageEl.classList.remove("is-in");
+          tl.pause(0);
+        },
+        onLeaveBack: () => {
+          stageEl.classList.remove("is-in");
+          tl.pause(0);
+        },
       });
     }, stageEl);
 
@@ -124,7 +164,7 @@ export function TrustStrip() {
         <div className="gx-depth-wash" aria-hidden />
         <div className="gx-depth-glow gx-depth-glow--top" aria-hidden />
         <div className="gx-depth-glow gx-depth-glow--bottom" aria-hidden />
-        <VoidParticles overlay className="gx-core-particles" />
+        <CoreParticles />
 
         <div className="gx-core-inner">
           <div ref={copy} className="gx-core-copy">
@@ -135,8 +175,9 @@ export function TrustStrip() {
               <span>technology.</span>
             </h2>
             <p className="gx-core-body">
-              Grade X is currently the only company in WA operating robotic kitchen
-              exhaust cleaning technology. Reference photos of the platform are shown
+              Grade X is currently the only company in WA operating robotic kitchen exhaust
+              cleaning technology, a genuine, verifiable point of differentiation in a category
+              most competitors service manually. Reference photos of the platform are shown
               here; a dedicated Technology page covers the system in full.
             </p>
             <Link href="/technology" className="gx-core-link">
@@ -166,8 +207,13 @@ export function TrustStrip() {
             <ol className="gx-core-specs">
               {specs.map((s) => (
                 <li key={s.n} className="gx-core-spec">
-                  <span>{s.n}</span>
-                  <strong>{s.t}</strong>
+                  <i className="gx-core-spec-line" aria-hidden />
+                  <div className="gx-core-spec-card">
+                    <i className="gx-core-spec-wash" aria-hidden />
+                    <span>{s.n}</span>
+                    <strong>{s.t}</strong>
+                    <p>{s.b}</p>
+                  </div>
                 </li>
               ))}
             </ol>

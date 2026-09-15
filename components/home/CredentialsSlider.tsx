@@ -1,15 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 import { credentials } from "@/lib/content";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type Slide = {
   place: string;
+  tag: string;
   title: string;
   title2: string;
   description: string;
@@ -20,6 +17,7 @@ type Slide = {
 const slides: Slide[] = [
   {
     place: "Insurance",
+    tag: "Public liability",
     title: "Public",
     title2: "liability",
     description: credentials[0]?.body ?? "",
@@ -27,6 +25,7 @@ const slides: Slide[] = [
   },
   {
     place: "Insurance",
+    tag: "Workers comp",
     title: "Workers",
     title2: "compensation",
     description: credentials[1]?.body ?? "",
@@ -34,6 +33,7 @@ const slides: Slide[] = [
   },
   {
     place: "Food-safe practice",
+    tag: "Food-safe",
     title: "Food-safe",
     title2: "practices",
     description: credentials[2]?.body ?? "",
@@ -41,6 +41,7 @@ const slides: Slide[] = [
   },
   {
     place: "WHS",
+    tag: "Safe work",
     title: "WHS",
     title2: "safe work",
     description: credentials[3]?.body ?? "",
@@ -48,6 +49,7 @@ const slides: Slide[] = [
   },
   {
     place: "Certifications",
+    tag: "Staff certs",
     title: "Staff",
     title2: "certifications",
     description: credentials[4]?.body ?? "",
@@ -55,6 +57,7 @@ const slides: Slide[] = [
   },
   {
     place: "Quality control",
+    tag: "ISO quality",
     title: "ISO-focused",
     title2: "quality control",
     description: credentials[5]?.body ?? "",
@@ -62,6 +65,7 @@ const slides: Slide[] = [
   },
   {
     place: "Technology",
+    tag: "Robotic",
     title: "Robotic",
     title2: "kitchen exhaust",
     description:
@@ -80,38 +84,55 @@ export function CredentialsSlider() {
   const stack = useRef<HTMLDivElement>(null);
   const marquee = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const root = stage.current;
     const copyEl = copy.current;
     const stackEl = stack.current;
     if (!root || !copyEl || !stackEl) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const panels = [...stackEl.querySelectorAll<HTMLElement>(".gx-reel-panel")];
-    const steps = [...root.querySelectorAll<HTMLElement>(".gx-reel-step")];
-    const media = [...stackEl.querySelectorAll<HTMLElement>(".gx-reel-media")];
-    const last = Math.max(slides.length - 1, 1);
+    const frame = root.querySelector<HTMLElement>(".gx-vault-space");
+    const panels = [...stackEl.querySelectorAll<HTMLElement>(".gx-vault-shot")];
+    const steps = [...root.querySelectorAll<HTMLElement>(".gx-vault-chip")];
+    const media = [...stackEl.querySelectorAll<HTMLElement>(".gx-vault-media")];
+    const shines = [...stackEl.querySelectorAll<HTMLElement>(".gx-vault-shine")];
+    const n = slides.length;
+    const kicker = copyEl.querySelector(".gx-vault-kicker");
+    const title = copyEl.querySelector(".gx-vault-title");
+    const body = copyEl.querySelector(".gx-vault-body");
+    const count = root.querySelector(".gx-vault-now");
+    const fillBar = root.querySelector<HTMLElement>(".gx-vault-fill");
+    const mouse = { x: 0.5, y: 0.5 };
+    const look = { x: 0.5, y: 0.5 };
+    const drag = { on: false, sx: 0, start: 0, moved: 0 };
     let shown = 0;
     let playing = -1;
+    let target = 0;
+    let pos = 0;
+    let dwell = 0;
+    let live = true;
+    let raf = 0;
+    let last = performance.now();
+    const DWELL = 5000;
 
-    const kicker = copyEl.querySelector(".gx-reel-kicker");
-    const title = copyEl.querySelector(".gx-reel-title");
-    const body = copyEl.querySelector(".gx-reel-body");
-    const count = copyEl.querySelector(".gx-reel-now");
-    const mark = copyEl.querySelector(".gx-reel-mark");
-    const cap = root.querySelector(".gx-reel-cap");
-    const fillBar = root.querySelector<HTMLElement>(".gx-reel-fill");
+    const wrap = (i: number, p: number) => {
+      let o = i - p;
+      if (o > n / 2) o -= n;
+      if (o < -n / 2) o += n;
+      return o;
+    };
 
     const fill = (index: number) => {
       const slide = slides[index];
       if (!slide) return;
-      const n = pad(index + 1);
+      const num = pad(index + 1);
+      copyEl.classList.remove("is-swap");
+      void copyEl.offsetWidth;
+      copyEl.classList.add("is-swap");
       if (kicker) kicker.textContent = slide.place;
-      if (title) title.innerHTML = `<span>${slide.title}</span><span>${slide.title2}</span>`;
+      if (title) title.innerHTML = `<span>${slide.title}</span> <em>${slide.title2}</em>`;
       if (body) body.textContent = slide.description;
-      if (count) count.textContent = n;
-      if (mark) mark.textContent = n;
-      if (cap) cap.textContent = slide.place;
+      if (count) count.textContent = num;
     };
 
     const syncMedia = (active: number) => {
@@ -128,24 +149,44 @@ export function CredentialsSlider() {
       });
     };
 
-    const paint = (progress: number) => {
-      const p = progress * last;
-      const active = Math.max(0, Math.min(last, Math.round(p)));
+    const paint = () => {
+      const mobile = window.matchMedia("(max-width: 899px)").matches;
+      const active = ((Math.round(pos) % n) + n) % n;
+      const t = last * 0.001;
+      look.x += (mouse.x - look.x) * 0.12;
+      look.y += (mouse.y - look.y) * 0.12;
+      const steerX = (0.5 - look.y) * (mobile ? 6 : 14);
+      const steerY = (look.x - 0.5) * (mobile ? 8 : 22);
+      const idleX = Math.sin(t * 0.72) * 7.5 + Math.sin(t * 0.23) * 2;
+      const idleY = Math.cos(t * 0.5) * 11;
+      const floatY = Math.sin(t * 0.62) * 12;
+      stackEl.style.transform = `translate3d(0, ${floatY}px, 0) rotateX(${idleX + steerX}deg) rotateY(${idleY + steerY}deg)`;
 
       panels.forEach((panel, i) => {
-        const abs = Math.abs(i - p);
-        panel.style.opacity = String(Math.max(0, 1 - abs));
-        panel.style.zIndex = String(10 + Math.round((1 - abs) * 10));
+        const o = wrap(i, pos);
+        const abs = Math.abs(o);
+        panel.style.visibility = abs < 1.05 ? "visible" : "hidden";
+        panel.style.zIndex = String(20 - Math.round(abs * 10));
+        panel.classList.toggle("is-on", i === active);
+        panel.style.opacity = abs > 0.92 ? String(Math.max(0, 1 - (abs - 0.92) / 0.13)) : "1";
+        panel.style.transform = `translate3d(${o * 112}%, 0, ${-abs * 60}px) rotateY(${o * -9}deg)`;
       });
+
       media.forEach((node, i) => {
-        const abs = Math.abs(i - p);
-        node.style.transform = `scale(${1.04 - Math.min(abs, 1) * 0.04})`;
+        const abs = Math.abs(wrap(i, pos));
+        if (abs > 1.05) return;
+        const px = (look.x - 0.5) * -22;
+        const py = (look.y - 0.5) * -16;
+        const zoom = 1.18 + Math.sin(t * 0.42) * 0.05;
+        node.style.transform = `translate3d(${px}px, ${py}px, 0) scale(${zoom})`;
       });
-      steps.forEach((step, i) => {
-        step.classList.toggle("is-on", i === active);
+
+      shines.forEach((node) => {
+        node.style.transform = `translate3d(${(look.x - 0.5) * 36}%, ${(look.y - 0.5) * 20}%, 0)`;
       });
-      if (fillBar) fillBar.style.width = `${progress * 100}%`;
-      copyEl.style.opacity = String(0.55 + (1 - Math.min(1, Math.abs(p - active) * 1.8)) * 0.45);
+
+      steps.forEach((step, i) => step.classList.toggle("is-on", i === active));
+      if (fillBar) fillBar.style.width = `${Math.min(1, dwell / DWELL) * 100}%`;
 
       if (active !== shown) {
         shown = active;
@@ -154,127 +195,204 @@ export function CredentialsSlider() {
       syncMedia(active);
     };
 
-    const goTo = (index: number, trigger: ScrollTrigger | null) => {
-      if (!trigger) return;
-      const next = Math.max(0, Math.min(1, index / last));
-      window.scrollTo({
-        top: trigger.start + next * (trigger.end - trigger.start),
-        behavior: "smooth",
-      });
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      if (live && !reduce && !drag.on) {
+        dwell += dt * 1000;
+        if (dwell >= DWELL) {
+          dwell = 0;
+          target = (target + 1) % n;
+        }
+      }
+      let delta = target - pos;
+      if (delta > n / 2) delta -= n;
+      if (delta < -n / 2) delta += n;
+      pos += delta * Math.min(1, dt * (drag.on ? 10 : 2.8));
+      if (pos < 0) pos += n;
+      if (pos >= n) pos -= n;
+      paint();
+      raf = requestAnimationFrame(tick);
+    };
+
+    const go = (index: number) => {
+      target = ((index % n) + n) % n;
+      dwell = 0;
     };
 
     fill(0);
-    paint(0);
+    paint();
 
     if (reduce) {
       panels.forEach((panel, i) => {
         panel.style.opacity = i === 0 ? "1" : "0";
+        panel.style.visibility = i === 0 ? "visible" : "hidden";
+        panel.style.transform = "none";
       });
-      copyEl.style.opacity = "1";
+      stackEl.style.transform = "none";
       return;
     }
 
-    const ctx = gsap.context(() => {
-      const trigger = ScrollTrigger.create({
-        trigger: root,
-        start: "top top",
-        end: () => `+=${slides.length * window.innerHeight * 0.7}`,
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.45,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => paint(self.progress),
-        onRefresh: (self) => paint(self.progress),
-      });
+    const onStep = steps.map((step, i) => {
+      const fn = () => go(i);
+      step.addEventListener("click", fn);
+      return () => step.removeEventListener("click", fn);
+    });
 
-      steps.forEach((step, i) => {
-        step.addEventListener("click", () => goTo(i, trigger));
-      });
+    const onMove = (event: PointerEvent) => {
+      if (!frame) return;
+      const box = frame.getBoundingClientRect();
+      mouse.x = (event.clientX - box.left) / Math.max(1, box.width);
+      mouse.y = (event.clientY - box.top) / Math.max(1, box.height);
+      if (!drag.on) return;
+      const dx = event.clientX - drag.sx;
+      drag.moved += Math.abs(event.movementX) + Math.abs(event.movementY);
+      target = drag.start - dx / Math.max(1, box.width / 1.1);
+      dwell = 0;
+    };
+    const onDown = (event: PointerEvent) => {
+      if (event.button !== 0 || !frame) return;
+      drag.on = true;
+      drag.sx = event.clientX;
+      drag.start = target;
+      drag.moved = 0;
+      frame.classList.add("is-grabbing");
+      frame.setPointerCapture(event.pointerId);
+    };
+    const onUp = (event: PointerEvent) => {
+      if (!drag.on || !frame) return;
+      drag.on = false;
+      frame.classList.remove("is-grabbing");
+      if (frame.hasPointerCapture(event.pointerId)) {
+        frame.releasePointerCapture(event.pointerId);
+      }
+      if (drag.moved < 10) {
+        go((shown + 1) % n);
+        return;
+      }
+      go(Math.round(target));
+    };
+    const onLeave = () => {
+      if (drag.on) return;
+      mouse.x = 0.5;
+      mouse.y = 0.5;
+    };
 
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    }, root);
+    frame?.addEventListener("pointermove", onMove);
+    frame?.addEventListener("pointerdown", onDown);
+    frame?.addEventListener("pointerup", onUp);
+    frame?.addEventListener("pointercancel", onUp);
+    frame?.addEventListener("pointerleave", onLeave);
 
-    return () => ctx.revert();
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        live = Boolean(entry?.isIntersecting);
+      },
+      { threshold: 0.28 },
+    );
+    io.observe(root);
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      live = false;
+      io.disconnect();
+      onStep.forEach((off) => off());
+      frame?.removeEventListener("pointermove", onMove);
+      frame?.removeEventListener("pointerdown", onDown);
+      frame?.removeEventListener("pointerup", onUp);
+      frame?.removeEventListener("pointercancel", onUp);
+      frame?.removeEventListener("pointerleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
-    <section className="gx-reel" aria-labelledby="gx-reel-heading">
+    <section className="gx-vault" aria-labelledby="gx-vault-heading">
       <div
         ref={stage}
-        className="gx-reel-stage"
+        className="gx-vault-stage"
         role="region"
         aria-roledescription="carousel"
         aria-label="Grade X compliance credentials"
       >
-        <div ref={copy} className="gx-reel-copy">
-          <p className="gx-reel-mark" aria-hidden>
-            01
+        <header className="gx-vault-bar">
+          <span>Compliance &amp; WHS</span>
+          <p className="gx-vault-count">
+            <span className="gx-vault-now">01</span>
+            <span>/ {pad(slides.length)}</span>
           </p>
-          <header className="gx-reel-top">
-            <span>Compliance &amp; WHS</span>
-            <p className="gx-reel-count">
-              <span className="gx-reel-now">01</span>
-              <span>/ {pad(slides.length)}</span>
-            </p>
-          </header>
-          <div className="gx-reel-main">
-            <p className="gx-reel-kicker">{slides[0]?.place}</p>
-            <h2 id="gx-reel-heading" className="gx-reel-title">
-              <span>{slides[0]?.title}</span>
-              <span>{slides[0]?.title2}</span>
+        </header>
+
+        <div ref={copy} className="gx-vault-copy">
+          <div className="gx-vault-copy-main">
+            <p className="gx-vault-kicker">{slides[0]?.place}</p>
+            <h2 id="gx-vault-heading" className="gx-vault-title">
+              <span>{slides[0]?.title}</span> <em>{slides[0]?.title2}</em>
             </h2>
-            <p className="gx-reel-body">{slides[0]?.description}</p>
-            <Link href="/compliance" className="gx-reel-link">
-              View credentials
-            </Link>
+            <p className="gx-vault-body">{slides[0]?.description}</p>
           </div>
-          <nav className="gx-reel-nav" aria-label="Credential chapters">
-            <div className="gx-reel-steps">
-              {slides.map((s, i) => (
-                <button
-                  key={`step-${s.title}-${i}`}
-                  type="button"
-                  className={`gx-reel-step${i === 0 ? " is-on" : ""}`}
-                  aria-label={`${s.title} ${s.title2}`}
-                >
-                  <i />
-                  <span>{pad(i + 1)}</span>
-                </button>
-              ))}
-            </div>
-          </nav>
+          <Link href="/compliance" className="gx-vault-link">
+            View credentials
+          </Link>
         </div>
 
-        <div ref={stack} className="gx-reel-frame">
-          {slides.map((s, i) => (
-            <article
-              key={`${s.title}-${i}`}
-              className="gx-reel-panel"
-              aria-label={credentials[i]?.title ?? `${s.title} ${s.title2}`}
-            >
-              {s.video ? (
-                <video
-                  className="gx-reel-media"
-                  src={s.video}
-                  poster={s.image}
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  disablePictureInPicture
-                />
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img className="gx-reel-media" src={s.image} alt="" decoding="async" />
-              )}
-            </article>
-          ))}
-          <div className="gx-reel-veil" aria-hidden />
-          <p className="gx-reel-cap">{slides[0]?.place}</p>
-          <div className="gx-reel-progress" aria-hidden>
-            <i className="gx-reel-fill" />
+        <div className="gx-vault-space">
+          <div className="gx-vault-dust" aria-hidden>
+            {Array.from({ length: 14 }, (_, i) => (
+              <i key={`dust-${i}`} style={{ "--i": i } as React.CSSProperties} />
+            ))}
           </div>
+          <div className="gx-vault-podium" aria-hidden />
+          <div className="gx-vault-orbit" aria-hidden />
+          <div className="gx-vault-orbit gx-vault-orbit-2" aria-hidden />
+          <div ref={stack} className="gx-vault-gyro">
+            <div className="gx-vault-world">
+              {slides.map((s, i) => (
+                <article
+                  key={`${s.title}-${i}`}
+                  className="gx-vault-shot"
+                  aria-label={credentials[i]?.title ?? `${s.title} ${s.title2}`}
+                >
+                  {s.video ? (
+                    <video
+                      className="gx-vault-media"
+                      src={s.video}
+                      poster={s.image}
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      disablePictureInPicture
+                    />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img className="gx-vault-media" src={s.image} alt="" decoding="async" />
+                  )}
+                  <span className="gx-vault-shine" aria-hidden />
+                  <span className="gx-vault-scanline" aria-hidden />
+                </article>
+              ))}
+              <span className="gx-vault-sweep" aria-hidden />
+            </div>
+          </div>
+        </div>
+
+        <nav className="gx-vault-rail" aria-label="Credential chapters">
+          {slides.map((s, i) => (
+            <button
+              key={`chip-${s.tag}-${i}`}
+              type="button"
+              className={`gx-vault-chip${i === 0 ? " is-on" : ""}`}
+              aria-label={`${s.title} ${s.title2}`}
+            >
+              <b>{pad(i + 1)}</b>
+              <span>{s.tag}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="gx-vault-progress" aria-hidden>
+          <i className="gx-vault-fill" />
         </div>
       </div>
 

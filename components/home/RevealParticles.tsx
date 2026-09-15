@@ -63,7 +63,7 @@ export function RevealParticles() {
       const pulse = (t * 0.18) % 1;
       ctx.beginPath();
       ctx.arc(cx, cy, 28 + pulse * Math.min(w, h) * 0.48, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(30, 111, 212, ${0.22 * (1 - pulse)})`;
+      ctx.strokeStyle = `rgba(201, 164, 74, ${0.22 * (1 - pulse)})`;
       ctx.lineWidth = 1.2;
       ctx.setLineDash([4, 12]);
       ctx.stroke();
@@ -72,7 +72,7 @@ export function RevealParticles() {
       const sweep = t * 0.42;
       ctx.beginPath();
       ctx.arc(cx, cy, Math.min(w, h) * 0.3, sweep, sweep + 0.7);
-      ctx.strokeStyle = "rgba(74, 154, 232, 0.28)";
+      ctx.strokeStyle = "rgba(201, 164, 74, 0.28)";
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
@@ -85,7 +85,7 @@ export function RevealParticles() {
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(t * 0.18 + p.phase);
-          ctx.strokeStyle = `rgba(190, 224, 255, ${p.a * twinkle})`;
+          ctx.strokeStyle = `rgba(244, 226, 176, ${p.a * twinkle})`;
           ctx.lineWidth = 1.15;
           ctx.beginPath();
           ctx.moveTo(-5.5, 0);
@@ -100,7 +100,7 @@ export function RevealParticles() {
         if (p.kind === 1) {
           ctx.beginPath();
           ctx.arc(x, y, p.r + 1.4, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(30, 111, 212, ${p.a * twinkle})`;
+          ctx.strokeStyle = `rgba(201, 164, 74, ${p.a * twinkle})`;
           ctx.lineWidth = 1;
           ctx.stroke();
           continue;
@@ -108,7 +108,7 @@ export function RevealParticles() {
 
         ctx.beginPath();
         ctx.arc(x, y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(190, 224, 255, ${p.a * twinkle})`;
+        ctx.fillStyle = `rgba(244, 226, 176, ${p.a * twinkle})`;
         ctx.fill();
       }
 

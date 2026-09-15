@@ -41,7 +41,7 @@ function CutawayDuct({ length = 12 }: { length?: number }) {
           position={[-length / 2 + 1 + i * 0.9, 0, 0]}
         >
           <torusGeometry args={[1.66, 0.04, 8, 40, Math.PI * 1.64]} />
-          <meshStandardMaterial color="#2a4d72" metalness={0.88} roughness={0.28} />
+          <meshStandardMaterial color="#8a6d32" metalness={0.88} roughness={0.28} />
         </mesh>
       ))}
     </group>
@@ -79,7 +79,7 @@ function GreaseMist() {
   });
   return (
     <points ref={ref} geometry={geo}>
-      <pointsMaterial color="#4a9ae8" size={0.025} transparent opacity={0.4} />
+      <pointsMaterial color="#c9a44a" size={0.025} transparent opacity={0.4} />
     </points>
   );
 }
@@ -123,21 +123,21 @@ function StoryScene() {
     <>
       <fog attach="fog" args={["#06101c", 8, 18]} />
       <ambientLight intensity={0.32} />
-      <hemisphereLight args={["#8eb6e8", "#0b1218", 0.48]} />
-      <directionalLight position={[5, 8, 4]} intensity={1.7} color="#f3f7fc" />
+      <hemisphereLight args={["#e8d4a8", "#0b1218", 0.48]} />
+      <directionalLight position={[5, 8, 4]} intensity={1.7} color="#f3eee4" />
       <spotLight
         position={[-3.2, 6, 2.4]}
         intensity={1.55}
         angle={0.46}
         penumbra={0.7}
-        color="#4a9ae8"
+        color="#c9a44a"
       />
       <spotLight
         position={[2.4, 1.2, -3]}
         intensity={0.85}
         angle={0.7}
         penumbra={0.8}
-        color="#9cc7f2"
+        color="#e4c878"
       />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.32, 0]} receiveShadow>
         <circleGeometry args={[3.4, 64]} />
@@ -145,7 +145,7 @@ function StoryScene() {
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.318, 0]}>
         <ringGeometry args={[1.55, 1.58, 64]} />
-        <meshBasicMaterial color="#4a9ae8" transparent opacity={0.28} />
+        <meshBasicMaterial color="#c9a44a" transparent opacity={0.28} />
       </mesh>
       <group ref={rig} position={[-2.35, -0.06, 0]} scale={2.35}>
         <GradeXRobot />
@@ -196,16 +196,16 @@ function RevealScene() {
   return (
     <>
       <ambientLight intensity={1.2} />
-      <hemisphereLight args={["#ffffff", "#dce6f2", 1]} />
+      <hemisphereLight args={["#ffffff", "#d4c7a8", 1]} />
       <directionalLight position={[4.2, 7.5, 5]} intensity={2.1} color="#ffffff" />
-      <directionalLight position={[-5, 2.8, -2]} intensity={0.45} color="#9dbbe0" />
+      <directionalLight position={[-5, 2.8, -2]} intensity={0.45} color="#c9a44a" />
       <spotLight position={[1.2, 8, 3]} intensity={1.15} angle={0.42} penumbra={1} color="#ffffff" />
       <ContactShadows
         position={[0, 0, 0]}
         opacity={0.14}
         scale={12}
         blur={2.8}
-        color="#1a3358"
+        color="#050b14"
       />
       <group ref={rig} position={[-1.45, 0, 0]} scale={0.92} rotation={[0, 0.5, 0]}>
         <ProductBot />
@@ -251,8 +251,8 @@ function DuctScene({ mode }: { mode: "hero" | "tech" }) {
       <color attach="background" args={["#000000"]} />
       <fog attach="fog" args={["#000000", 5, 16]} />
       <ambientLight intensity={0.35} />
-      <directionalLight position={[5, 6, 4]} intensity={1.35} color="#e8f1fc" />
-      <pointLight position={[-3, 2, 2]} intensity={0.7} color="#4d7aaa" />
+      <directionalLight position={[5, 6, 4]} intensity={1.35} color="#f3eee4" />
+      <pointLight position={[-3, 2, 2]} intensity={0.7} color="#c9a44a" />
       <CameraRig mode={mode} />
       <group rotation={[0.12, -0.42, 0.04]} position={[0, 0.15, 0]}>
         <CutawayDuct />
@@ -268,7 +268,7 @@ function StudioScene({ explode = false }: { explode?: boolean }) {
     <>
       <color attach="background" args={["#000000"]} />
       <ambientLight intensity={0.85} />
-      <spotLight position={[4, 6, 3]} intensity={2.4} angle={0.55} color="#e8f1fc" />
+      <spotLight position={[4, 6, 3]} intensity={2.4} angle={0.55} color="#f3eee4" />
       <directionalLight position={[-3, 4, 2]} intensity={1.1} />
       <CameraRig mode={explode ? "studio" : "hero"} />
       <group scale={explode ? 1.35 : 1.55} position={[0, 0.08, 0]}>

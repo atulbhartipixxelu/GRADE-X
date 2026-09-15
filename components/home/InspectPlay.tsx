@@ -4,9 +4,9 @@ import Link from "next/link";
 import { HeroScene } from "@/components/3d/HeroScene";
 
 const reads = [
-  { n: "01", k: "Platform", v: "Stainless tracked crawler" },
-  { n: "02", k: "Head", v: "Twin turret nozzles" },
-  { n: "03", k: "Record", v: "Inspection camera + LED" },
+  { n: "01", k: "Platform", v: "Robotic exhaust cleaning" },
+  { n: "02", k: "Measure", v: "Digital grease thickness gauge" },
+  { n: "03", k: "Record", v: "Live video during the clean" },
 ] as const;
 
 export function InspectPlay() {
@@ -20,17 +20,17 @@ export function InspectPlay() {
       <div className="gx-play-copy">
         <p className="gx-play-kicker">
           <i />
-          3D visualisation
-          <span>Live interior</span>
+          Technology
+          <span>WA only</span>
         </p>
         <h2 id="gx-play-heading" className="gx-play-title">
-          <span>Robotic exhaust cleaning</span>
-          <span>inside the duct.</span>
+          <span>Robotic kitchen exhaust</span>
+          <span>cleaning technology.</span>
         </h2>
         <p className="gx-play-body">
-          The 3D treatment visualises the robotic exhaust cleaning process — a duct
-          with the platform moving through it — supporting the headline, not replacing
-          it.
+          Grade X is currently the only company in WA operating robotic kitchen exhaust
+          cleaning technology. The scene shows the process inside a duct: a camera and
+          scanning element moving through the exhaust system.
         </p>
         <ol className="gx-play-reads">
           {reads.map((row) => (

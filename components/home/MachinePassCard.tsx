@@ -49,11 +49,11 @@ export function MachinePassCard() {
         />
       </div>
       <div className="gx-pass-copy">
-        <h3 className="gx-pass-title">Kitchen exhaust robot</h3>
+        <h3 className="gx-pass-title">Robotic exhaust cleaning platform</h3>
         <ul className="gx-pass-bits">
-          <li>Dual hose</li>
-          <li>Turret</li>
-          <li>Camera</li>
+          <li>WA only</li>
+          <li>Live video</li>
+          <li>Measurement</li>
         </ul>
         <Link href="/technology" className="gx-pass-link">
           View technology

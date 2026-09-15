@@ -86,12 +86,12 @@ function SplitHeadline({
                       <motion.span
                         key={`c-${li}-${start}-${ci}`}
                         className="gx-reveal-char"
-                        initial={{ opacity: 0, color: "#7ec4ff" }}
+                        initial={{ opacity: 0, color: "#c9a44a" }}
                         animate={{
                           opacity: active ? 1 : 0,
                           color: active
-                            ? ["#7ec4ff", "#7ec4ff", "#eef3fa"]
-                            : "#eef3fa",
+                            ? ["#c9a44a", "#e4c878", "#f3eee4"]
+                            : "#f3eee4",
                         }}
                         transition={{
                           duration: 0.22,

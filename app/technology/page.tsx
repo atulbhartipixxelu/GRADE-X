@@ -53,7 +53,7 @@ export default function TechnologyPage() {
       <PageHero
         kicker="Technology / Robotic Exhaust Cleaning"
         title="Robotic kitchen exhaust cleaning technology."
-        body="A dedicated page for Grade X’s core differentiator. Reference photos of the robotic platform are shown below. The 3D scene visualises the process inside a duct — not a generic abstract shape."
+        body="A dedicated page for Grade X’s core differentiator. Reference photos and the process inside a duct are shown below."
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/technology", label: "Technology" },
