@@ -11,6 +11,35 @@ export const metadata = pageMeta(
   "/technology",
 );
 
+const passTicks = [
+  "Forward camera",
+  "Dual work lights",
+  "Twin turret jets",
+  "Duct floor drive",
+  "Live interior feed",
+  "Stainless tracks",
+];
+
+function PassTape() {
+  return (
+    <div className="gx-tech-pass-tick" aria-hidden>
+      <p className="gx-tech-pass-tick-live">
+        <i />
+        Live
+      </p>
+      <div className="gx-tech-pass-tick-mask">
+        <div className="gx-tech-pass-tick-track">
+          {[0, 1].map((copy) =>
+            [...passTicks, ...passTicks].map((tick, i) => (
+              <span key={`${copy}-${i}-${tick}`}>{tick}</span>
+            )),
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const specs = [
   {
     t: "Stainless tracked crawler",
@@ -37,16 +66,32 @@ export default function TechnologyPage() {
 
       <TechBay />
 
-      <section className="relative h-[70vh] min-h-[480px] overflow-hidden border-y border-gold/15">
+      <section className="gx-tech-pass" aria-label="Live interior pass">
         <HeroScene mode="tech" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/40" />
-        <div className="absolute bottom-8 left-8 max-w-md" data-rise>
-          <p className="font-mono text-[11px] tracking-[0.28em] text-gold-2 uppercase">Live interior pass</p>
-          <p className="mt-2 text-sm text-white/80">
-            The crawler drives the duct floor. Turret jets fire. Camera and LEDs stay on so the clean is
-            visible during the work.
+        <div className="gx-tech-pass-veil" aria-hidden />
+        <div className="gx-tech-pass-scan" aria-hidden />
+        <div className="gx-tech-pass-scope" aria-hidden>
+          <div className="gx-tech-pass-scope-track">
+            {Array.from({ length: 28 }, (_, i) => (
+              <span key={i} className={i % 4 === 0 ? "is-major" : ""} />
+            ))}
+            {Array.from({ length: 28 }, (_, i) => (
+              <span key={`b${i}`} className={i % 4 === 0 ? "is-major" : ""} />
+            ))}
+          </div>
+        </div>
+        <div className="gx-tech-pass-hud" data-rise>
+          <p className="gx-tech-pass-live">
+            <i />
+            Live interior pass
+          </p>
+          <h2>The clean is visible during the work.</h2>
+          <p>
+            The crawler drives the duct floor. Turret jets fire. Camera and LEDs stay on so clients see
+            the interior during the clean, not only a hatch photo after it closes.
           </p>
         </div>
+        <PassTape />
       </section>
 
       <section className="gx-inner-wrap gx-inner-split">
