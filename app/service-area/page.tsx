@@ -1,3 +1,4 @@
+import { InnerMotion } from "@/components/inner/InnerMotion";
 import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 import { pageMeta } from "@/lib/seo";
@@ -20,8 +21,9 @@ export const metadata = pageMeta(
 
 export default function ServiceAreaPage() {
   return (
-    <>
+    <InnerMotion>
       <PageHero
+        index="07"
         kicker="Service Area"
         title="Perth metropolitan / Western Australia."
         body="A prospective client can confirm Grade X services their location: Perth metropolitan and Western Australia, based at 5 Elward Way, Balga WA 6061."
@@ -30,9 +32,9 @@ export default function ServiceAreaPage() {
           { href: "/service-area", label: "Service area" },
         ]}
       />
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2">
-        <div>
-          <h2 className="font-display text-3xl text-ivory">Coverage</h2>
+      <section className="gx-inner-wrap gx-inner-split">
+        <div className="gx-inner-copy" data-rise>
+          <h2>Coverage</h2>
           <ul className="mt-6 space-y-3">
             {metros.map((m) => (
               <li key={m} className="border-l border-gold pl-4 text-mist">
@@ -40,15 +42,15 @@ export default function ServiceAreaPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-sm text-mist">
+          <p>
             Base: {site.address.full}. Emergency response is offered across the Perth metro.
           </p>
-          <div className="mt-8">
+          <div className="gx-inner-cta">
             <Button href="/contact">Confirm your site</Button>
           </div>
         </div>
-        <div className="min-h-[360px] overflow-hidden rounded-[1.25rem] bg-navy-2">
-          <svg viewBox="0 0 400 360" className="relative h-full w-full p-8 text-gold">
+        <div className="gx-inner-card min-h-[360px]" data-rise data-tilt>
+          <svg viewBox="0 0 400 360" className="h-full w-full text-gold">
             <rect x="40" y="30" width="320" height="300" fill="none" stroke="currentColor" strokeOpacity="0.25" />
             <path
               d="M120 80 L280 70 L310 160 L260 280 L140 290 L90 180 Z"
@@ -67,6 +69,6 @@ export default function ServiceAreaPage() {
           </svg>
         </div>
       </section>
-    </>
+    </InnerMotion>
   );
 }

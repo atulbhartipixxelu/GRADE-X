@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { services } from "@/lib/content";
 import { store } from "@/lib/store";
+import { InnerMotion } from "@/components/inner/InnerMotion";
 import { PageHero } from "@/components/ui/PageHero";
 import { QuoteForm } from "@/components/forms/QuoteForm";
 import { pageMeta } from "@/lib/seo";
@@ -34,20 +35,23 @@ export default async function ServiceDetailPage({
   if (!service) notFound();
 
   return (
-    <>
+    <InnerMotion>
       <PageHero
+        index="03"
         kicker="Service"
         title={service.name}
         body={service.excerpt}
+        media="/slides/kitchen-canopy.jpg"
+        mediaAlt={service.name}
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/services", label: "Services" },
           { href: `/services/${service.slug}`, label: service.name },
         ]}
       />
-      <section className="mx-auto grid max-w-7xl gap-16 px-5 py-20 sm:px-8 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <p className="text-lg leading-8 text-mist">{service.description}</p>
+      <section className="gx-inner-wrap gx-inner-split">
+        <div className="gx-inner-copy" data-rise>
+          <p className="text-lg">{service.description}</p>
           <ul className="mt-8 space-y-3">
             {service.outcomes.map((o) => (
               <li key={o} className="flex gap-3 text-sm text-ivory">
@@ -57,14 +61,14 @@ export default async function ServiceDetailPage({
             ))}
           </ul>
         </div>
-        <div className="border border-gold/20 bg-navy-2 p-8 lg:col-span-5">
-          <h2 className="font-display text-2xl text-ivory">Request this service</h2>
-          <p className="mt-2 mb-6 text-sm text-mist">
-            Quote path is the same on every page: service, site, contact.
-          </p>
-          <QuoteForm preset={service.name} />
+        <div className="gx-inner-card" data-rise>
+          <h2>Request this service</h2>
+          <p>Quote path is the same on every page: service, site, contact.</p>
+          <div className="mt-6">
+            <QuoteForm preset={service.name} />
+          </div>
         </div>
       </section>
-    </>
+    </InnerMotion>
   );
 }

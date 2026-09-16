@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { posts } from "@/lib/content";
+import { InnerMotion } from "@/components/inner/InnerMotion";
 import { PageHero } from "@/components/ui/PageHero";
 import { pageMeta } from "@/lib/seo";
 
@@ -28,8 +29,9 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <>
+    <InnerMotion>
       <PageHero
+        index="11"
         kicker={post.category}
         title={post.title}
         body={post.excerpt}
@@ -39,14 +41,16 @@ export default async function BlogPostPage({
           { href: `/blog/${post.slug}`, label: post.title },
         ]}
       />
-      <article className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
-        <p className="font-mono text-xs text-mist">{post.date}</p>
-        <div className="mt-8 space-y-6 text-lg leading-9 text-mist">
+      <article className="gx-inner-wrap max-w-3xl">
+        <p className="font-mono text-xs text-mist" data-rise>
+          {post.date}
+        </p>
+        <div className="gx-inner-copy mt-8 space-y-6" data-rise>
           {post.body.map((para) => (
             <p key={para.slice(0, 24)}>{para}</p>
           ))}
         </div>
       </article>
-    </>
+    </InnerMotion>
   );
 }
