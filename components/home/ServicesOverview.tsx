@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { categoryImages } from "@/lib/categoryMedia";
 import { categoryMeta, services, type ServiceCategory } from "@/lib/content";
 import { Button } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/SectionHeading";
@@ -13,13 +14,6 @@ const order: ServiceCategory[] = [
   "lobby",
   "exterior",
 ];
-
-const images: Record<ServiceCategory, string> = {
-  "kitchen-exhaust": "/slides/kitchen-canopy.jpg",
-  "kitchen-equipment": "/slides/duct-spray.jpg",
-  lobby: "/slides/exploded-studio.jpg",
-  exterior: "/slides/duct-crawler.jpg",
-};
 
 export function ServicesOverview() {
   const [active, setActive] = useState(0);
@@ -55,7 +49,7 @@ export function ServicesOverview() {
                 aria-hidden={i !== active}
               >
                 <Image
-                  src={images[key]}
+                  src={categoryImages[key]}
                   alt=""
                   fill
                   priority={i === 0}

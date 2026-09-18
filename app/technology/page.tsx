@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { HeroScene } from "@/components/3d/HeroScene";
 import { InnerMotion } from "@/components/inner/InnerMotion";
 import { TechBanner } from "@/components/technology/TechBanner";
@@ -94,29 +95,63 @@ export default function TechnologyPage() {
         <PassTape />
       </section>
 
-      <section className="gx-inner-wrap gx-inner-split">
-        <div className="gx-inner-copy" data-rise>
-          <h2>Tracks, turret, hoses — the real architecture.</h2>
-          <p>
-            The third photograph is an exploded build of this platform. The 3D loop separates the same
-            assemblies: track plates, rollers, front camera barrel and the dual-hose turret.
+      <section className="gx-tech-arch" aria-label="Platform architecture">
+        <div className="gx-tech-arch-board">
+          <h2 className="gx-tech-arch-title" data-rise>
+            Tracks, turret,
+            <br />
+            hoses — the real
+            <br />
+            architecture.
+          </h2>
+          <p className="gx-tech-arch-lede" data-rise>
+            The third photograph is an exploded build of this platform. The 3D loop separates the
+            same assemblies: track plates, rollers, front camera barrel and the dual-hose turret.
           </p>
-        </div>
-        <div className="relative h-[420px] overflow-hidden rounded-[1.25rem] border border-gold/20" data-rise>
-          <HeroScene mode="studio" />
-        </div>
-      </section>
 
-      <section className="gx-inner-wrap pt-0">
-        <div className="gx-inner-grid gx-inner-grid-2">
-          {specs.map((c) => (
-            <article key={c.t} className="gx-inner-card" data-rise data-tilt>
-              <h2>{c.t}</h2>
+          {specs.map((c, i) => (
+            <article
+              key={c.t}
+              className={`gx-tech-arch-call gx-tech-arch-call--${i + 1}`}
+              data-rise
+            >
+              <b>{String(i + 1).padStart(2, "0")}</b>
+              <h3>{c.t}</h3>
               <p>{c.b}</p>
             </article>
           ))}
+
+          <div className="gx-tech-arch-machine" data-rise>
+            <div className="gx-tech-arch-shot">
+              <Image
+                src="/technology/arch-crawler.jpg"
+                alt="Stainless tracked crawler with twin turret nozzles, dual hoses and forward inspection camera"
+                width={400}
+                height={428}
+                className="gx-tech-arch-photo"
+              />
+              <i className="gx-tech-arch-wipe gx-tech-arch-wipe--tl" aria-hidden />
+              <i className="gx-tech-arch-wipe gx-tech-arch-wipe--tr" aria-hidden />
+            </div>
+          </div>
+
+          <svg className="gx-tech-arch-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+            <g fill="none" stroke="#2c2414" strokeWidth="0.13">
+              <path d="M22.8 44.6 H37.4" />
+              <path d="M62.2 33.8 H75.6" />
+              <path d="M22.8 72.2 H48.6" />
+              <path d="M63.4 61.6 H75.6" />
+            </g>
+            <g fill="#2c2414">
+              <circle cx="37.4" cy="44.6" r="0.45" />
+              <circle cx="62.2" cy="33.8" r="0.45" />
+              <circle cx="48.6" cy="72.2" r="0.45" />
+              <circle cx="63.4" cy="61.6" r="0.45" />
+            </g>
+          </svg>
         </div>
-        <div className="gx-inner-cta" data-rise>
+
+        <div className="gx-tech-arch-cta" data-rise>
           <Button href="/digital-evidence">Digital evidence system</Button>
           <Button href="/methodology" variant="ghost">
             Eight-step methodology
