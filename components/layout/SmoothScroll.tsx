@@ -13,21 +13,19 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (reduce) return;
 
     const lenis = new Lenis({
-      duration: 0.9,
+      duration: 0.75,
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 0.86,
       touchMultiplier: 1,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
-    const notify = () => window.dispatchEvent(new Event("scroll"));
-    lenis.on("scroll", notify);
 
     const ticker = (time: number) => {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(500, 33);
+    gsap.ticker.lagSmoothing(0);
 
     const onResize = () => ScrollTrigger.refresh();
     window.addEventListener("resize", onResize);

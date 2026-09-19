@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts } from "@/lib/content";
 import { InnerMotion } from "@/components/inner/InnerMotion";
-import { PageHero } from "@/components/ui/PageHero";
 import { pageMeta } from "@/lib/seo";
 
 export async function generateStaticParams() {
@@ -19,6 +19,14 @@ export async function generateMetadata({
   return pageMeta(post.title, post.excerpt, `/blog/${slug}`);
 }
 
+function stamp(iso: string) {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("en-AU", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -30,22 +38,23 @@ export default async function BlogPostPage({
 
   return (
     <InnerMotion>
-      <PageHero
-        index="11"
-        kicker={post.category}
-        title={post.title}
-        body={post.excerpt}
-        crumbs={[
-          { href: "/", label: "Home" },
-          { href: "/blog", label: "Resources" },
-          { href: `/blog/${post.slug}`, label: post.title },
-        ]}
-      />
-      <article className="gx-inner-wrap max-w-3xl">
-        <p className="font-mono text-xs text-mist" data-rise>
-          {post.date}
-        </p>
-        <div className="gx-inner-copy mt-8 space-y-6" data-rise>
+      <article className="gx-blog gx-blog--article">
+        <header className="gx-blog-head">
+          <p className="gx-blog-crumbs">
+            <Link href="/">Home</Link>
+            {" / "}
+            <Link href="/blog">Resources</Link>
+            {" / "}
+            <span>{post.category}</span>
+          </p>
+          <p className="gx-blog-kicker">{post.category}</p>
+          <h1>{post.title}</h1>
+          <p className="gx-blog-lede">{post.excerpt}</p>
+          <time className="gx-blog-date" dateTime={post.date}>
+            {stamp(post.date)}
+          </time>
+        </header>
+        <div className="gx-blog-body" data-rise>
           {post.body.map((para) => (
             <p key={para.slice(0, 24)}>{para}</p>
           ))}

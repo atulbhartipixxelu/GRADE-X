@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CredentialsSlider } from "@/components/home/CredentialsSlider";
 import { Kicker } from "@/components/ui/SectionHeading";
 import { CoreParticles } from "@/components/home/CoreParticles";
 
@@ -155,7 +154,6 @@ export function TrustStrip() {
   }, []);
 
   return (
-    <>
       <section
         ref={stage}
         className="gx-depth gx-depth-stage gx-core"
@@ -220,8 +218,5 @@ export function TrustStrip() {
           </div>
         </div>
       </section>
-
-      <CredentialsSlider />
-    </>
   );
 }

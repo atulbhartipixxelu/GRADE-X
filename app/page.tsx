@@ -1,11 +1,11 @@
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { EvidencePreview } from "@/components/home/EvidencePreview";
+import { HomeMethod } from "@/components/home/HomeMethod";
 import { HomeMotion } from "@/components/home/HomeMotion";
-import { InspectPlay } from "@/components/home/InspectPlay";
+import { HomeTrust } from "@/components/home/HomeTrust";
+import { ScrollVideoBanner } from "@/components/home/ScrollVideoBanner";
 import { ServicesOverview } from "@/components/home/ServicesOverview";
 import { TrustStrip } from "@/components/home/TrustStrip";
-import { CtaBanner } from "@/components/home/CtaBanner";
-import { StoryReveal } from "@/components/home/StoryReveal";
-import { ScrollVideoBanner } from "@/components/home/ScrollVideoBanner";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -20,13 +20,13 @@ export default function HomePage() {
     <HomeMotion>
       <div className="gx-hero-stack">
         <ScrollVideoBanner />
-        <StoryReveal />
       </div>
       <TrustStrip />
+      <HomeTrust />
       <ServicesOverview />
+      <HomeMethod />
       <EvidencePreview />
       <CtaBanner />
-      <InspectPlay />
     </HomeMotion>
   );
 }

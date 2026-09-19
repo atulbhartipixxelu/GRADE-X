@@ -18,8 +18,6 @@ const topNav = [
 export function Header() {
   const pathname = usePathname();
   const [menuPath, setMenuPath] = useState<string | null>(null);
-  const isHome = pathname === "/";
-  const [overHero, setOverHero] = useState(isHome);
   const open = menuPath === pathname;
   const isAdmin = pathname.startsWith("/admin");
 
@@ -30,60 +28,13 @@ export function Header() {
     };
   }, [open]);
 
-  useEffect(() => {
-    if (!isHome) {
-      setOverHero(false);
-      return;
-    }
-    const hero = document.querySelector(".gx-hero");
-    const onScroll = () => {
-      if (!hero) {
-        setOverHero(true);
-        return;
-      }
-      setOverHero(hero.getBoundingClientRect().bottom > 88);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    const id = window.setInterval(onScroll, 200);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.clearInterval(id);
-    };
-  }, [isHome]);
-
   if (isAdmin) return null;
-
-  const onVideo = isHome && overHero;
 
   return (
     <>
-      <header className={`gx-nav ${onVideo ? "gx-nav--over" : ""}`}>
+      <header className="gx-nav">
         <div className="gx-nav-inner">
-          <Logo />
-          <nav className="hidden items-center gap-7 lg:flex">
-            {topNav.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`gx-nav-link text-[13px] tracking-[0.12em] uppercase transition ${
-                    active ? "is-on" : ""
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-          <div className="flex items-center gap-3 sm:gap-4">
-            <a href={site.phoneHref} className="gx-nav-phone hidden lg:inline-flex">
-              {site.phone}
-            </a>
-            <Button href="/contact" className="hidden sm:inline-flex">
-              Request a quote
-            </Button>
+          <div className="gx-nav-start">
             <button
               type="button"
               onClick={() => setMenuPath(open ? null : pathname)}
@@ -91,10 +42,34 @@ export function Header() {
             >
               {open ? "Close" : "Menu"}
             </button>
+            <Logo variant="lockup" />
+          </div>
+
+          <nav className="gx-nav-links" aria-label="Primary">
+            {topNav.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`gx-nav-link ${active ? "is-on" : ""}`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="gx-nav-end">
+            <a href={site.phoneHref} className="gx-nav-phone hidden lg:inline-flex">
+              {site.phone}
+            </a>
+            <Button href="/contact" className="gx-nav-quote hidden sm:inline-flex">
+              Request a quote
+            </Button>
           </div>
         </div>
       </header>
-      {!isHome ? <div className="h-[var(--header-h)]" aria-hidden /> : null}
 
       <div
         className={`fixed inset-0 z-40 bg-navy transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${

@@ -45,7 +45,14 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   ...pageMeta(site.tagline, site.description, "/"),
   metadataBase: new URL(site.url),
-  icons: { icon: "/favicon.png", apple: "/brand/logo-shield.png" },
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png", sizes: "38x38" },
+      { url: "/brand/logo-shield.png", type: "image/png", sizes: "777x406" },
+    ],
+    apple: "/brand/logo-shield.png",
+    shortcut: "/favicon.png",
+  },
   keywords: [
     "kitchen exhaust cleaning Perth",
     "robotic exhaust cleaning Western Australia",

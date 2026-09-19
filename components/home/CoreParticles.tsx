@@ -107,15 +107,17 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
       });
     };
 
-    const plinth = () => {
+    let plat = { cx: 0, cy: 0, r: 80 };
+    const measurePlinth = () => {
       const host = el.parentElement;
       const node = host?.querySelector(".gx-core-plinth");
       if (!node) {
-        return { cx: w * 0.68, cy: h * 0.5, r: Math.min(w, h) * 0.22 };
+        plat = { cx: w * 0.68, cy: h * 0.5, r: Math.min(w, h) * 0.22 };
+        return;
       }
       const a = el.getBoundingClientRect();
       const b = node.getBoundingClientRect();
-      return {
+      plat = {
         cx: b.left - a.left + b.width / 2,
         cy: b.top - a.top + b.height / 2,
         r: b.width / 2,
@@ -141,7 +143,7 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
       mouse.x += (mouse.tx - mouse.x) * 0.05;
       mouse.y += (mouse.ty - mouse.y) * 0.05;
 
-      const { cx, cy, r } = plinth();
+      const { cx, cy, r } = plat;
       const pullX = (mouse.x - 0.5) * 18;
       const pullY = (mouse.y - 0.5) * 12;
       const ox = cx + pullX;
@@ -288,9 +290,11 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
 
     resize();
     seed();
+    measurePlinth();
     const ro = new ResizeObserver(() => {
       resize();
       seed();
+      measurePlinth();
     });
     ro.observe(el);
     window.addEventListener("pointermove", onMove, { passive: true });

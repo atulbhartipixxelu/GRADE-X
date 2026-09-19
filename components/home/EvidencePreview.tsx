@@ -186,50 +186,52 @@ export function EvidencePreview() {
                 className={`gx-evd-card gx-evd-card--${tile.mark}${i === 0 ? " is-on" : ""}`}
                 style={{ ["--i" as string]: String(i) }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="gx-evd-bg" src={tile.image} alt="" decoding="async" />
-                <span className="gx-evd-shade" aria-hidden />
-                <span className="gx-evd-idx">{pad(i + 1)}</span>
-                <span className="gx-evd-icon" aria-hidden>
-                  <tile.icon strokeWidth={1.65} />
-                </span>
-                <h3 className="gx-evd-name">{tile.t}</h3>
-                <p className="gx-evd-note">{tile.n}</p>
-
-                {tile.mark === "gauge" ? (
-                  <div className="gx-evd-gauge" aria-hidden>
-                    <span>Before</span>
-                    <span className="gx-evd-gauge-track">
+                <div className="gx-evd-media">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="gx-evd-bg" src={tile.image} alt="" decoding="async" />
+                  <span className="gx-evd-idx">{pad(i + 1)}</span>
+                  <span className="gx-evd-icon" aria-hidden>
+                    <tile.icon strokeWidth={1.65} />
+                  </span>
+                  {tile.mark === "live" ? (
+                    <span className="gx-evd-rec" aria-hidden>
+                      <i /> Rec
+                    </span>
+                  ) : null}
+                </div>
+                <div className="gx-evd-info">
+                  <h3 className="gx-evd-name">{tile.t}</h3>
+                  <p className="gx-evd-note">{tile.n}</p>
+                  {tile.mark === "gauge" ? (
+                    <div className="gx-evd-gauge" aria-hidden>
+                      <span>Before</span>
+                      <span className="gx-evd-gauge-track">
+                        <i />
+                      </span>
+                      <span>After</span>
+                    </div>
+                  ) : null}
+                  {tile.mark === "photo" ? (
+                    <span className="gx-evd-frames" aria-hidden>
+                      <i />
                       <i />
                     </span>
-                    <span>After</span>
-                  </div>
-                ) : null}
-                {tile.mark === "photo" ? (
-                  <span className="gx-evd-frames" aria-hidden>
-                    <i />
-                    <i />
-                  </span>
-                ) : null}
-                {tile.mark === "live" ? (
-                  <span className="gx-evd-rec" aria-hidden>
-                    <i /> Rec
-                  </span>
-                ) : null}
-                {tile.mark === "file" ? (
-                  <span className="gx-evd-sheet" aria-hidden>
-                    <i />
-                    <i />
-                    <i />
-                  </span>
-                ) : null}
-                {tile.mark === "list" ? (
-                  <span className="gx-evd-ticks" aria-hidden>
-                    <i />
-                    <i />
-                    <i />
-                  </span>
-                ) : null}
+                  ) : null}
+                  {tile.mark === "file" ? (
+                    <span className="gx-evd-sheet" aria-hidden>
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                  ) : null}
+                  {tile.mark === "list" ? (
+                    <span className="gx-evd-ticks" aria-hidden>
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                  ) : null}
+                </div>
               </article>
             ))}
           </div>
