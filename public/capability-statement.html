@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <title>Grade X Commercial Solutions — Capability Statement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #101826;
+      --navy: #152033;
+      --blue: #2f6eb5;
+      --blue-2: #3b82c9;
+      --paper: #ffffff;
+      --mute: #66707c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #10141b;
+      color: #eef3f8;
+      font-family: Outfit, "Segoe UI", Arial, sans-serif;
+      letter-spacing: 0.01em;
+      word-spacing: 0.16em;
+      font-kerning: none;
+      font-feature-settings: "kern" 0, "liga" 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    @page { size: A4 portrait; margin: 0; }
+    .sheet {
+      position: relative;
+      width: 210mm; height: 297mm;
+      overflow: hidden;
+      page-break-after: always; break-after: page; page-break-inside: avoid;
+    }
+    .sheet:last-child { page-break-after: auto; }
+    h1, h2, h3 { font-weight: 800; letter-spacing: 0; word-spacing: 0.1em; }
+    .ico { width: 3.7mm; height: 3.7mm; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .ink { background: var(--ink); }
+    .paper { background: var(--paper); color: var(--navy); }
+    .pad { display: flex; flex-direction: column; height: 100%; padding: 12mm 15mm 13mm; }
+    .ink .pad { padding-right: 0; }
+
+    .hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 7mm; margin-bottom: 8mm;
+      font-size: 6.4pt; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(21,32,51,0.36);
+    }
+    .ink .hdr { color: rgba(238,243,248,0.38); padding-right: 15mm; }
+    .hdr-l { display: flex; align-items: center; gap: 2.2mm; }
+    .hdr-l img { height: 6.2mm; width: auto; object-fit: contain; }
+    .ink .hdr-l img { background: #fff; padding: 0.5mm 1mm; }
+    .hdr b { font-weight: 600; color: inherit; }
+
+    .round {
+      width: 8.8mm; height: 8.8mm; flex: 0 0 8.8mm;
+      border-radius: 50%; border: 0.32mm solid var(--blue);
+      display: grid; place-items: center;
+    }
+    .h-title { font-size: 32pt; line-height: 0.94; margin: 0 0 4.5mm; }
+    .lede { font-size: 8.8pt; line-height: 1.48; color: var(--mute); }
+    .ink .lede { color: rgba(238,243,248,0.58); }
+
+    .why {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 4mm 9mm;
+      flex: 0 0 auto;
+      align-items: stretch;
+    }
+    .why-left { display: flex; flex-direction: column; }
+    .why-left .lede { max-width: 86mm; }
+    .feat2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-content: space-between;
+      align-self: stretch;
+    }
+    .feat2 li { display: grid; grid-template-columns: 8.8mm 1fr; gap: 3.2mm; list-style: none; align-items: start; }
+    .feat2 b { display: block; margin-bottom: 1.2mm; font-size: 7.3pt; letter-spacing: 0.1em; text-transform: uppercase; }
+    .feat2 p { font-size: 7.6pt; line-height: 1.4; color: var(--mute); }
+
+    .impact {
+      margin-top: 9mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm 3.5mm;
+      padding: 5.5mm 5mm 5mm;
+      background: var(--ink); color: #fff;
+      border-radius: 2.4mm;
+    }
+    .impact .k {
+      grid-column: 1 / -1;
+      font-size: 6.4pt; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.42); margin-bottom: 0.6mm;
+    }
+    .impact > div { display: flex; align-items: center; gap: 2.6mm; }
+    .impact .round { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.04); }
+    .impact .ico { stroke: #fff; }
+    .impact strong { display: block; font-size: 15pt; line-height: 1; }
+    .impact em { display: block; font-style: normal; font-size: 6.2pt; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.48); margin-top: 0.7mm; }
+
+    .photo { display: block; width: 100%; object-fit: cover; }
+    .photo-lg { flex: 1 1 auto; height: auto; min-height: 78mm; margin-top: 7mm; border-radius: 2.4mm; }
+
+    .ink .pad { padding-right: 15mm; }
+    .ink .hdr { width: auto; max-width: none; padding-right: 0; white-space: nowrap; }
+    .proc {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 0 8mm;
+      flex: 1 1 auto;
+      min-height: 0;
+      height: 100%;
+      align-items: stretch;
+    }
+    .proc-l { display: flex; flex-direction: column; min-width: 0; width: auto; height: 100%; }
+    .proc-l .lede { margin: 0 0 6mm; max-width: 108mm; }
+    .steps {
+      position: relative;
+      display: grid;
+      gap: 3.8mm;
+      align-content: start;
+    }
+    .steps::before {
+      content: "";
+      position: absolute;
+      left: 3.9mm;
+      top: 4mm;
+      bottom: 4mm;
+      width: 0.22mm;
+      background: rgba(47,110,181,0.3);
+    }
+    .steps li {
+      display: grid;
+      grid-template-columns: 8mm 1fr;
+      gap: 3.4mm;
+      list-style: none;
+      align-items: start;
+      position: relative;
+    }
+    .num {
+      width: 8mm; height: 8mm; border-radius: 50%;
+      border: 0.35mm solid var(--blue); color: var(--blue);
+      background: var(--ink);
+      display: grid; place-items: center;
+      font-size: 6.3pt; font-weight: 700;
+    }
+    .steps h3 {
+      font-size: 8.6pt; letter-spacing: 0; text-transform: none;
+      text-align: left; line-height: 1.2; padding-top: 0.6mm;
+      word-spacing: 0.16em;
+    }
+    .steps p {
+      margin-top: 1mm;
+      font-size: 7.3pt; line-height: 1.38;
+      color: rgba(238,243,248,0.52);
+      word-spacing: 0.14em;
+    }
+
+    .proc-r {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      min-height: 208mm;
+    }
+    .diag {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 2.4mm;
+    }
+    .diag img { width: 100%; height: 100%; object-fit: cover; object-position: 42% 40%; }
+    .commit {
+      flex: 0 0 auto;
+      margin-top: 4.5mm;
+      padding: 5.5mm 5.5mm 5mm;
+      background: var(--blue-2); color: #fff;
+      border-radius: 2.4mm;
+    }
+    .commit .round {
+      width: 12mm; height: 12mm; flex-basis: 12mm;
+      border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.1);
+    }
+    .commit .ico { width: 5.4mm; height: 5.4mm; stroke: #fff; }
+    .commit h3 { margin: 3.4mm 0 2mm; font-size: 11pt; letter-spacing: 0.05em; text-transform: uppercase; }
+    .commit p { font-size: 7.7pt; line-height: 1.4; color: rgba(255,255,255,0.86); }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.4mm;
+      flex: 1 1 auto;
+      align-content: stretch;
+      min-height: 0;
+    }
+    .method-grid li {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 4.2mm 4.4mm 4mm;
+      border: 0.22mm solid rgba(47,110,181,0.34);
+      border-radius: 2mm;
+      background: rgba(255,255,255,0.03);
+    }
+    .method-grid .top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2.6mm;
+    }
+    .method-grid .num { background: transparent; }
+    .method-grid h3 { font-size: 8.5pt; line-height: 1.2; word-spacing: 0.14em; }
+    .method-grid p {
+      margin-top: 1.6mm; font-size: 7.1pt; line-height: 1.38;
+      color: rgba(238,243,248,0.52); word-spacing: 0.14em;
+    }
+
+    .bay-head {
+      display: grid; grid-template-columns: 1.35fr 0.65fr;
+      gap: 8mm; align-items: end; margin-bottom: 6mm;
+    }
+    .bay-k {
+      font-size: 6.6pt; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #8eb6e4; margin-bottom: 3mm; word-spacing: 0.16em;
+    }
+    .bay-wa {
+      padding: 5mm 5.5mm;
+      background: var(--blue-2); color: #fff; border-radius: 2.4mm;
+    }
+    .bay-wa strong { display: block; font-size: 13pt; line-height: 1.1; word-spacing: 0.1em; }
+    .bay-wa span {
+      display: block; margin-top: 1.8mm; font-size: 7.3pt; line-height: 1.35;
+      color: rgba(255,255,255,0.84); word-spacing: 0.12em;
+    }
+    .bay-photo {
+      display: block; width: 100%; height: 78mm; object-fit: cover;
+      object-position: 50% 55%; border-radius: 2.4mm;
+    }
+    .bay-ticks {
+      display: flex; flex-wrap: wrap; gap: 2mm 5mm;
+      margin: 4.5mm 0 6mm;
+    }
+    .bay-ticks li {
+      list-style: none; font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(238,243,248,0.5); word-spacing: 0.14em;
+    }
+    .bay-ticks li::before {
+      content: ""; display: inline-block; width: 1.6mm; height: 1.6mm;
+      margin-right: 2mm; border-radius: 50%; background: var(--blue); vertical-align: 0.3mm;
+    }
+    .bay-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3.4mm;
+      flex: 1 1 auto;
+    }
+    .bay-specs li {
+      list-style: none; padding: 4.2mm 4.5mm 4mm;
+      border: 0.22mm solid rgba(47,110,181,0.34);
+      border-radius: 2mm; background: rgba(255,255,255,0.03);
+    }
+    .bay-specs h3 { font-size: 8.6pt; margin-bottom: 1.6mm; word-spacing: 0.12em; }
+    .bay-specs p { font-size: 7.2pt; line-height: 1.38; color: rgba(238,243,248,0.52); word-spacing: 0.14em; }
+
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 2mm;
+      margin-top: auto; padding: 3.2mm 6.5mm; background: var(--blue); color: #fff;
+      font-size: 8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .cta-btn .ico { stroke: #fff; }
+    .desk {
+      display: grid; grid-template-columns: 1.25fr 0.75fr;
+      gap: 7mm; align-items: start;
+    }
+    .desk-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 3.2mm; margin-top: 7mm; }
+    .desk-cards li {
+      list-style: none; padding: 4.2mm 4.4mm;
+      border: 0.22mm solid rgba(47,110,181,0.36);
+      border-radius: 2mm; background: rgba(255,255,255,0.03);
+    }
+    .desk-cards span {
+      display: block; font-size: 6.3pt; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #8eb6e4; margin-bottom: 1.8mm; word-spacing: 0.14em;
+    }
+    .desk-cards b { display: block; font-size: 9.2pt; line-height: 1.3; word-spacing: 0.12em; }
+    .desk-direct {
+      padding: 6mm 5.5mm 5.5mm;
+      background: var(--blue-2); color: #fff; border-radius: 2.4mm;
+    }
+    .desk-direct .k {
+      font-size: 6.6pt; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.72); margin-bottom: 3mm;
+    }
+    .desk-direct h3 { font-size: 22pt; line-height: 1; margin-bottom: 3mm; letter-spacing: 0.02em; }
+    .desk-direct p { font-size: 8pt; line-height: 1.4; color: rgba(255,255,255,0.88); word-spacing: 0.12em; }
+    .desk-direct p + p { margin-top: 2mm; }
+    .desk-photo {
+      display: block; width: 100%; height: 78mm; object-fit: cover;
+      object-position: 50% 55%; border-radius: 2.4mm; margin-top: 7mm;
+    }
+    .desk-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto; padding-top: 6mm;
+    }
+    .desk-foot .cta-btn { margin-top: 0; }
+    .desk-foot small {
+      font-size: 7.4pt; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(238,243,248,0.48); word-spacing: 0.14em;
+    }
+
+    .cover { background: #050b14; color: #fff; display: flex; flex-direction: column; padding: 13mm 14mm 11mm; }
+    .cover-head { display: flex; justify-content: space-between; align-items: flex-start; }
+    .cover-head img { height: 12mm; background: #fff; padding: 1.6mm 2.4mm; }
+    .cover-meta { text-align: right; font-size: 7pt; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); line-height: 1.65; word-spacing: 0.2em; }
+    .cover-copy { padding: 11mm 0 8mm; }
+    .cover-doc {
+      margin: 0 0 5mm;
+      font-size: 7.4pt; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+      color: #8eb6e4; word-spacing: 0.2em;
+    }
+    .cover-kicker {
+      display: inline-flex; align-items: center; gap: 2.2mm;
+      margin: 0 0 6mm; padding: 1.8mm 4.6mm 1.8mm 3.4mm;
+      border: 0.28mm solid rgba(47,110,181,0.85);
+      border-radius: 20mm;
+      background: rgba(5,11,20,0.4);
+      font-size: 7.1pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #c5d8f0; word-spacing: 0.2em;
+    }
+    .cover-kicker i {
+      width: 2.6mm; height: 2.6mm; border-radius: 50%;
+      background: var(--blue-2); box-shadow: 0 0 0 1.6mm rgba(59,130,201,0.28);
+    }
+    .cover-copy h1 { font-size: 36pt; line-height: 0.94; word-spacing: 0.12em; }
+    .cover-rule {
+      width: 22mm; height: 0.7mm; margin: 5mm 0 4.5mm;
+      background: var(--blue-2); border-radius: 1mm;
+    }
+    .cover-lede {
+      max-width: 148mm; font-size: 11pt; line-height: 1.45;
+      color: rgba(238,243,248,0.74); word-spacing: 0.18em;
+    }
+    .cover-visual {
+      position: relative; flex: 1 1 auto; min-height: 118mm;
+      overflow: hidden; border-radius: 2.6mm;
+    }
+    .cover-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; }
+    .cover-visual::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42mm;
+      background: linear-gradient(180deg, transparent, rgba(5,11,20,0.82));
+    }
+    .cover-hud {
+      position: absolute; left: 4mm; right: 4mm; bottom: 4mm; z-index: 2;
+      display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 2.4mm;
+    }
+    .cover-hud li, .cover-hud .lead {
+      list-style: none;
+      padding: 3.6mm 3.8mm 3.4mm;
+      background: rgba(5,11,20,0.82);
+      border: 0.22mm solid rgba(47,110,181,0.4);
+      border-radius: 1.6mm;
+    }
+    .cover-hud .lead b, .cover-hud li span {
+      display: block; font-size: 8pt; font-weight: 800; line-height: 1.2; word-spacing: 0.1em;
+    }
+    .cover-hud .lead span, .cover-hud li b {
+      display: block; margin-bottom: 1.4mm;
+      font-size: 6pt; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #8eb6e4; word-spacing: 0.12em;
+    }
+    .cover-hud ul { display: contents; }
+    .cover-bar {
+      display: flex; justify-content: space-between; margin-top: 5mm;
+      font-size: 6.6pt; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(238,243,248,0.42); word-spacing: 0.18em;
+    }
+
+    .dossier { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 8mm; align-items: end; }
+    .dossier-k {
+      font-size: 6.6pt; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 3mm; word-spacing: 0.16em;
+    }
+    .dossier-photo {
+      display: block; width: 100%; height: 74mm; object-fit: cover; border-radius: 2.4mm;
+    }
+    .file-label { margin-top: 7mm; }
+    .file { display: grid; gap: 0; margin-top: 2mm; }
+    .file li {
+      display: grid; grid-template-columns: 10mm 1fr 58mm; gap: 3mm; align-items: center;
+      list-style: none; min-height: 15mm; padding: 3mm 0;
+      border-bottom: 0.22mm solid rgba(18,32,51,0.1);
+    }
+    .file em {
+      font-style: normal; font-size: 7.4pt; font-weight: 800; color: var(--blue);
+    }
+    .file b { font-size: 8.4pt; word-spacing: 0.12em; }
+    .file span { text-align: right; font-size: 7.4pt; color: var(--mute); word-spacing: 0.12em; }
+    .dossier-note {
+      margin-top: auto; padding: 5mm 5.5mm;
+      background: var(--ink); color: #fff; border-radius: 2.4mm;
+    }
+    .dossier-note h3 { font-size: 10pt; margin-bottom: 1.8mm; word-spacing: 0.12em; }
+    .dossier-note p { font-size: 7.6pt; line-height: 1.4; color: rgba(238,243,248,0.68); word-spacing: 0.14em; }
+
+    @media print { html, body { width: 210mm; margin: 0; background: #10141b; } .sheet { box-shadow: none; } }
+    @media screen {
+      body { padding: 28px 0 60px; }
+      .sheet { margin: 0 auto 22px; box-shadow: 0 22px 60px rgba(0,0,0,0.48); }
+    }
+  </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M14 9h5a1 1 0 0 1 1 1v11"/><path d="M8 8h2M8 12h2M8 16h2M17 13h1M17 17h1"/><path d="M3 21h18"/></symbol>
+  <symbol id="i-hash" viewBox="0 0 24 24"><path d="M5 9h15M4 15h15M9 4 7 20M17 4l-2 16"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 5 3.2 8.4 7 9.7 3.8-1.3 7-4.7 7-9.7V6z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3h4l1.2 4.2-2.2 1.3a12 12 0 0 0 5.5 5.5l1.3-2.2L21 13v4a2 2 0 0 1-2.2 2A16 16 0 0 1 5 6.2 2 2 0 0 1 7 3z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5L3 8z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 7h12M8 12h12M8 17h12"/><circle cx="4.5" cy="7" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="17" r="1"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M12 8V5M9 13h.01M15 13h.01M8 18v2M16 18v2"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1"/><rect x="6" y="6" width="12" height="15" rx="2"/><path d="M9 12h6M9 16h4"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 1 9-9"/><path d="m12 12 4-3"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.2"/></symbol>
+  <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 3s7 7.2 7 11.2A7 7 0 1 1 5 14.2C5 10.2 12 3 12 3z"/></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path d="M15 6a4 4 0 0 0-6.3 4.8L4 15.5 8.5 20l4.7-4.7A4 4 0 0 0 18 9l-3 3"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M4.9 6.5l2.8 2.8M16.3 14.7l2.8 2.8M3 12h4M17 12h4M4.9 17.5l2.8-2.8M16.3 9.3l2.8-2.8"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 19a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a5 5 0 0 0 5-5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M10 21v-7h4v7"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M4 20V8l8-5 8 5v12"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="7" width="12" height="10" rx="1.5"/><path d="m15 11 6-3v8l-6-3z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 7 10 17l-6-6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="m4 8 8 6 8-6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-hat" viewBox="0 0 24 24"><path d="M4 14c0-4.4 3.6-8 8-8s8 3.6 8 8"/><path d="M3 14h18v3H3z"/></symbol>
+  <symbol id="i-utensil" viewBox="0 0 24 24"><path d="M4 3v7a2 2 0 0 0 2 2h1V3"/><path d="M7 12v9M16 3v18M14 3h6v5a3 3 0 0 1-3 3h-1"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 8 6 4h12l2 4v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M6 13v7h12v-7"/></symbol>
+</svg>
+
+<section class="sheet cover">
+  <div class="cover-head">
+    <img src="/brand/gradex-lockup-navy.png" alt="Grade X Commercial Solutions" />
+    <p class="cover-meta">Grade X Commercial Solutions Pty Ltd<br />Perth · Western Australia</p>
+  </div>
+  <div class="cover-copy">
+    <p class="cover-doc">Capability&nbsp;Statement · Issue&nbsp;2026</p>
+    <p class="cover-kicker"><i></i> Western&nbsp;Australia's&nbsp;only&nbsp;robotic&nbsp;kitchen&nbsp;exhaust&nbsp;specialist</p>
+    <h1>Precision.<br />Technology.<br />Compliance.</h1>
+    <span class="cover-rule"></span>
+    <p class="cover-lede">Advanced&nbsp;equipment and proven methodology for professional commercial kitchen exhaust cleaning.</p>
+  </div>
+  <div class="cover-visual">
+    <img src="/slides/kitchen-hood.jpg" alt="Grade X tracked crawler on a commercial kitchen cookline" />
+    <div class="cover-hud">
+      <p class="lead"><span>Live inspection in progress</span><b>Interior cleaning, digitally verified</b></p>
+      <ul>
+        <li><b>Pre-clean baseline</b><span>Micron gauge</span></li>
+        <li><b>Post-clean record</b><span>Same-point test</span></li>
+        <li><b>Job evidence</b><span>Photos + video</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cover-bar">
+    <span>Capability&nbsp;Statement</span>
+    <span>ABN 45 684 073 345</span>
+    <span>5&nbsp;Elward&nbsp;Way, Balga&nbsp;WA&nbsp;6061</span>
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Company profile <b>| Page 02</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">Built for the<br />environments that matter.</h2>
+        <p class="lede">A Western Australian specialist in robotic kitchen exhaust cleaning, digital grease measurement and commercial kitchen hygiene — not a general cleaning company. Prepared for facility managers, procurement, QSR operators and multi-site groups.</p>
+        <div class="impact">
+          <p class="k">Company file</p>
+          <div><span class="round"><svg class="ico"><use href="#i-hash"/></svg></span><div><strong>ABN</strong><em>45 684 073 345</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-pin"/></svg></span><div><strong>Balga</strong><em>5 Elward Way WA</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-bot"/></svg></span><div><strong>01</strong><em>Robotic platform in WA</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-phone"/></svg></span><div><strong>WA</strong><em>Perth metro response</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-building"/></svg></span><div><b>Specialist, not general</b><p>Robotic exhaust, digital measurement and commercial kitchen hygiene only.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-droplet"/></svg></span><div><b>Fire-risk environments</b><p>The work sits where fire load, food safety and trading hours meet.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Documented process</b><p>Eight numbered steps and a job file a facility manager can show.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-globe"/></svg></span><div><b>Perth &amp; WA coverage</b><p>Planned programmes and emergency response across the Perth metro.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/slides/kitchen-canopy.jpg" alt="Commercial kitchen canopy and cookline" />
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>At a glance <b>| Page 03</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">Verified<br />operating facts.</h2>
+        <p class="lede">Not invented metrics. These figures come from the live Grade X offering, methodology and evidence pack.</p>
+        <div class="impact">
+          <p class="k">Operating facts</p>
+          <div><span class="round"><svg class="ico"><use href="#i-layers"/></svg></span><div><strong>21</strong><em>Commercial services</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-list"/></svg></span><div><strong>08</strong><em>Step methodology</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-grid"/></svg></span><div><strong>04</strong><em>Service categories</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-file"/></svg></span><div><strong>06</strong><em>Evidence artefacts</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-cpu"/></svg></span><div><b>Technology-led</b><p>Stainless tracked crawler, dual-hose turret, forward camera and LED.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-gauge"/></svg></span><div><b>Digital measurement</b><p>Real-time micron readings, including the Teinnova Grasmeter.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-clip"/></svg></span><div><b>Documented work</b><p>Every job leaves a file a facility manager can show.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-shield"/></svg></span><div><b>WHS-focused</b><p>Risk assessments, SWMS and site-specific procedures where required.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/slides/kitchen-hood.jpg" alt="Grade X crawler on a commercial cookline" />
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Core capabilities <b>| Page 04</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">The work that sits<br />on the cookline.</h2>
+        <p class="lede">Eight capabilities across kitchen exhaust, equipment, front-of-house and exterior commercial — the same contractor already inside the cookline.</p>
+        <div class="impact">
+          <p class="k">Scope</p>
+          <div><span class="round"><svg class="ico"><use href="#i-layers"/></svg></span><div><strong>21</strong><em>Services listed</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-grid"/></svg></span><div><strong>04</strong><em>Categories</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-bot"/></svg></span><div><strong>01</strong><em>WA robotic platform</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-phone"/></svg></span><div><strong>WA</strong><em>Metro emergency</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-droplet"/></svg></span><div><b>Kitchen exhaust</b><p>Full-system hygiene, measured grease thickness and after-clean evidence.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-bot"/></svg></span><div><b>Robotic exhaust</b><p>Tracked crawler, dual-hose turret and forward camera — only of this kind in WA.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-gauge"/></svg></span><div><b>Digital measurement</b><p>Instant micron readings before and after, including the Teinnova Grasmeter.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-spark"/></svg></span><div><b>Steam &amp; extraction</b><p>Professional-grade steam that lifts grease with reduced harsh chemistry.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/slides/duct-crawler.jpg" alt="Tracked crawler inside kitchen exhaust ductwork" />
+  </div>
+</section>
+
+<section class="sheet ink">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Technology <b>| Page 05</b></span></p>
+    <div class="bay-head">
+      <div>
+        <p class="bay-k">Meet the crawler</p>
+        <h2 class="h-title">Robotic kitchen<br />exhaust cleaning.</h2>
+        <p class="lede">Grade X operates a stainless tracked crawler for kitchen exhaust interiors — dual-hose high-pressure cleaning, twin turret nozzles, LED lighting and a forward inspection camera.</p>
+      </div>
+      <aside class="bay-wa">
+        <strong>The only robotic platform of this kind in WA</strong>
+        <span>Currently the only company in Western Australia operating this technology.</span>
+      </aside>
+    </div>
+    <img class="bay-photo" src="/slides/kitchen-hood.jpg" alt="Grade X stainless tracked crawler on a commercial cookline" />
+    <ul class="bay-ticks">
+      <li>Forward camera</li>
+      <li>Dual work lights</li>
+      <li>Twin turret jets</li>
+      <li>Duct floor drive</li>
+      <li>Live interior feed</li>
+      <li>Stainless tracks</li>
+    </ul>
+    <ol class="bay-specs">
+      <li>
+        <h3>Stainless tracked crawler</h3>
+        <p>Chevron-plate tracks and a sealed stainless chassis so the unit can drive grease-slick duct floors instead of sending a person inside.</p>
+      </li>
+      <li>
+        <h3>Twin turret nozzles</h3>
+        <p>An articulating head with two forward jets, fed by dual high-pressure hoses and brass quick-connects — the same layout as this machine.</p>
+      </li>
+      <li>
+        <h3>Inspection camera + LED</h3>
+        <p>Forward camera barrel and dual work lights. Clients can see the interior during the clean, not only a hatch photo after it closes.</p>
+      </li>
+      <li>
+        <h3>Exploded service architecture</h3>
+        <p>Drive motors, track assemblies, rollers and turret are built to be serviced. The build matches this platform, not a generic robot.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sheet ink">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Methodology <b>| Page 06</b></span></p>
+    <h2 class="h-title">How Grade X<br />actually operates.</h2>
+    <p class="lede" style="max-width:168mm;margin-bottom:6mm">A dedicated numbered sequence — evidence of a repeatable, professional process, not folded into general service descriptions.</p>
+    <ol class="method-grid">
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-search"/></svg></span><span class="num">01</span></div>
+        <h3>Site inspection and assessment</h3>
+        <p>The system is walked, photographed and scoped before any cleaning starts so the method matches the site.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-gauge"/></svg></span><span class="num">02</span></div>
+        <h3>Grease thickness measurement</h3>
+        <p>A digital grease thickness gauge — including the Teinnova Grasmeter — captures real-time micron readings.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-shield"/></svg></span><span class="num">03</span></div>
+        <h3>Preparation and protection</h3>
+        <p>Cookline, storage and guest-adjacent zones are isolated and protected. Live kitchens stay on where agreed.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-spark"/></svg></span><span class="num">04</span></div>
+        <h3>Interior steam washing</h3>
+        <p>Professional-grade steam and extraction lift grease inside the exhaust system, with less harsh chemistry.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-droplet"/></svg></span><span class="num">05</span></div>
+        <h3>Canopy, ductwork and components</h3>
+        <p>Canopy interiors, filters and accessible ductwork are cleaned as one path. Crawler used where manned entry is unsafe.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-check"/></svg></span><span class="num">06</span></div>
+        <h3>Final inspection and quality control</h3>
+        <p>The completed system is inspected against the original scope. Missed soil is treated as a defect.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-gauge"/></svg></span><span class="num">07</span></div>
+        <h3>Post-cleaning grease measurement</h3>
+        <p>The same digital method after the clean. Before-and-after micron readings sit in the job file.</p>
+      </li>
+      <li>
+        <div class="top"><span class="round"><svg class="ico"><use href="#i-file"/></svg></span><span class="num">08</span></div>
+        <h3>Reporting and documentation</h3>
+        <p>Before/after photos, measurement records, compliance notes and next-interval recommendations.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Service portfolio <b>| Page 07</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">Service<br />capability</h2>
+        <p class="lede">Twenty-one services across four categories. Only the work confirmed on the Grade X website is listed here.</p>
+        <div class="impact">
+          <p class="k">Portfolio</p>
+          <div><span class="round"><svg class="ico"><use href="#i-droplet"/></svg></span><div><strong>01</strong><em>Kitchen exhaust</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-tool"/></svg></span><div><strong>02</strong><em>Kitchen equipment</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-home"/></svg></span><div><strong>03</strong><em>Lobby &amp; FOH</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-ext"/></svg></span><div><strong>04</strong><em>Exterior commercial</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-droplet"/></svg></span><div><b>Kitchen exhaust &amp; hygiene</b><p>Exhaust, canopy, robotic cleaning, steam, and cookline equipment hygiene.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-tool"/></svg></span><div><b>Kitchen equipment</b><p>Grill recovery, fryer boil-outs, shake machines, cool rooms, nightly and monthly deep cleans.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-home"/></svg></span><div><b>Lobby &amp; front-of-house</b><p>Lobby cleaning, monthly restoration, and Play Place with staff certification where required.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-ext"/></svg></span><div><b>Exterior commercial</b><p>Floors, pressure washing, drive-thru, windows, line marking and hygiene zones.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/services/kitchen-exhaust-hood.jpg" alt="Kitchen Exhaust & Hygiene Specialty — stainless canopy, baffle filters and drop lights" />
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Digital evidence <b>| Page 08</b></span></p>
+    <div class="dossier">
+      <div>
+        <p class="dossier-k">Digital evidence &amp; reporting</p>
+        <h2 class="h-title">Verification of<br />completed work.</h2>
+        <p class="lede">Objective grease-thickness measurement before and after every clean, live video during the clean itself, and before/after photographic evidence supplied with every job.</p>
+      </div>
+      <img class="dossier-photo" src="/slides/duct-live.jpg" alt="Live inspection view inside a kitchen exhaust duct" />
+    </div>
+    <p class="dossier-k file-label">What sits in the report</p>
+    <ol class="file">
+      <li><em>01</em><b>Before-and-after photographs</b><span>Supplied with every job</span></li>
+      <li><em>02</em><b>Digital grease measurement records</b><span>Before and after, objective micron readings</span></li>
+      <li><em>03</em><b>Live video</b><span>During the clean itself</span></li>
+      <li><em>04</em><b>Service reports for the visit</b><span>Areas cleaned and inspected</span></li>
+      <li><em>05</em><b>Compliance documentation</b><span>Held with the job record</span></li>
+      <li><em>06</em><b>Recommendations for future maintenance</b><span>Recorded in the report</span></li>
+    </ol>
+    <aside class="dossier-note">
+      <h3>Client reporting system</h3>
+      <p>Equipment includes a digital grease thickness gauge with external probe — such as the Teinnova Grasmeter — producing instant micron readings. Before-and-after measurements verify effectiveness objectively, not by visual assessment. Live video is available during robotic cleans.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Compliance &amp; WHS <b>| Page 09</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">Compliance, WHS<br />and risk.</h2>
+        <p class="lede">Facility managers look for this before engaging a contractor. Exact certificate wording is supplied by Grade X. Current documents are held on file. This is not a claim of ISO certification.</p>
+        <div class="impact">
+          <p class="k">On file</p>
+          <div><span class="round"><svg class="ico"><use href="#i-shield"/></svg></span><div><strong>PL</strong><em>Public liability</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-users"/></svg></span><div><strong>WC</strong><em>Workers compensation</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-hat"/></svg></span><div><strong>WHS</strong><em>SWMS on request</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-clip"/></svg></span><div><strong>QC</strong><em>ISO-focused process</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-shield"/></svg></span><div><b>Public liability</b><p>Cover in place for commercial site work. Certificates supplied on request.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-users"/></svg></span><div><b>Workers compensation</b><p>Maintained so host sites are not absorbing contractor injury risk.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-utensil"/></svg></span><div><b>Food-safe practices</b><p>Steam-led interior work and protection of food-production surfaces.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-check"/></svg></span><div><b>Staff certifications</b><p>Including Working With Children Check where play-place work requires it.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/slides/kitchen-hood.jpg" alt="Grade X equipment on a commercial cookline" />
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Sectors <b>| Page 10</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">Built for commercial<br />environments.</h2>
+        <p class="lede">One specialist partner across kitchen, hygiene, front-of-house and external environments — the same contractor already inside the cookline.</p>
+        <div class="impact">
+          <p class="k">Who we serve</p>
+          <div><span class="round"><svg class="ico"><use href="#i-utensil"/></svg></span><div><strong>QSR</strong><em>Fast food cooklines</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-hat"/></svg></span><div><strong>HORECA</strong><em>Hotels · clubs</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-clip"/></svg></span><div><strong>FM</strong><em>Facility managers</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-layers"/></svg></span><div><strong>MULTI</strong><em>Site groups</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-utensil"/></svg></span><div><b>QSR &amp; fast food</b><p>High-volume cooklines where fire load, brand standards and trading hours meet.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-droplet"/></svg></span><div><b>Commercial kitchens</b><p>Hotel, club and restaurant kitchens that need a documented interior clean.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-building"/></svg></span><div><b>Commercial property</b><p>Shopping-centre food tenancies and high-traffic customer entries.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-layers"/></svg></span><div><b>Multi-site operators</b><p>Programmes that can look the same at every store — exhaust, equipment and evidence.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/services/lobby.jpg" alt="High-traffic commercial front-of-house" />
+  </div>
+</section>
+
+<section class="sheet paper">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Why Grade X <b>| Page 11</b></span></p>
+    <div class="why">
+      <div class="why-left">
+        <h2 class="h-title">Why<br />Grade X</h2>
+        <p class="lede">Credibility, process and accountability. The difference is technology, measurement and a file a facility manager can show.</p>
+        <div class="impact">
+          <p class="k">At a glance</p>
+          <div><span class="round"><svg class="ico"><use href="#i-bot"/></svg></span><div><strong>01</strong><em>WA robotic platform</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-list"/></svg></span><div><strong>08</strong><em>Documented steps</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-file"/></svg></span><div><strong>06</strong><em>Evidence artefacts</em></div></div>
+          <div><span class="round"><svg class="ico"><use href="#i-phone"/></svg></span><div><strong>WA</strong><em>Metro emergency</em></div></div>
+        </div>
+      </div>
+      <ul class="feat2">
+        <li><span class="round"><svg class="ico"><use href="#i-bot"/></svg></span><div><b>Technology-led</b><p>Currently the only company in WA operating this robotic kitchen exhaust platform.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-gauge"/></svg></span><div><b>Digital measurement</b><p>Instant micron readings before and after. Visual “looks clean” is not the metric.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-cam"/></svg></span><div><b>Live inspection</b><p>Forward camera and dual work lights. The interior is visible during the clean.</p></div></li>
+        <li><span class="round"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Before &amp; after evidence</b><p>Photographs, measurement records, and live video on robotic cleans.</p></div></li>
+      </ul>
+    </div>
+    <img class="photo photo-lg" src="/slides/kitchen-hood.jpg" alt="Grade X crawler on a commercial cookline" />
+  </div>
+</section>
+
+<section class="sheet ink">
+  <div class="pad">
+    <p class="hdr"><span class="hdr-l"><img src="/brand/gradex-lockup-navy.png" alt="" /> Grade X</span><span>Contact <b>| Page 12</b></span></p>
+    <div class="desk">
+      <div>
+        <p class="bay-k">Contact</p>
+        <h2 class="h-title">Request a<br />quote.</h2>
+        <p class="lede">Service type, site details, and contact information. Service area: Perth metropolitan / WA. Emergency response is available — call for urgent issues.</p>
+        <ul class="desk-cards">
+          <li><span>Phone</span><b>0430 360 162</b></li>
+          <li><span>Email</span><b>gradex.perth@gmail.com</b></li>
+          <li><span>Address</span><b>5 Elward Way, Balga WA 6061</b></li>
+          <li><span>Service area</span><b>Perth metropolitan and Western Australia</b></li>
+        </ul>
+      </div>
+      <aside class="desk-direct">
+        <p class="k">Direct</p>
+        <h3>0430 360 162</h3>
+        <p>Emergency response available across the Perth metro.</p>
+        <p>Grade X Commercial Solutions Pty Ltd</p>
+        <p>ABN 45 684 073 345</p>
+      </aside>
+    </div>
+    <img class="desk-photo" src="/slides/kitchen-hood.jpg" alt="Grade X tracked crawler on a commercial kitchen cookline" />
+    <div class="desk-foot">
+      <span class="cta-btn"><svg class="ico"><use href="#i-arrow"/></svg>Request a quote</span>
+      <small>Precision. Technology. Compliance.</small>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var n = new URLSearchParams(location.search).get("sheet");
+  if (!n) return;
+  document.querySelectorAll(".sheet").forEach(function (s, i) {
+    if (String(i + 1) !== n) s.style.display = "none";
+  });
+})();
+</script>
+</body>
+</html>

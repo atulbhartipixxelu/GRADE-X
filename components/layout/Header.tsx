@@ -12,6 +12,7 @@ const topNav = [
   { href: "/about", label: "About" },
   { href: "/technology", label: "Technology" },
   { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 

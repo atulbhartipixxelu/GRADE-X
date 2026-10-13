@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { services } from "@/lib/content";
+import { categoryImages } from "@/lib/categoryMedia";
+import { categoryMeta, services } from "@/lib/content";
 import { store } from "@/lib/store";
 import { InnerMotion } from "@/components/inner/InnerMotion";
 import { PageHero } from "@/components/ui/PageHero";
@@ -41,8 +42,8 @@ export default async function ServiceDetailPage({
         kicker="Service"
         title={service.name}
         body={service.excerpt}
-        media="/slides/kitchen-canopy.jpg"
-        mediaAlt={service.name}
+        media={categoryImages[service.category]}
+        mediaAlt={categoryMeta[service.category].title}
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/services", label: "Services" },

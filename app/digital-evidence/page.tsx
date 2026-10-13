@@ -58,6 +58,9 @@ export default function EvidencePage() {
       <section className="gx-inner-wrap pt-0">
         <div className="gx-inner-cta" data-rise>
           <Button href="/contact">Request a quote</Button>
+          <Button href="/gallery" variant="ghost">
+            Work gallery
+          </Button>
         </div>
       </section>
     </InnerMotion>

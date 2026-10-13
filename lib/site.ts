@@ -43,6 +43,7 @@ export const nav = [
   { href: "/", label: "Home" },
   { href: "/technology", label: "Technology" },
   { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/methodology", label: "Methodology" },
   { href: "/digital-evidence", label: "Evidence" },
   { href: "/compliance", label: "Compliance" },
@@ -61,6 +62,7 @@ export const footerNav = {
     { href: "/technology", label: "Robotic cleaning" },
     { href: "/methodology", label: "Our methodology" },
     { href: "/digital-evidence", label: "Digital evidence" },
+    { href: "/gallery", label: "Work gallery" },
     { href: "/compliance", label: "Compliance & WHS" },
   ],
   services: [

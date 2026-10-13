@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/methodology",
     "/digital-evidence",
+    "/gallery",
     "/compliance",
     "/case-studies",
     "/service-area",
