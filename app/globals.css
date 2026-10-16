@@ -446,7 +446,7 @@ html.lenis body {
   position: relative;
   isolation: isolate;
   background: var(--navy);
-  font-family: var(--font-outfit), var(--font-figtree), ui-sans-serif, sans-serif;
+  font-family: var(--font-figtree), ui-sans-serif, sans-serif;
 }
 
 .gx-inner h1,
@@ -1873,7 +1873,7 @@ a.gx-inner-card:hover {
   align-items: center;
   gap: 1.35rem;
   padding-right: 1.35rem;
-  font-family: var(--font-outfit), sans-serif;
+  font-family: var(--font-grotesk), sans-serif;
   font-size: 0.92rem;
   font-weight: 500;
   letter-spacing: 0.04em;

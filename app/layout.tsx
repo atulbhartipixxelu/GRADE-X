@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, Space_Grotesk, JetBrains_Mono, Syne, Outfit } from "next/font/google";
+import { Figtree, Space_Grotesk, JetBrains_Mono, Syne } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Loader } from "@/components/layout/Loader";
@@ -35,13 +35,6 @@ const syne = Syne({
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   ...pageMeta(site.tagline, site.description, "/"),
   metadataBase: new URL(site.url),
@@ -67,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en-AU"
       data-theme="dark"
-      className={`${sans.variable} ${display.variable} ${mono.variable} ${syne.variable} ${outfit.variable} h-full antialiased`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} ${syne.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-navy text-ivory">
         <script
