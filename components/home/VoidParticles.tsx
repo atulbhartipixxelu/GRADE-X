@@ -78,7 +78,7 @@ export function VoidParticles({
         const cx = w * (0.5 + (mouse.x - 0.5) * 0.08);
         const cy = h * (0.5 + (mouse.y - 0.5) * 0.06);
         const g = ctx.createRadialGradient(cx, cy, 20, cx, cy, Math.max(w, h) * 0.55);
-        g.addColorStop(0, "rgba(201, 164, 74, 0.22)");
+        g.addColorStop(0, "rgba(47, 110, 181, 0.22)");
         g.addColorStop(0.42, "rgba(10, 22, 40, 0.18)");
         g.addColorStop(1, "rgba(5, 11, 20, 0)");
         ctx.fillStyle = g;
@@ -117,7 +117,7 @@ export function VoidParticles({
           const d2 = dx * dx + dy * dy;
           if (d2 > 11000) continue;
           const alpha = 0.14 * (1 - d2 / 11000);
-          ctx.strokeStyle = `rgba(228, 200, 120, ${alpha})`;
+          ctx.strokeStyle = `rgba(59, 130, 201, ${alpha})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -129,13 +129,13 @@ export function VoidParticles({
         if (p.glow) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * 4.2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(201, 164, 74, ${p.a * 0.18})`;
+          ctx.fillStyle = `rgba(47, 110, 181, ${p.a * 0.18})`;
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = p.glow
-          ? `rgba(244, 226, 176, ${p.a})`
+          ? `rgba(185, 214, 240, ${p.a})`
           : `rgba(238, 243, 250, ${p.a})`;
         ctx.fill();
       }

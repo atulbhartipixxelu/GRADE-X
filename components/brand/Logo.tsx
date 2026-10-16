@@ -13,10 +13,10 @@ export function BrandLockup({
   return (
     <span className={`gx-brand ${className}`}>
       <Image
-        src="/brand/logo.png"
+        src="/brand/gradex-lockup-light.png"
         alt=""
-        width={1024}
-        height={289}
+        width={603}
+        height={206}
         className="gx-brand-img"
         sizes={sizes}
         priority={priority}
@@ -48,7 +48,7 @@ export function Logo({
         <>
           <span className="gx-logo-mark relative size-[2.85rem] shrink-0 overflow-hidden sm:size-[3.1rem]">
             <Image
-              src="/brand/logo-shield.png"
+              src="/favicon.png"
               alt=""
               fill
               className="object-contain p-[3px]"
@@ -71,7 +71,7 @@ export function Logo({
 export function LogoMark({ className = "size-10" }: { className?: string }) {
   return (
     <Image
-      src="/brand/logo-shield.png"
+      src="/favicon.png"
       alt=""
       width={40}
       height={40}

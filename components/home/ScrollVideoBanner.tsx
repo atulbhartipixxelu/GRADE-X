@@ -1,8 +1,8 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { ArrowRight, Pause, Play, Scan } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -194,13 +194,19 @@ export function ScrollVideoBanner() {
         <div className="gx-hero-hud-right">
           <div className="gx-hero-hud-meta">
             <span>
-              Timecode <b><span ref={clockEl}>00:00</span> / <span ref={lengthEl}>00:00</span></b>
+              Timecode{" "}
+              <b>
+                <span ref={clockEl}>00:00</span> / <span ref={lengthEl}>00:00</span>
+              </b>
             </span>
             <span>
               Mode <b>{loopOn ? "Autoplay loop" : "Scroll-driven"}</b>
             </span>
             <span>
-              Progress <b><span ref={pctEl}>0%</span></b>
+              Progress{" "}
+              <b>
+                <span ref={pctEl}>0%</span>
+              </b>
             </span>
           </div>
           <button type="button" className={`gx-hero-hud-play${loopOn ? " is-on" : ""}`} onClick={toggleLoop}>
@@ -221,14 +227,14 @@ export function ScrollVideoBanner() {
           cleaning.
         </p>
         <div className="gx-hero-actions">
-          <Link href="/contact" className="gx-hero-cta-gold">
+          <Button href="/contact">
             Request a quote
             <ArrowRight strokeWidth={2} />
-          </Link>
-          <Link href="/technology" className="gx-hero-ghost">
+          </Button>
+          <Button href="/technology">
             <Scan strokeWidth={2} />
             Inspect the crawler
-          </Link>
+          </Button>
         </div>
       </div>
 

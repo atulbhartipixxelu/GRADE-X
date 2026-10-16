@@ -152,9 +152,9 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
       ctx.clearRect(0, 0, w, h);
 
       const halo = ctx.createRadialGradient(ox, oy, r * 0.7, ox, oy, r * 2.15);
-      halo.addColorStop(0, "rgba(201, 164, 74, 0)");
-      halo.addColorStop(0.42, "rgba(201, 164, 74, 0.05)");
-      halo.addColorStop(1, "rgba(201, 164, 74, 0)");
+      halo.addColorStop(0, "rgba(47, 110, 181, 0)");
+      halo.addColorStop(0.42, "rgba(47, 110, 181, 0.05)");
+      halo.addColorStop(1, "rgba(47, 110, 181, 0)");
       ctx.fillStyle = halo;
       ctx.fillRect(0, 0, w, h);
 
@@ -162,9 +162,9 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
       ctx.translate(ox, oy);
       ctx.rotate(t * 0.42);
       const beam = ctx.createRadialGradient(0, 0, r, 0, 0, r * 1.92);
-      beam.addColorStop(0, "rgba(201, 164, 74, 0.16)");
-      beam.addColorStop(0.7, "rgba(228, 200, 120, 0.05)");
-      beam.addColorStop(1, "rgba(201, 164, 74, 0)");
+      beam.addColorStop(0, "rgba(47, 110, 181, 0.16)");
+      beam.addColorStop(0.7, "rgba(59, 130, 201, 0.05)");
+      beam.addColorStop(1, "rgba(47, 110, 181, 0)");
       ctx.fillStyle = beam;
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -176,7 +176,7 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
       ctx.save();
       ctx.translate(ox, oy);
       ctx.rotate(-t * 0.08);
-      ctx.strokeStyle = "rgba(228, 200, 120, 0.28)";
+      ctx.strokeStyle = "rgba(59, 130, 201, 0.28)";
       ctx.lineWidth = 1;
       for (let i = 0; i < 56; i++) {
         const a = (i / 56) * Math.PI * 2;
@@ -220,7 +220,7 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
           );
           const da = Math.min(gap, Math.PI * 2 - gap);
           if (da > 0.48) continue;
-          ctx.strokeStyle = `rgba(201, 164, 74, ${0.16 * (1 - da / 0.48)})`;
+          ctx.strokeStyle = `rgba(47, 110, 181, ${0.16 * (1 - da / 0.48)})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -232,14 +232,14 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
         if (p.glow) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 4.4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(201, 164, 74, ${p.a * 0.16})`;
+          ctx.fillStyle = `rgba(47, 110, 181, ${p.a * 0.16})`;
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.glow
-          ? `rgba(244, 226, 176, ${Math.min(1, p.a)})`
-          : `rgba(228, 200, 120, ${Math.min(0.85, p.a)})`;
+          ? `rgba(185, 214, 240, ${Math.min(1, p.a)})`
+          : `rgba(59, 130, 201, ${Math.min(0.85, p.a)})`;
         ctx.fill();
       }
 
@@ -254,7 +254,7 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
           const a = c.trail[i];
           const b = c.trail[i + 1];
           if (!a || !b) continue;
-          ctx.strokeStyle = `rgba(228, 200, 120, ${(1 - i / c.trail.length) * 0.45})`;
+          ctx.strokeStyle = `rgba(59, 130, 201, ${(1 - i / c.trail.length) * 0.45})`;
           ctx.lineWidth = 1.4 - i * 0.05;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -281,7 +281,7 @@ export function CoreParticles({ className = "gx-core-particles" }: { className?:
         }
         ctx.beginPath();
         ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 164, 74, ${0.18 + k * 0.28})`;
+        ctx.fillStyle = `rgba(47, 110, 181, ${0.18 + k * 0.28})`;
         ctx.fill();
       }
 

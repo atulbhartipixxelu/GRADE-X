@@ -29,45 +29,40 @@ export function HomeTrust() {
             <p className="gx-htrust-kicker">Trust signals</p>
             <Button href="/compliance">Compliance &amp; WHS</Button>
           </div>
-          <h2 id="gx-htrust-heading">Insurance, compliance and certifications</h2>
-          <p>
-            Facility managers and QSR compliance teams look for this before engaging a contractor.
-            Exact certificate wording is supplied by Grade X.
-          </p>
+          <div className="gx-htrust-intro">
+            <div>
+              <h2 id="gx-htrust-heading">Insurance, compliance and certifications</h2>
+              <p className="gx-htrust-file">
+                <span>On file</span>
+                Grade X · Balga WA
+              </p>
+            </div>
+            <p>
+              Facility managers and QSR compliance teams look for this before engaging a contractor.
+              Exact certificate wording is supplied by Grade X.
+            </p>
+          </div>
         </header>
 
-        <div className="gx-htrust-dossier">
-          <div className="gx-htrust-seal" aria-hidden>
-            <i className="gx-htrust-seal-ring" />
-            <i className="gx-htrust-seal-ring gx-htrust-seal-ring--2" />
-            <div className="gx-htrust-seal-core">
-              <span>On file</span>
-              <strong>Grade X</strong>
-              <em>Balga WA</em>
-            </div>
-          </div>
-
-          <ol className="gx-htrust-register">
-            {credentials.map((item, i) => {
-              const Icon = icons[i] ?? Sparkles;
-              return (
-                <li key={item.title}>
-                  <Link href="/compliance" className="gx-htrust-row">
-                    <span className="gx-htrust-no">{String(i + 1).padStart(2, "0")}</span>
+        <ol className="gx-htrust-board">
+          {credentials.map((item, i) => {
+            const Icon = icons[i] ?? Sparkles;
+            return (
+              <li key={item.title}>
+                <Link href="/compliance" className="gx-htrust-tile">
+                  <span className="gx-htrust-tile-top">
                     <i className="gx-htrust-ico" aria-hidden>
                       <Icon strokeWidth={1.7} />
                     </i>
-                    <div className="gx-htrust-copy">
-                      <strong>{item.title}</strong>
-                      <p>{item.body}</p>
-                    </div>
-                    <em className="gx-htrust-mark">Held on file</em>
-                  </Link>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+                    <em>{String(i + 1).padStart(2, "0")}</em>
+                  </span>
+                  <strong>{item.title}</strong>
+                  <p>{item.body}</p>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

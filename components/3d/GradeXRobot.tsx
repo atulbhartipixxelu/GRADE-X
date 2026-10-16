@@ -24,7 +24,7 @@ const rubber = {
 } as const;
 
 const brass = {
-  color: "#c9a44a",
+  color: "#2f6eb5",
   metalness: 1,
   roughness: 0.22,
 } as const;

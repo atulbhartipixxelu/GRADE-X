@@ -79,7 +79,7 @@ function GreaseMist() {
   });
   return (
     <points ref={ref} geometry={geo}>
-      <pointsMaterial color="#c9a44a" size={0.025} transparent opacity={0.4} />
+      <pointsMaterial color="#2f6eb5" size={0.025} transparent opacity={0.4} />
     </points>
   );
 }
@@ -130,14 +130,14 @@ function StoryScene() {
         intensity={1.55}
         angle={0.46}
         penumbra={0.7}
-        color="#c9a44a"
+        color="#2f6eb5"
       />
       <spotLight
         position={[2.4, 1.2, -3]}
         intensity={0.85}
         angle={0.7}
         penumbra={0.8}
-        color="#e4c878"
+        color="#3b82c9"
       />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.32, 0]} receiveShadow>
         <circleGeometry args={[3.4, 64]} />
@@ -145,7 +145,7 @@ function StoryScene() {
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.318, 0]}>
         <ringGeometry args={[1.55, 1.58, 64]} />
-        <meshBasicMaterial color="#c9a44a" transparent opacity={0.28} />
+        <meshBasicMaterial color="#2f6eb5" transparent opacity={0.28} />
       </mesh>
       <group ref={rig} position={[-2.35, -0.06, 0]} scale={2.35}>
         <GradeXRobot />
@@ -198,7 +198,7 @@ function RevealScene() {
       <ambientLight intensity={1.2} />
       <hemisphereLight args={["#ffffff", "#d4c7a8", 1]} />
       <directionalLight position={[4.2, 7.5, 5]} intensity={2.1} color="#ffffff" />
-      <directionalLight position={[-5, 2.8, -2]} intensity={0.45} color="#c9a44a" />
+      <directionalLight position={[-5, 2.8, -2]} intensity={0.45} color="#2f6eb5" />
       <spotLight position={[1.2, 8, 3]} intensity={1.15} angle={0.42} penumbra={1} color="#ffffff" />
       <ContactShadows
         position={[0, 0, 0]}
@@ -252,7 +252,7 @@ function DuctScene({ mode }: { mode: "hero" | "tech" }) {
       <fog attach="fog" args={["#000000", 5, 16]} />
       <ambientLight intensity={0.35} />
       <directionalLight position={[5, 6, 4]} intensity={1.35} color="#f3eee4" />
-      <pointLight position={[-3, 2, 2]} intensity={0.7} color="#c9a44a" />
+      <pointLight position={[-3, 2, 2]} intensity={0.7} color="#2f6eb5" />
       <CameraRig mode={mode} />
       <group rotation={[0.12, -0.42, 0.04]} position={[0, 0.15, 0]}>
         <CutawayDuct />

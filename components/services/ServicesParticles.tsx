@@ -87,9 +87,9 @@ export function ServicesParticles({ className = "gx-svc-hero-particles" }: { cla
 
       const sweep = ((t * 0.08) % 1) * w;
       const band = ctx.createLinearGradient(sweep - 80, 0, sweep + 80, 0);
-      band.addColorStop(0, "rgba(201, 164, 74, 0)");
-      band.addColorStop(0.5, "rgba(201, 164, 74, 0.07)");
-      band.addColorStop(1, "rgba(201, 164, 74, 0)");
+      band.addColorStop(0, "rgba(47, 110, 181, 0)");
+      band.addColorStop(0.5, "rgba(47, 110, 181, 0.07)");
+      band.addColorStop(1, "rgba(47, 110, 181, 0)");
       ctx.fillStyle = band;
       ctx.fillRect(0, 0, w, h);
 
@@ -116,7 +116,7 @@ export function ServicesParticles({ className = "gx-svc-hero-particles" }: { cla
           ctx.save();
           ctx.translate(p.x, p.y);
           ctx.rotate(t * 0.7 + p.col);
-          ctx.strokeStyle = `rgba(244, 226, 176, ${a})`;
+          ctx.strokeStyle = `rgba(185, 214, 240, ${a})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(0, -3.4);
@@ -129,7 +129,7 @@ export function ServicesParticles({ className = "gx-svc-hero-particles" }: { cla
         } else {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = p.r > 1.3 ? `rgba(244, 226, 176, ${a})` : `rgba(201, 164, 74, ${a})`;
+          ctx.fillStyle = p.r > 1.3 ? `rgba(185, 214, 240, ${a})` : `rgba(47, 110, 181, ${a})`;
           ctx.fill();
         }
 

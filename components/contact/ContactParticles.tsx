@@ -117,9 +117,9 @@ export function ContactParticles({ className = "gx-com-particles" }: { className
       ctx.clearRect(0, 0, w, h);
 
       const haze = ctx.createRadialGradient(mx, my, 12, mx, my, Math.max(w, h) * 0.38);
-      haze.addColorStop(0, "rgba(201, 164, 74, 0.14)");
-      haze.addColorStop(0.45, "rgba(201, 164, 74, 0.04)");
-      haze.addColorStop(1, "rgba(201, 164, 74, 0)");
+      haze.addColorStop(0, "rgba(47, 110, 181, 0.14)");
+      haze.addColorStop(0.45, "rgba(47, 110, 181, 0.04)");
+      haze.addColorStop(1, "rgba(47, 110, 181, 0)");
       ctx.fillStyle = haze;
       ctx.fillRect(0, 0, w, h);
 
@@ -142,7 +142,7 @@ export function ContactParticles({ className = "gx-com-particles" }: { className
           const a = c.trail[k - 1];
           const b = c.trail[k];
           if (!a || !b) continue;
-          ctx.strokeStyle = `rgba(244, 226, 176, ${fade * (k / c.trail.length) * 0.55})`;
+          ctx.strokeStyle = `rgba(185, 214, 240, ${fade * (k / c.trail.length) * 0.55})`;
           ctx.lineWidth = 1.4 * (k / c.trail.length);
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -163,7 +163,7 @@ export function ContactParticles({ className = "gx-com-particles" }: { className
         ring.a -= 0.35 * dt;
         ctx.beginPath();
         ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(201, 164, 74, ${Math.max(0, ring.a)})`;
+        ctx.strokeStyle = `rgba(47, 110, 181, ${Math.max(0, ring.a)})`;
         ctx.lineWidth = 1.1;
         ctx.stroke();
         if (ring.a <= 0) rings.splice(i, 1);
@@ -199,7 +199,7 @@ export function ContactParticles({ className = "gx-com-particles" }: { className
           if (!b) continue;
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d > 108) continue;
-          ctx.strokeStyle = `rgba(201, 164, 74, ${(1 - d / 108) * 0.16})`;
+          ctx.strokeStyle = `rgba(47, 110, 181, ${(1 - d / 108) * 0.16})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -212,14 +212,14 @@ export function ContactParticles({ className = "gx-com-particles" }: { className
         if (p.glow) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * 4.4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(201, 164, 74, ${p.a * 0.16 * twinkle})`;
+          ctx.fillStyle = `rgba(47, 110, 181, ${p.a * 0.16 * twinkle})`;
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = p.glow
-          ? `rgba(244, 226, 176, ${p.a * twinkle})`
-          : `rgba(228, 200, 120, ${p.a * twinkle})`;
+          ? `rgba(185, 214, 240, ${p.a * twinkle})`
+          : `rgba(59, 130, 201, ${p.a * twinkle})`;
         ctx.fill();
       }
 

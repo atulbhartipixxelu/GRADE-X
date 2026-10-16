@@ -1,29 +1,6 @@
 import Link from "next/link";
-import type { LucideIcon } from "lucide-react";
-import {
-  ArrowUpRight,
-  ClipboardCheck,
-  FileText,
-  Gauge,
-  ScanSearch,
-  Shield,
-  Sparkles,
-  SprayCan,
-  Wind,
-} from "lucide-react";
 import { methodology } from "@/lib/content";
 import { Button } from "@/components/ui/Button";
-
-const icons: LucideIcon[] = [
-  ScanSearch,
-  Gauge,
-  Shield,
-  SprayCan,
-  Wind,
-  ClipboardCheck,
-  Sparkles,
-  FileText,
-];
 
 export function HomeMethod() {
   return (
@@ -44,24 +21,17 @@ export function HomeMethod() {
         </header>
 
         <ol className="gx-hmethod-grid">
-          {methodology.map((item, i) => {
-            const Icon = icons[i] ?? Sparkles;
-            return (
-              <li key={item.step}>
-                <Link href="/methodology" className="gx-hmethod-card">
-                  <span className="gx-hmethod-card-top">
-                    <i className="gx-hmethod-ico" aria-hidden>
-                      <Icon strokeWidth={1.7} />
-                    </i>
-                    <em>{item.step}</em>
-                    <ArrowUpRight className="gx-hmethod-go" strokeWidth={1.8} aria-hidden />
-                  </span>
+          {methodology.map((item) => (
+            <li key={item.step}>
+              <Link href="/methodology" className="gx-hmethod-card">
+                <span className="gx-hmethod-no">{item.step}</span>
+                <div className="gx-hmethod-copy">
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
-                </Link>
-              </li>
-            );
-          })}
+                </div>
+              </Link>
+            </li>
+          ))}
         </ol>
       </div>
     </section>

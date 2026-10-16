@@ -24,14 +24,14 @@ export function Button({
   if (href) {
     return (
       <Link href={href} className={cls}>
-        {children}
+        <span className="gx-btn-label">{children}</span>
       </Link>
     );
   }
 
   return (
     <button type={type} className={cls} disabled={disabled} onClick={onClick}>
-      {children}
+      <span className="gx-btn-label">{children}</span>
     </button>
   );
 }

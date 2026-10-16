@@ -53,7 +53,7 @@ function Eye({ x }: { x: number }) {
         <ringGeometry args={[0.055, 0.082, 32]} />
         <meshStandardMaterial
           color="#f3eee4"
-          emissive="#c9a44a"
+          emissive="#2f6eb5"
           emissiveIntensity={2.4}
           toneMapped={false}
         />

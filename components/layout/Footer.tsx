@@ -33,7 +33,7 @@ export function Footer() {
 
       <div className="gx-foot-content relative z-10 px-5 pt-20 pb-10 sm:px-8 sm:pt-24">
         <div className="mx-auto max-w-[1400px]">
-          <Logo />
+          <Logo variant="lockup" />
           <p className="mt-6 max-w-xl text-sm leading-7 text-white/80">
             {site.tagline}
             <br />

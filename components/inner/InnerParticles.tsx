@@ -85,8 +85,8 @@ export function InnerParticles({ className = "gx-inner-particles" }: { className
       ctx.clearRect(0, 0, w, h);
 
       const haze = ctx.createRadialGradient(mx, my, 20, mx, my, Math.max(w, h) * 0.42);
-      haze.addColorStop(0, "rgba(201, 164, 74, 0.09)");
-      haze.addColorStop(1, "rgba(201, 164, 74, 0)");
+      haze.addColorStop(0, "rgba(47, 110, 181, 0.09)");
+      haze.addColorStop(1, "rgba(47, 110, 181, 0)");
       ctx.fillStyle = haze;
       ctx.fillRect(0, 0, w, h);
 
@@ -110,7 +110,7 @@ export function InnerParticles({ className = "gx-inner-particles" }: { className
           if (!b) continue;
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d > 118) continue;
-          ctx.strokeStyle = `rgba(201, 164, 74, ${(1 - d / 118) * 0.18})`;
+          ctx.strokeStyle = `rgba(47, 110, 181, ${(1 - d / 118) * 0.18})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -123,14 +123,14 @@ export function InnerParticles({ className = "gx-inner-particles" }: { className
         if (n.glow || near > 0.35) {
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.r * (3.6 + near * 3), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(201, 164, 74, ${0.08 + near * 0.16})`;
+          ctx.fillStyle = `rgba(47, 110, 181, ${0.08 + near * 0.16})`;
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r + near * 1.2, 0, Math.PI * 2);
         ctx.fillStyle = n.glow
-          ? `rgba(244, 226, 176, ${0.55 + near * 0.4})`
-          : `rgba(228, 200, 120, ${0.28 + near * 0.45})`;
+          ? `rgba(185, 214, 240, ${0.55 + near * 0.4})`
+          : `rgba(59, 130, 201, ${0.28 + near * 0.45})`;
         ctx.fill();
       }
 

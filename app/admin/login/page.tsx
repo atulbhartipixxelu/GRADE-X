@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
   return (
     <div className="grid min-h-screen place-items-center bg-navy px-5">
       <form onSubmit={onSubmit} className="w-full max-w-sm border border-gold/20 bg-navy-2 p-8">
-        <Logo />
+        <Logo variant="lockup" />
         <p className="mt-6 font-mono text-[11px] tracking-[0.28em] text-gold uppercase">
           CMS login
         </p>
