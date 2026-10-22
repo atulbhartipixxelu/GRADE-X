@@ -198,7 +198,7 @@ function Spray() {
 
   return (
     <points ref={ref} geometry={geo}>
-      <pointsMaterial color="#f4e27a" size={0.018} transparent opacity={0.55} depthWrite={false} />
+      <pointsMaterial color="#9ec9f2" size={0.018} transparent opacity={0.55} depthWrite={false} />
     </points>
   );
 }
@@ -255,14 +255,14 @@ export function GradeXRobot({
       {[-0.09, 0.09].map((z) => (
         <mesh key={z} position={[0.4, 0.015, z]}>
           <sphereGeometry args={[0.028, 16, 16]} />
-          <meshStandardMaterial color="#f4e27a" emissive="#ffe27a" emissiveIntensity={1.6} />
+          <meshStandardMaterial color="#dcefff" emissive="#9ec9f2" emissiveIntensity={1.35} />
         </mesh>
       ))}
       <mesh position={[0.4, 0.015, 0]}>
         <sphereGeometry args={[0.016, 12, 12]} />
         <meshStandardMaterial color="#111" />
       </mesh>
-      <pointLight position={[0.5, 0.05, 0]} color="#ffe9a0" intensity={1.6} distance={2.4} />
+      <pointLight position={[0.5, 0.05, 0]} color="#cfe4ff" intensity={1.45} distance={2.4} />
 
       <mesh position={[-0.28, 0.14, -0.06]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.03, 0.03, 0.05, 12]} />

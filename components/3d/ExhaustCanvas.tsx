@@ -26,7 +26,7 @@ function CutawayDuct({ length = 12 }: { length?: number }) {
       <mesh rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[1.58, 1.58, length, 48, 1, true, Math.PI * 0.18, Math.PI * 1.64]} />
         <meshStandardMaterial
-          color="#4a2e18"
+          color="#1a2430"
           metalness={0.15}
           roughness={0.92}
           side={THREE.BackSide}
@@ -41,7 +41,7 @@ function CutawayDuct({ length = 12 }: { length?: number }) {
           position={[-length / 2 + 1 + i * 0.9, 0, 0]}
         >
           <torusGeometry args={[1.66, 0.04, 8, 40, Math.PI * 1.64]} />
-          <meshStandardMaterial color="#8a6d32" metalness={0.88} roughness={0.28} />
+          <meshStandardMaterial color="#3d5a78" metalness={0.88} roughness={0.28} />
         </mesh>
       ))}
     </group>
