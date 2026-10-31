@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { categoryMeta, services, type ServiceCategory } from "@/lib/content";
@@ -50,7 +50,7 @@ export function ServicesMega({ active }: { active: boolean }) {
     closeTimer.current = window.setTimeout(() => setOpen(false), 280);
   };
 
-  const toggle = (event: MouseEvent<HTMLButtonElement>) => {
+  const toggle = (event: ReactMouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
     window.clearTimeout(closeTimer.current);
@@ -80,8 +80,8 @@ export function ServicesMega({ active }: { active: boolean }) {
       if (!root.current?.contains(event.target as Node)) setOpen(false);
     };
 
-    const nav = root.current?.closest(".gx-nav");
-    const onNavLeave = (event: MouseEvent) => {
+    const nav = root.current?.closest<HTMLElement>(".gx-nav");
+    const onNavLeave = (event: globalThis.MouseEvent) => {
       if (stillInside(event.relatedTarget)) return;
       hide();
     };
