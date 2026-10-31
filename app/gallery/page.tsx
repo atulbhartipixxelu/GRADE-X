@@ -1,7 +1,7 @@
-import Link from "next/link";
+import { CtaBanner } from "@/components/home/CtaBanner";
+import { GalleryBanner } from "@/components/gallery/GalleryBanner";
 import { GalleryBoard } from "@/components/gallery/GalleryBoard";
 import { InnerMotion } from "@/components/inner/InnerMotion";
-import { Button } from "@/components/ui/Button";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
@@ -13,26 +13,24 @@ export const metadata = pageMeta(
 export default function GalleryPage() {
   return (
     <InnerMotion>
-      <section className="gx-gal">
-        <div className="gx-gal-top">
-          <p className="gx-inner-crumbs">
-            <Link href="/">Home</Link>
-            {" / "}
-            <span>Gallery</span>
-          </p>
-          <p className="gx-gal-eyebrow">Work gallery</p>
-          <div className="gx-gal-intro">
-            <h1>Gallery</h1>
-            <p>Before-and-after photography supplied with every Grade X job.</p>
-          </div>
-        </div>
+      <div className="gx-hero-stack">
+        <GalleryBanner />
+      </div>
 
-        <GalleryBoard />
-
-        <div className="gx-gal-foot" data-rise>
-          <Button href="/contact">Request a quote</Button>
+      <section className="gx-gal" aria-labelledby="gx-gal-heading">
+        <div className="gx-gal-wrap">
+          <header className="gx-gal-top" data-aos="fade-up">
+            <p className="gx-gal-eyebrow">Work gallery</p>
+            <div className="gx-gal-intro">
+              <h2 id="gx-gal-heading">Gallery</h2>
+              <p>Before-and-after photography supplied with every Grade X job.</p>
+            </div>
+          </header>
+          <GalleryBoard />
         </div>
       </section>
+
+      <CtaBanner />
     </InnerMotion>
   );
 }

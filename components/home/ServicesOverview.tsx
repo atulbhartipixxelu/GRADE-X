@@ -16,7 +16,9 @@ import {
   Fan,
   Flame,
   Layers,
+  Minus,
   Moon,
+  Plus,
   Puzzle,
   ShieldCheck,
   ShowerHead,
@@ -168,7 +170,7 @@ export function ServicesOverview() {
 
             <div className="gx-reel-top">
               <div className="gx-reel-kicker">
-                <Kicker>Services</Kicker>
+                <Kicker className="text-white">Services</Kicker>
                 <Link href="/services" className="gx-reel-all">
                   All 21
                 </Link>
@@ -194,13 +196,30 @@ export function ServicesOverview() {
                         const Icon = serviceIcons[item.slug] ?? Sparkles;
                         return (
                           <article key={`${copy}-${item.slug}`} className="gx-reel-chip">
-                            <i className="gx-reel-ico" aria-hidden>
-                              <Icon strokeWidth={1.75} />
-                            </i>
-                            <strong>{item.name}</strong>
-                            <p>{item.excerpt}</p>
+                            <span className="gx-reel-flip">
+                              <span className="gx-reel-face gx-reel-front">
+                                <i className="gx-reel-ico" aria-hidden>
+                                  <Icon strokeWidth={1.7} />
+                                </i>
+                                <strong>{item.name}</strong>
+                                <p>{item.excerpt}</p>
+                                <em className="gx-reel-mark" aria-hidden>
+                                  <Plus strokeWidth={2.2} />
+                                </em>
+                              </span>
+                              <span className="gx-reel-face gx-reel-back">
+                                <i className="gx-reel-ico" aria-hidden>
+                                  <Icon strokeWidth={1.7} />
+                                </i>
+                                <strong>{item.name}</strong>
+                                <p>{item.excerpt}</p>
+                                <em className="gx-reel-mark" aria-hidden>
+                                  <Minus strokeWidth={2.2} />
+                                </em>
+                              </span>
+                            </span>
                             <Link href={`/services/${item.slug}`} tabIndex={copy === 0 ? 0 : -1}>
-                              View
+                              View {item.name}
                             </Link>
                           </article>
                         );

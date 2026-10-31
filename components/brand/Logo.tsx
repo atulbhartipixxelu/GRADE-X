@@ -5,15 +5,17 @@ export function BrandLockup({
   className = "",
   priority = false,
   sizes = "200px",
+  tone = "navy",
 }: {
   className?: string;
   priority?: boolean;
   sizes?: string;
+  tone?: "navy" | "light";
 }) {
   return (
     <span className={`gx-brand ${className}`}>
       <Image
-        src="/brand/gradex-lockup-light.png"
+        src={tone === "light" ? "/brand/gradex-lockup-light.png" : "/brand/gradex-lockup-navy.png"}
         alt=""
         width={603}
         height={206}
@@ -30,10 +32,12 @@ export function Logo({
   href = "/",
   className = "",
   variant = "wordmark",
+  tone = "navy",
 }: {
   href?: string;
   className?: string;
   variant?: "wordmark" | "lockup";
+  tone?: "navy" | "light";
 }) {
   return (
     <Link
@@ -43,7 +47,7 @@ export function Logo({
       aria-label="Grade X Commercial Solutions home"
     >
       {variant === "lockup" ? (
-        <BrandLockup className="gx-brand--nav" priority sizes="280px" />
+        <BrandLockup className="gx-brand--nav" priority sizes="280px" tone={tone} />
       ) : (
         <>
           <span className="gx-logo-mark relative size-[2.85rem] shrink-0 overflow-hidden sm:size-[3.1rem]">

@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { HeroScene } from "@/components/3d/HeroScene";
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { InnerMotion } from "@/components/inner/InnerMotion";
 import { ArchLine } from "@/components/technology/ArchLine";
 import { TechBanner } from "@/components/technology/TechBanner";
@@ -20,6 +20,13 @@ const passTicks = [
   "Duct floor drive",
   "Live interior feed",
   "Stainless tracks",
+];
+
+const facts = [
+  { value: "Stainless", label: "Tracked crawler chassis" },
+  { value: "Twin turret", label: "Dual-hose high-pressure jets" },
+  { value: "Live camera", label: "LED interior confirmation" },
+  { value: "Only in WA", label: "This class of robotic platform" },
 ];
 
 const specs = [
@@ -44,22 +51,65 @@ const specs = [
 export default function TechnologyPage() {
   return (
     <InnerMotion>
-      <TechBanner />
+      <div className="gx-hero-stack">
+        <TechBanner />
+      </div>
+
+      <section className="gx-about-facts" aria-label="Platform at a glance">
+        <div className="gx-about-facts-wrap">
+          {facts.map((item, i) => (
+            <article key={item.value} data-aos="fade-up" data-aos-delay={String(i * 80)}>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <strong>{item.value}</strong>
+              <p>{item.label}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <TechBay />
 
-      <section className="gx-tech-pass" aria-label="Live interior pass">
-        <div className="gx-tech-pass-shell">
-          <aside className="gx-tech-pass-rail">
-            <p className="gx-tech-pass-live">
-              <i />
-              Live interior pass
-            </p>
-            <h2>The clean is visible during the work.</h2>
+      <section className="gx-tech-pass" id="live-pass" aria-label="Live interior pass">
+        <div className="gx-tech-pass-wrap">
+          <header className="gx-tech-pass-head" data-aos="fade-up">
+            <div>
+              <p className="gx-tech-pass-live">
+                <i />
+                Live interior pass
+              </p>
+              <h2>The clean is visible during the work.</h2>
+            </div>
             <p>
               The crawler drives the duct floor. Turret jets fire. Camera and LEDs stay on so clients
               see the interior during the clean, not only a hatch photo after it closes.
             </p>
+          </header>
+
+          <div className="gx-tech-pass-board">
+            <figure className="gx-tech-pass-port">
+              <video
+                src="/technology/crawler-scrub.mp4"
+                muted
+                playsInline
+                autoPlay
+                loop
+                preload="metadata"
+                disablePictureInPicture
+                controls={false}
+                aria-label="Forward camera · dual work lights"
+              />
+              <div className="gx-tech-pass-hud">
+                <b>Live</b>
+                <span>Forward camera · dual work lights</span>
+              </div>
+              <div className="gx-tech-pass-veil" aria-hidden />
+              <div className="gx-tech-pass-scan" aria-hidden />
+              <i className="gx-tech-pass-corner" aria-hidden />
+              <i className="gx-tech-pass-corner is-rt" aria-hidden />
+              <i className="gx-tech-pass-corner is-lb" aria-hidden />
+              <i className="gx-tech-pass-corner is-rb" aria-hidden />
+            </figure>
+
             <ol className="gx-tech-pass-channels">
               {passTicks.map((tick, i) => (
                 <li key={tick} style={{ "--i": i } as CSSProperties}>
@@ -69,29 +119,13 @@ export default function TechnologyPage() {
                 </li>
               ))}
             </ol>
-          </aside>
-
-          <figure className="gx-tech-pass-port">
-            <div className="gx-tech-pass-hud">
-              <b>Live</b>
-              <span>Forward camera · dual work lights</span>
-            </div>
-            <HeroScene mode="tech" />
-            <div className="gx-tech-pass-veil" aria-hidden />
-            <div className="gx-tech-pass-grid" aria-hidden />
-            <div className="gx-tech-pass-cross" aria-hidden />
-            <div className="gx-tech-pass-scan" aria-hidden />
-            <i className="gx-tech-pass-corner" aria-hidden />
-            <i className="gx-tech-pass-corner is-rt" aria-hidden />
-            <i className="gx-tech-pass-corner is-lb" aria-hidden />
-            <i className="gx-tech-pass-corner is-rb" aria-hidden />
-          </figure>
+          </div>
         </div>
       </section>
 
       <section className="gx-tech-arch" aria-label="Platform architecture">
         <div className="gx-tech-arch-wrap">
-          <header className="gx-tech-arch-head">
+          <header className="gx-tech-arch-head" data-aos="fade-up">
             <p className="gx-tech-arch-kicker">Platform</p>
             <h2>Tracks, turret, hoses — the real architecture.</h2>
             <p>
@@ -110,6 +144,8 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
+
+      <CtaBanner />
     </InnerMotion>
   );
 }

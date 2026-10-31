@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { galleryShots } from "@/lib/gallery";
 
@@ -32,7 +33,7 @@ export function GalleryBoard() {
 
   return (
     <>
-      <div className="gx-gal-board">
+      <div className="gx-gal-board" id="gallery-board">
         {galleryShots.map((item, i) => (
           <button
             key={item.src}
@@ -49,6 +50,11 @@ export function GalleryBoard() {
               sizes="(min-width: 900px) 50vw, 100vw"
               className="object-cover"
             />
+            <span className="gx-gal-tile-veil" aria-hidden />
+            <span className="gx-gal-tile-cap">
+              {item.label ? <em>{item.label}</em> : null}
+              <strong>{item.title}</strong>
+            </span>
           </button>
         ))}
       </div>
@@ -58,7 +64,13 @@ export function GalleryBoard() {
           <button type="button" className="gx-gal-lite-x" onClick={() => setOpen(null)}>
             Close
           </button>
-          <p className="gx-gal-lite-name">{shot.title}</p>
+          <div className="gx-gal-lite-meta">
+            <p className="gx-gal-lite-name">{shot.title}</p>
+            <p>{shot.caption}</p>
+            <Link href={shot.serviceHref} onClick={(event) => event.stopPropagation()}>
+              View service
+            </Link>
+          </div>
           <figure onClick={(event) => event.stopPropagation()}>
             <Image src={shot.src} alt={shot.alt} fill sizes="100vw" className="object-contain" />
           </figure>

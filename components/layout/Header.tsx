@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
+import { ServicesMega } from "@/components/layout/ServicesMega";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
@@ -33,6 +35,23 @@ export function Header() {
 
   return (
     <>
+      <div className="gx-topbar">
+        <div className="gx-topbar-inner">
+          <a href={site.phoneHref}>
+            <Phone size={14} strokeWidth={2} />
+            {site.phone}
+          </a>
+          <a href={site.emailHref}>
+            <Mail size={14} strokeWidth={2} />
+            {site.email}
+          </a>
+          <span>
+            <MapPin size={14} strokeWidth={2} />
+            {site.address.full}
+          </span>
+        </div>
+      </div>
+
       <header className="gx-nav">
         <div className="gx-nav-inner">
           <div className="gx-nav-start">
@@ -48,7 +67,10 @@ export function Header() {
 
           <nav className="gx-nav-links" aria-label="Primary">
             {topNav.map((item) => {
-              const active = pathname === item.href;
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+              if (item.href === "/services") {
+                return <ServicesMega key={item.href} active={active} />;
+              }
               return (
                 <Link
                   key={item.href}
@@ -62,18 +84,15 @@ export function Header() {
           </nav>
 
           <div className="gx-nav-end">
-            <a href={site.phoneHref} className="gx-nav-phone hidden lg:inline-flex">
-              {site.phone}
-            </a>
             <Button href="/contact" className="gx-nav-quote hidden sm:inline-flex">
-              Request a quote
+              Contact Us
             </Button>
           </div>
         </div>
       </header>
 
       <div
-        className={`fixed inset-0 z-40 bg-navy transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+        className={`fixed inset-0 z-40 bg-[#0c0f16] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
           open ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -84,7 +103,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   onClick={() => setMenuPath(null)}
-                  className="font-display block py-1 text-5xl tracking-tight text-ivory sm:text-7xl"
+                  className="font-display block py-1 text-5xl tracking-tight text-white sm:text-7xl"
                 >
                   {item.label}
                 </Link>
@@ -92,9 +111,9 @@ export function Header() {
             ))}
           </ul>
           <div className="mt-10">
-            <p className="text-sm text-mist">{site.email}</p>
+            <p className="text-sm text-white/70">{site.email}</p>
           </div>
-          <a href={site.phoneHref} className="mt-2 text-sm text-ivory">
+          <a href={site.phoneHref} className="mt-2 text-sm text-white">
             {site.phone}
           </a>
         </div>

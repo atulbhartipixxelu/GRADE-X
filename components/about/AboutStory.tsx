@@ -1,15 +1,18 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
-import { InnerParticles } from "@/components/inner/InnerParticles";
 import { site } from "@/lib/site";
+
+const facts = [
+  { value: "Only in WA", label: "Robotic kitchen exhaust technology" },
+  { value: "Digital", label: "Grease thickness evidence on every job" },
+  { value: "Live video", label: "Camera confirmation during the clean" },
+  { value: "Compliance", label: "Documented records for facility files" },
+];
 
 const slides = [
   {
     n: "01",
     label: "Only in WA",
-    video: "/robot/crawler.mp4",
+    video: "/robot/orbit.mp4",
     alt: "Grade X crawler driving through an exhaust run",
     text: "Grade X is currently the only company in WA operating robotic kitchen exhaust cleaning technology, a genuine, verifiable point of differentiation in a category most competitors service manually. For clients that means safer access, verifiable results, and less disruption.",
   },
@@ -38,174 +41,88 @@ function splitCopy(text: string) {
 }
 
 export function AboutStory() {
-  const root = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const section = root.current;
-    if (!section) return;
-    const scroller = section.querySelector<HTMLElement>("[data-scroller]");
-    const stage = section.querySelector<HTMLElement>("[data-stage]");
-    if (!scroller || !stage) return;
-
-    const cards = [...stage.querySelectorAll<HTMLElement>("[data-slide]")];
-    const ticks = [...stage.querySelectorAll<HTMLElement>("[data-tick]")];
-    const videos = cards.map((card) => card.querySelector("video"));
-    let current = -1;
-    let shown = 0;
-    let target = 0;
-    let raf = 0;
-
-    const playSlide = (index: number) => {
-      videos.forEach((el, i) => {
-        if (!el) return;
-        el.muted = true;
-        el.playsInline = true;
-        if (i === index) {
-          el.loop = true;
-          void el.play().catch(() => undefined);
-        } else {
-          el.pause();
-        }
-      });
-    };
-
-    const mark = (index: number) => {
-      if (index === current) return;
-      current = index;
-      cards.forEach((card, i) => card.classList.toggle("is-on", i === index));
-      ticks.forEach((tick, i) => tick.classList.toggle("is-on", i === index));
-      playSlide(index);
-    };
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      videos.forEach((el) => {
-        if (!el) return;
-        el.muted = true;
-        el.loop = true;
-        void el.play().catch(() => undefined);
-      });
-      return;
-    }
-
-    const readTarget = () => {
-      const max = Math.max(1, scroller.offsetHeight - stage.offsetHeight);
-      const p = Math.min(1, Math.max(0, -scroller.getBoundingClientRect().top / max));
-      target = p * (cards.length - 1);
-    };
-
-    const tick = () => {
-      raf = requestAnimationFrame(tick);
-      readTarget();
-      shown += (target - shown) * 0.16;
-      if (Math.abs(target - shown) < 0.0008) shown = target;
-      stage.style.setProperty("--slide", shown.toFixed(4));
-      mark(Math.min(cards.length - 1, Math.round(shown)));
-    };
-
-    mark(0);
-    readTarget();
-    shown = target;
-    stage.style.setProperty("--slide", String(shown));
-    raf = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(raf);
-      videos.forEach((el) => el?.pause());
-    };
-  }, []);
-
   return (
-    <section ref={root} className="gx-about-deck" aria-label="The robotic technology story">
-      <div className="gx-about-deck-scroll" data-scroller>
-        <div className="gx-about-deck-stage" data-stage>
-          <InnerParticles className="gx-about-deck-particles" />
+    <>
+      <section className="gx-about-facts" aria-label="Grade X at a glance">
+        <div className="gx-about-facts-wrap">
+          {facts.map((item, i) => (
+            <article key={item.value} data-aos="fade-up" data-aos-delay={String(i * 80)}>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <strong>{item.value}</strong>
+              <p>{item.label}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
-          <header className="gx-about-deck-head">
-            <p>About Grade X</p>
-            <h2>
-              <span>
-                <b>The robotic</b>
-              </span>
-              <span>
-                <b>technology story</b>
-              </span>
-            </h2>
+      <section className="gx-about-story" aria-labelledby="gx-about-story-heading">
+        <div className="gx-about-story-wrap">
+          <header className="gx-about-story-head" data-aos="fade-up">
+            <p className="gx-about-story-kicker">About Grade X</p>
+            <h2 id="gx-about-story-heading">The robotic technology story</h2>
           </header>
 
-          <div className="gx-about-deck-viewport">
-            <div className="gx-about-deck-track">
-              {slides.map((item, i) => {
-                const copy = splitCopy(item.text);
-                return (
-                  <article
-                    key={item.n}
-                    className={`gx-about-deck-slide${i === 0 ? " is-on" : ""}`}
-                    data-slide
-                  >
-                    <div className="gx-about-deck-box">
-                      <figure>
-                        <video
-                          src={item.video}
-                          muted
-                          playsInline
-                          loop
-                          preload="auto"
-                          disablePictureInPicture
-                          controls={false}
-                          aria-label={item.alt}
-                        />
-                      </figure>
-                      <div className="gx-about-deck-copy">
-                        <p className="gx-about-deck-kicker">
-                          {item.n} <span>{item.label}</span>
-                        </p>
-                        <h3>{copy.lead}</h3>
-                        {copy.rest ? <p className="gx-about-deck-body">{copy.rest}</p> : null}
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="gx-about-deck-ticks" aria-hidden>
-            {slides.map((item, i) => (
-              <span key={item.n} data-tick className={i === 0 ? "is-on" : ""}>
-                {item.n}
-              </span>
-            ))}
-          </div>
+          {slides.map((item, i) => {
+            const copy = splitCopy(item.text);
+            return (
+              <article
+                key={item.n}
+                className={`gx-about-row${i % 2 ? " is-flip" : ""}`}
+                data-aos={i % 2 ? "fade-left" : "fade-right"}
+              >
+                <figure className="gx-about-row-media">
+                  <video
+                    src={item.video}
+                    muted
+                    playsInline
+                    autoPlay
+                    loop
+                    preload="metadata"
+                    disablePictureInPicture
+                    controls={false}
+                    aria-label={item.alt}
+                  />
+                </figure>
+                <div className="gx-about-row-copy">
+                  <p className="gx-about-row-kicker">
+                    {item.n} <span>{item.label}</span>
+                  </p>
+                  <h3>{copy.lead}</h3>
+                  {copy.rest ? <p>{copy.rest}</p> : null}
+                </div>
+              </article>
+            );
+          })}
         </div>
-      </div>
+      </section>
 
-      <aside className="gx-about-deck-firm" aria-label="Company registration">
-        <div className="gx-about-deck-firm-glow" aria-hidden />
-
-        <div className="gx-about-deck-firm-row">
-          <div>
-            <b>Company</b>
-            <h3>{site.legalName}</h3>
+      <section className="gx-about-firm" aria-label="Company registration">
+        <div className="gx-about-firm-wrap">
+          <header className="gx-about-firm-head" data-aos="fade-up">
+            <p className="gx-about-story-kicker">Company</p>
+            <h2>{site.legalName}</h2>
             <p>{site.tagline}</p>
+            <p>
+              Team and leadership profiles will be published here once supplied by Grade X.
+            </p>
+          </header>
+
+          <div className="gx-about-firm-grid">
+            <article data-aos="fade-up">
+              <span>ABN</span>
+              <strong>{site.abn}</strong>
+            </article>
+            <article data-aos="fade-up" data-aos-delay="80">
+              <span>Base</span>
+              <strong>{site.address.full}</strong>
+            </article>
           </div>
 
-          <p className="gx-about-deck-firm-note">
-            Team and leadership profiles will be published here once supplied by Grade X.
-          </p>
-
-          <Button href="/contact">Request a quote</Button>
+          <div className="gx-about-firm-action" data-aos="fade-up">
+            <Button href="/contact">Request a quote</Button>
+          </div>
         </div>
-
-        <ul className="gx-about-deck-firm-rail">
-          <li>
-            <span>ABN</span>
-            {site.abn}
-          </li>
-          <li>
-            <span>Base</span>
-            {site.address.full}
-          </li>
-        </ul>
-      </aside>
-    </section>
+      </section>
+    </>
   );
 }

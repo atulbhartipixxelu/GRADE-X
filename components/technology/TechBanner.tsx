@@ -1,15 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-
-const stats = [
-  { value: "Stainless", label: "Tracked crawler chassis" },
-  { value: "Twin turret", label: "Dual-hose high-pressure jets" },
-  { value: "Live camera", label: "LED interior confirmation" },
-  { value: "Only in WA", label: "This class of robotic platform" },
-];
-
-const marks = ["Tracks", "Turret", "Hoses", "Camera", "LED"];
+import { Play } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 export function TechBanner() {
   const video = useRef<HTMLVideoElement>(null);
@@ -20,59 +13,61 @@ export function TechBanner() {
     el.muted = true;
     el.defaultMuted = true;
     el.playsInline = true;
-    const play = () => {
+    const start = () => {
       void el.play().catch(() => undefined);
     };
-    el.addEventListener("loadeddata", play);
-    if (el.readyState >= 2) play();
-    return () => {
-      el.removeEventListener("loadeddata", play);
-      el.pause();
-    };
+    if (el.readyState >= 2) start();
+    else el.addEventListener("canplay", start, { once: true });
+    return () => el.removeEventListener("canplay", start);
   }, []);
 
   return (
-    <section className="gx-tech-hero" aria-label="Robotic exhaust cleaning technology">
-      <div className="gx-tech-hero-stage">
+    <section className="gx-hero" aria-label="Robotic exhaust cleaning technology">
+      <div className="gx-hero-media">
         <video
           ref={video}
-          className="gx-tech-hero-video"
-          src="/hero/banner.mp4"
+          src="/technology/crawler-scrub.mp4"
+          autoPlay
           muted
-          playsInline
           loop
-          preload="auto"
+          playsInline
+          preload="metadata"
           disablePictureInPicture
           controls={false}
+          className="gx-hero-video"
         />
-        <div className="gx-tech-hero-veil" aria-hidden />
+        <div className="gx-hero-wash" aria-hidden />
       </div>
 
-      <div className="gx-tech-hero-wrap">
-        <div className="gx-tech-hero-top">
-          <div>
-            <p className="gx-tech-hero-kicker">Technology</p>
-            <h1>Robotic kitchen exhaust cleaning.</h1>
-          </div>
-          <p className="gx-tech-hero-lede">
+      <div className="gx-hero-inner">
+        <div className="gx-hero-copy">
+          <p className="gx-hero-kicker">Technology</p>
+          <h1 className="gx-hero-title">
+            <span>Robotic kitchen</span>
+            <span>exhaust cleaning.</span>
+          </h1>
+          <p className="gx-hero-body">
             Grade X operates a stainless tracked crawler for kitchen exhaust interiors — dual-hose
             high-pressure cleaning, twin turret nozzles, LED lighting and a forward inspection
             camera. Currently the only robotic platform of this kind in WA.
           </p>
+          <ul className="gx-hero-chips">
+            {["Tracks", "Turret", "Hoses", "Camera", "LED"].map((mark) => (
+              <li key={mark}>{mark}</li>
+            ))}
+          </ul>
+          <div className="gx-hero-actions">
+            <Button href="/contact">Request a quote</Button>
+            <a className="gx-hero-play" href="#live-pass">
+              <span className="gx-hero-play-icon">
+                <Play strokeWidth={2} />
+                <i />
+                <i />
+              </span>
+              Live interior pass
+            </a>
+          </div>
         </div>
-        <ul className="gx-tech-hero-marks">
-          {marks.map((mark) => (
-            <li key={mark}>{mark}</li>
-          ))}
-        </ul>
-        <ul className="gx-tech-hero-stats">
-          {stats.map((item) => (
-            <li key={item.value}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

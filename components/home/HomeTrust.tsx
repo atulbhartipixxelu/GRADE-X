@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import type { PointerEvent } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
@@ -19,6 +22,23 @@ const icons: LucideIcon[] = [
   BadgeCheck,
   Sparkles,
 ];
+
+function trackPointer(event: PointerEvent<HTMLAnchorElement>) {
+  const tile = event.currentTarget;
+  const box = tile.getBoundingClientRect();
+  const x = (event.clientX - box.left) / Math.max(1, box.width);
+  const y = (event.clientY - box.top) / Math.max(1, box.height);
+  tile.style.setProperty("--gx-x", `${(x * 100).toFixed(2)}%`);
+  tile.style.setProperty("--gx-y", `${(y * 100).toFixed(2)}%`);
+  tile.style.setProperty("--gx-nx", x.toFixed(3));
+  tile.style.setProperty("--gx-ny", y.toFixed(3));
+}
+
+function clearPointer(event: PointerEvent<HTMLAnchorElement>) {
+  const tile = event.currentTarget;
+  tile.style.setProperty("--gx-nx", "0.5");
+  tile.style.setProperty("--gx-ny", "0.5");
+}
 
 export function HomeTrust() {
   return (
@@ -49,7 +69,13 @@ export function HomeTrust() {
             const Icon = icons[i] ?? Sparkles;
             return (
               <li key={item.title}>
-                <Link href="/compliance" className="gx-htrust-tile">
+                <Link
+                  href="/compliance"
+                  className="gx-htrust-tile"
+                  onPointerMove={trackPointer}
+                  onPointerLeave={clearPointer}
+                >
+                  <i className="gx-htrust-liquid" aria-hidden />
                   <span className="gx-htrust-tile-top">
                     <i className="gx-htrust-ico" aria-hidden>
                       <Icon strokeWidth={1.7} />

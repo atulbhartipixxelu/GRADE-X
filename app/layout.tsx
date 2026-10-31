@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Figtree, Space_Grotesk, JetBrains_Mono, Syne } from "next/font/google";
+import { AosInit } from "@/components/layout/AosInit";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Loader } from "@/components/layout/Loader";
@@ -59,10 +60,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-AU"
-      data-theme="dark"
+      data-theme="light"
       className={`${sans.variable} ${display.variable} ${mono.variable} ${syne.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-navy text-ivory">
+      <body className="flex min-h-full flex-col bg-white text-[#222222]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <AosInit />
         </SmoothScroll>
       </body>
     </html>

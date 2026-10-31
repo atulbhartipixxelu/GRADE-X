@@ -95,8 +95,14 @@ export function ArchLine({ items }: { items: Spec[] }) {
               {String(i + 1).padStart(2, "0")}
             </i>
             <article>
+              <span className="gx-tech-arch-ghost" aria-hidden>
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <h3>{item.t}</h3>
               <p>{item.b}</p>
+              <span className="gx-tech-arch-go" aria-hidden>
+                <i />
+              </span>
             </article>
           </li>
         ))}

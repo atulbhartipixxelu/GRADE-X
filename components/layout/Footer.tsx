@@ -1,127 +1,82 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, type RefObject } from "react";
 import { usePathname } from "next/navigation";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { footerNav, site } from "@/lib/site";
 
 export function Footer() {
   const pathname = usePathname();
-  const video = useRef<HTMLVideoElement>(null);
   if (pathname.startsWith("/admin")) return null;
 
   return (
-    <footer className="gx-foot relative overflow-hidden text-white">
-      <video
-        ref={video}
-        src="/robot/crawler.mp4"
-        poster="/robot/side.jpg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controls={false}
-        className="gx-foot-video"
-        aria-hidden
-      />
-      <div className="gx-foot-overlay" aria-hidden />
-
-      <FooterMedia video={video} />
-
-      <div className="gx-foot-content relative z-10 px-5 pt-20 pb-10 sm:px-8 sm:pt-24">
-        <div className="mx-auto max-w-[1400px]">
-          <Logo variant="lockup" />
-          <p className="mt-6 max-w-xl text-sm leading-7 text-white/80">
-            {site.tagline}
-            <br />
-            Advanced equipment and proven methodology for professional commercial
-            kitchen exhaust cleaning.
+    <footer className="gx-foot">
+      <div className="gx-foot-inner">
+        <div className="gx-foot-brand">
+          <Logo variant="lockup" tone="light" />
+          <p className="gx-foot-tag">{site.tagline}</p>
+          <p>
+            Advanced equipment and proven methodology for professional commercial kitchen exhaust
+            cleaning.
           </p>
         </div>
-        <div className="mx-auto mt-14 grid max-w-[1400px] gap-10 border-t border-white/15 pt-10 sm:grid-cols-4">
-          <div>
-            <p className="text-sm leading-7 text-white/75">
-              {site.legalName}
-              <br />
-              {site.address.full}
-              <br />
-              {site.serviceArea}
-            </p>
-            <p className="mt-4 font-mono text-[11px] text-white/55">ABN {site.abn}</p>
-          </div>
-          <FooterCol items={footerNav.company} />
-          <FooterCol items={footerNav.operations} />
-          <div>
-            <FooterCol items={footerNav.services} />
-            <div className="mt-6 flex gap-4 text-sm">
-              {footerNav.legal.map((item) => (
-                <Link key={item.href} href={item.href} className="text-white/55 hover:text-white">
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
+        <FooterCol title="Company" items={footerNav.company} />
+        <FooterCol title="Operations" items={footerNav.operations} />
+        <div className="gx-foot-contact">
+          <p className="gx-foot-title">Contact</p>
+          <p className="gx-foot-legal">{site.legalName}</p>
+          <ul className="gx-foot-facts">
+            <li>
+              <MapPin strokeWidth={1.7} aria-hidden />
+              <span>{site.address.full}</span>
+            </li>
+            <li>
+              <Phone strokeWidth={1.7} aria-hidden />
+              <a href={site.phoneHref}>{site.phone}</a>
+            </li>
+            <li>
+              <Mail strokeWidth={1.7} aria-hidden />
+              <a href={site.emailHref}>{site.email}</a>
+            </li>
+          </ul>
+          <p className="gx-foot-area">{site.serviceArea}</p>
+          <p className="gx-foot-abn">ABN {site.abn}</p>
         </div>
-        <div className="mx-auto mt-12 flex max-w-[1400px] flex-col gap-2 text-sm text-white/55 sm:flex-row sm:justify-between">
-          <p>
-            <a href={site.phoneHref} className="hover:text-white">
-              {site.phone}
-            </a>
-            {" · "}
-            <a href={site.emailHref} className="hover:text-white">
-              {site.email}
-            </a>
-          </p>
-          <p>
-            © {new Date().getFullYear()} {site.legalName}. All rights reserved.
-          </p>
+      </div>
+      <div className="gx-foot-bar">
+        <p>
+          © {new Date().getFullYear()} {site.legalName}. All rights reserved.
+        </p>
+        <div>
+          {footerNav.legal.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterMedia({ video }: { video: RefObject<HTMLVideoElement | null> }) {
-  useEffect(() => {
-    const el = video.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.pause();
-      return;
-    }
-    el.muted = true;
-    el.defaultMuted = true;
-    el.loop = true;
-    el.playsInline = true;
-    const play = () => {
-      void el.play().catch(() => undefined);
-    };
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) play();
-        else el.pause();
-      },
-      { threshold: 0.12 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [video]);
-  return null;
-}
-
-function FooterCol({ items }: { items: readonly { href: string; label: string }[] }) {
+function FooterCol({
+  title,
+  items,
+}: {
+  title: string;
+  items: readonly { href: string; label: string }[];
+}) {
   return (
-    <ul className="space-y-2">
-      {items.map((item) => (
-        <li key={item.href}>
-          <Link href={item.href} className="text-sm text-white/90 hover:text-gold-2">
-            {item.label}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <p className="gx-foot-title">{title}</p>
+      <ul>
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href}>{item.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

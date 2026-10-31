@@ -1,6 +1,7 @@
 import { InnerMotion } from "@/components/inner/InnerMotion";
 import { AboutBanner } from "@/components/about/AboutBanner";
 import { AboutStory } from "@/components/about/AboutStory";
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
@@ -12,8 +13,11 @@ export const metadata = pageMeta(
 export default function AboutPage() {
   return (
     <InnerMotion>
-      <AboutBanner />
+      <div className="gx-hero-stack">
+        <AboutBanner />
+      </div>
       <AboutStory />
+      <CtaBanner />
     </InnerMotion>
   );
 }

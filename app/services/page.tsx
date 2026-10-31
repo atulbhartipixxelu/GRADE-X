@@ -33,9 +33,11 @@ export default async function ServicesPage() {
 
   return (
     <InnerMotion>
-      <ServicesBanner
-        groups={groups.map((g) => ({ key: g.key, title: g.title, count: g.items.length }))}
-      />
+      <div className="gx-hero-stack">
+        <ServicesBanner
+          groups={groups.map((g) => ({ key: g.key, title: g.title, count: g.items.length }))}
+        />
+      </div>
       <ServicesDeck groups={groups} />
     </InnerMotion>
   );

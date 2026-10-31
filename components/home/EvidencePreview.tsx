@@ -22,6 +22,7 @@ const tiles = [
     t: reportContents[0],
     n: "Supplied with every job",
     mark: "photo",
+    tag: "Photographs",
     icon: Camera,
     image: "/slides/kitchen-hood.jpg",
   },
@@ -29,6 +30,7 @@ const tiles = [
     t: reportContents[1],
     n: "Before and after, objective micron readings",
     mark: "gauge",
+    tag: "Measurement",
     icon: Gauge,
     image: "/slides/duct-interior.jpg",
   },
@@ -36,6 +38,7 @@ const tiles = [
     t: "Live video during the clean",
     n: "During the clean itself",
     mark: "live",
+    tag: "Live video",
     icon: Video,
     image: "/slides/duct-live.jpg",
   },
@@ -43,6 +46,7 @@ const tiles = [
     t: reportContents[2],
     n: "Written service report for facility files",
     mark: "file",
+    tag: "Report",
     icon: FileText,
     image: "/slides/exploded-bench.jpg",
   },
@@ -50,6 +54,7 @@ const tiles = [
     t: reportContents[4],
     n: "Held with the job record",
     mark: "shield",
+    tag: "Compliance",
     icon: ShieldCheck,
     image: "/slides/plant-flange.jpg",
   },
@@ -57,6 +62,7 @@ const tiles = [
     t: reportContents[5],
     n: "Recommendations for future intervals",
     mark: "list",
+    tag: "Recommendations",
     icon: ClipboardList,
     image: "/slides/cylinder-brush.jpg",
   },
@@ -155,18 +161,25 @@ export function EvidencePreview() {
     >
       <div className="gx-evd-stage">
         <header className="gx-evd-head">
-          <div className="gx-evd-copy">
+          <div className="gx-evd-copy" data-aos="fade-right" data-aos-duration="850">
             <Kicker>Digital evidence &amp; reporting</Kicker>
             <h2 id="gx-evd-heading" className="gx-evd-title">
-              <span>What a client receives</span>
+              What a client receives
               <span>after every job.</span>
             </h2>
           </div>
-          <div className="gx-evd-aside">
+          <div
+            className="gx-evd-aside"
+            data-aos="fade-left"
+            data-aos-delay="140"
+            data-aos-duration="850"
+          >
             <p className="gx-evd-body">
-              Objective grease-thickness measurement before and after every clean, live video
-              during the clean, and photographic before/after evidence. This is a genuine
-              service feature, not a generic quality claim.
+              Objective grease-thickness measurement before and after every clean, live
+              video during the clean, and photographic before/after evidence.
+            </p>
+            <p className="gx-evd-body gx-evd-body--sub">
+              This is a genuine service feature, not a generic quality claim.
             </p>
             <div className="gx-evd-meta">
               <p className="gx-evd-count">
@@ -178,7 +191,7 @@ export function EvidencePreview() {
           </div>
         </header>
 
-        <div ref={view} className="gx-evd-view">
+        <div ref={view} className="gx-evd-view" data-aos="fade-up" data-aos-delay="210" data-aos-duration="850">
           <div ref={track} className="gx-evd-track">
             {tiles.map((tile, i) => (
               <article
@@ -189,48 +202,32 @@ export function EvidencePreview() {
                 <div className="gx-evd-media">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img className="gx-evd-bg" src={tile.image} alt="" decoding="async" />
-                  <span className="gx-evd-idx">{pad(i + 1)}</span>
-                  <span className="gx-evd-icon" aria-hidden>
-                    <tile.icon strokeWidth={1.65} />
+                  <b className="gx-evd-ghost" aria-hidden>
+                    {pad(i + 1)}
+                  </b>
+                  <i className="gx-evd-corner" aria-hidden />
+                  <i className="gx-evd-corner is-rt" aria-hidden />
+                  <i className="gx-evd-corner is-lb" aria-hidden />
+                  <i className="gx-evd-corner is-rb" aria-hidden />
+                  <span className="gx-evd-chip">
+                    <tile.icon strokeWidth={1.7} />
+                    {tile.tag}
+                    {tile.mark === "live" ? (
+                      <em className="gx-evd-rec" aria-hidden>
+                        <i /> Rec
+                      </em>
+                    ) : null}
                   </span>
-                  {tile.mark === "live" ? (
-                    <span className="gx-evd-rec" aria-hidden>
-                      <i /> Rec
-                    </span>
-                  ) : null}
-                </div>
-                <div className="gx-evd-info">
-                  <h3 className="gx-evd-name">{tile.t}</h3>
-                  <p className="gx-evd-note">{tile.n}</p>
-                  {tile.mark === "gauge" ? (
-                    <div className="gx-evd-gauge" aria-hidden>
-                      <span>Before</span>
-                      <span className="gx-evd-gauge-track">
-                        <i />
-                      </span>
-                      <span>After</span>
+                  <div className="gx-evd-info">
+                    <span className="gx-evd-idx">{pad(i + 1)}</span>
+                    <div>
+                      <h3 className="gx-evd-name">{tile.t}</h3>
+                      <p className="gx-evd-note">{tile.n}</p>
                     </div>
-                  ) : null}
-                  {tile.mark === "photo" ? (
-                    <span className="gx-evd-frames" aria-hidden>
+                    <em className="gx-evd-go" aria-hidden>
                       <i />
-                      <i />
-                    </span>
-                  ) : null}
-                  {tile.mark === "file" ? (
-                    <span className="gx-evd-sheet" aria-hidden>
-                      <i />
-                      <i />
-                      <i />
-                    </span>
-                  ) : null}
-                  {tile.mark === "list" ? (
-                    <span className="gx-evd-ticks" aria-hidden>
-                      <i />
-                      <i />
-                      <i />
-                    </span>
-                  ) : null}
+                    </em>
+                  </div>
                 </div>
               </article>
             ))}

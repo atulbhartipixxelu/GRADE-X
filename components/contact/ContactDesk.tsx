@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, Globe, Mail, MapPin, Phone, PhoneCall } from "lucide-react";
-import { ContactParticles } from "@/components/contact/ContactParticles";
+import { Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { services as fallbackServices } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -39,12 +38,11 @@ export function ContactDesk() {
 
   return (
     <div className="gx-com">
-      <section className="gx-com-desk" aria-labelledby="gx-com-heading">
-        <ContactParticles />
+      <section className="gx-com-desk" id="quote" aria-labelledby="gx-com-form-heading">
         <div className="gx-com-wrap">
-          <header className="gx-com-head">
+          <header className="gx-com-head" data-aos="fade-up">
             <p className="gx-com-kicker">Contact</p>
-            <h1 id="gx-com-heading">Request a quote</h1>
+            <h2 id="gx-com-form-heading">Quote details</h2>
             <p className="gx-com-lede">
               Service type, site details, and contact information. Service area: Perth metropolitan /
               WA. Emergency response is available — call for urgent issues.
@@ -123,38 +121,43 @@ export function ContactDesk() {
             </form>
 
             <aside className="gx-com-aside">
-              <div className="gx-com-reach">
-                <p className="gx-com-direct">Direct</p>
-                <a className="gx-com-phone" href={site.phoneHref}>
-                  <Phone aria-hidden />
-                  {site.phone}
-                </a>
-                <a className="gx-com-mail" href={site.emailHref}>
+              <a className="gx-com-call" href={site.phoneHref}>
+                <span className="gx-com-call-top">
+                  <span className="gx-com-call-ico" aria-hidden>
+                    <Phone strokeWidth={1.7} />
+                  </span>
+                  <span className="gx-cta-live">
+                    <i /> Direct
+                  </span>
+                </span>
+                <strong>{site.phone}</strong>
+                <em>{site.emergency}.</em>
+                <span className="gx-com-call-mail">
                   <Mail aria-hidden />
                   {site.email}
-                </a>
-              </div>
+                </span>
+              </a>
 
               <ul className="gx-com-facts">
                 <li>
-                  <MapPin aria-hidden />
+                  <b>01</b>
                   <span>Address</span>
-                  {site.address.full}
+                  <strong>{site.address.full}</strong>
                 </li>
                 <li>
-                  <FileText aria-hidden />
+                  <b>02</b>
                   <span>ABN</span>
-                  {site.abn}
+                  <strong>{site.abn}</strong>
                 </li>
                 <li>
-                  <Globe aria-hidden />
+                  <b>03</b>
                   <span>Service area</span>
-                  {site.serviceArea}
+                  <strong>{site.serviceArea}</strong>
                 </li>
                 <li>
-                  <PhoneCall aria-hidden />
+                  <b>04</b>
                   <span>Emergency</span>
-                  {site.emergency}.
+                  <strong>{site.emergency}.</strong>
                 </li>
               </ul>
 
@@ -171,7 +174,8 @@ export function ContactDesk() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {site.address.full}
+                  <span>Base</span>
+                  <strong>{site.address.full}</strong>
                 </a>
               </div>
             </aside>
