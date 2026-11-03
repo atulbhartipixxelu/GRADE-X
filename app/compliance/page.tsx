@@ -1,7 +1,5 @@
 import Link from "next/link";
-import type { LucideIcon } from "lucide-react";
 import {
-  ArrowUpRight,
   BadgeCheck,
   FileCheck,
   HardHat,
@@ -10,23 +8,18 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import { credentials } from "@/lib/content";
+import { isoStandards } from "@/lib/iso";
 import { Button } from "@/components/ui/Button";
+import { IsoBadgeRow } from "@/components/trust/IsoBadgeRow";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
-  "Compliance and WHS",
-  "Insurance, WHS, food-safe methods, SWMS and ISO-focused quality control for Grade X Commercial Solutions — written for facility managers and QSR compliance teams.",
+  "Compliance, Insurance and ISO",
+  "ISO 9001, 14001 and 45001 certificates, insurance, SWMS and WHS information. Download our certificate pack.",
   "/compliance",
 );
 
-const icons: LucideIcon[] = [
-  Shield,
-  FileCheck,
-  UtensilsCrossed,
-  HardHat,
-  BadgeCheck,
-  Sparkles,
-];
+const icons = [Sparkles, Shield, FileCheck, HardHat, UtensilsCrossed, BadgeCheck];
 
 export default function CompliancePage() {
   return (
@@ -38,18 +31,59 @@ export default function CompliancePage() {
           <span>Compliance</span>
         </p>
         <p className="gx-cmp-kicker">Compliance and WHS</p>
-        <h1>Insurance, WHS and certifications</h1>
+        <h1>Compliance you can check.</h1>
         <p>
-          Grade X&apos;s own compliance credentials. Exact certificate wording is supplied by Grade
-          X; this page presents them clearly for facility managers and QSR compliance teams.
+          Every Grade X visit runs under written quality, environmental and safety systems, with
+          insurance current for the work. Download our certificate pack, or ask us to send it to
+          your procurement team.
         </p>
+        <IsoBadgeRow />
+        <p className="gx-cmp-pending">
+          Badge artwork and downloads stay as placeholders until the certificate files arrive. We
+          will not publish a certifier mark without the matching PDF.
+        </p>
+        <Button href="/contact">Request the full pack</Button>
       </header>
+
+      <section className="gx-iso-tiles" aria-label="ISO certificates">
+        {isoStandards.map((item) => (
+          <article key={item.id} id={item.id} className="gx-iso-tile">
+            <p>{item.short}</p>
+            <h2>{item.code}</h2>
+            <p>{item.line}</p>
+            <dl>
+              <div>
+                <dt>Certificate</dt>
+                <dd>{item.number}</dd>
+              </div>
+              <div>
+                <dt>Certifier</dt>
+                <dd>{item.certifier}</dd>
+              </div>
+              <div>
+                <dt>Scope</dt>
+                <dd>{item.scope}</dd>
+              </div>
+              <div>
+                <dt>Expiry</dt>
+                <dd>{item.expiry}</dd>
+              </div>
+            </dl>
+            {"relatedHref" in item && item.relatedHref ? (
+              <p>
+                <Link href={item.relatedHref}>{item.relatedLabel}</Link>
+              </p>
+            ) : null}
+          </article>
+        ))}
+      </section>
 
       <ol className="gx-cmp-grid">
         {credentials.map((item, i) => {
           const Icon = icons[i] ?? Sparkles;
+          const id = "id" in item ? item.id : undefined;
           return (
-            <li key={item.title}>
+            <li key={item.title} id={id}>
               <article className="gx-cmp-card">
                 <span className="gx-cmp-card-top">
                   <i className="gx-cmp-ico" aria-hidden>
@@ -59,26 +93,14 @@ export default function CompliancePage() {
                 </span>
                 <h2>{item.title}</h2>
                 <p>{item.body}</p>
+                <p>
+                  <Link href="/contact">Request this file</Link>
+                </p>
               </article>
             </li>
           );
         })}
       </ol>
-
-      <div className="gx-cmp-note">
-        <div>
-          <h2>ISO-focused standards</h2>
-          <p>
-            Procedures are designed around recognised industry standards: detailed reporting and
-            service records for every job; risk assessments, SWMS and site-specific safety
-            procedures where required; ongoing quality inspections and continuous improvement.
-          </p>
-        </div>
-        <Button href="/contact">
-          Request a quote
-          <ArrowUpRight strokeWidth={1.8} />
-        </Button>
-      </div>
     </main>
   );
 }

@@ -84,8 +84,8 @@ export function Header() {
           </nav>
 
           <div className="gx-nav-end">
-            <Button href="/contact" className="gx-nav-quote hidden sm:inline-flex">
-              Contact Us
+            <Button href="/contact" variant="urgent" className="gx-nav-quote hidden sm:inline-flex">
+              Request a quote
             </Button>
           </div>
         </div>

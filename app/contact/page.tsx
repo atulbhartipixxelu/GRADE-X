@@ -5,8 +5,8 @@ import { InnerMotion } from "@/components/inner/InnerMotion";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
-  "Request a quote",
-  "Request a Grade X quote for robotic kitchen exhaust cleaning and commercial kitchen hygiene in Perth and Western Australia.",
+  "Request a Quote",
+  "Tell us about your site. We reply within [one business day]. Urgent kitchen exhaust help: 0430 360 162.",
   "/contact",
 );
 

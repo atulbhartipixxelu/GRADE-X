@@ -121,7 +121,7 @@ export function TechBay() {
         clear();
         return;
       }
-      wrap.style.height = `${track.offsetHeight - right.clientHeight + row.offsetHeight + window.innerHeight * 0.22}px`;
+      wrap.style.height = `${track.offsetHeight - right.clientHeight + row.offsetHeight}px`;
       live = true;
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(tick);

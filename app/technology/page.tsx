@@ -5,11 +5,12 @@ import { ArchLine } from "@/components/technology/ArchLine";
 import { TechBanner } from "@/components/technology/TechBanner";
 import { TechBay } from "@/components/technology/TechBay";
 import { Button } from "@/components/ui/Button";
+import { CertifiedStrip } from "@/components/trust/CertifiedStrip";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
-  "Robotic exhaust cleaning technology",
-  "Grade X operates a stainless tracked crawler for kitchen exhaust interiors — dual-hose high-pressure cleaning, twin turret nozzles, LED lighting and a forward inspection camera. Currently the only robotic platform of this kind in WA.",
+  "Robotic Exhaust Cleaning Technology",
+  "See how our tracked crawler cleans and inspects kitchen ducts with a live camera, twin jets and before and after readings.",
   "/technology",
 );
 
@@ -26,7 +27,7 @@ const facts = [
   { value: "Stainless", label: "Tracked crawler chassis" },
   { value: "Twin turret", label: "Dual-hose high-pressure jets" },
   { value: "Live camera", label: "LED interior confirmation" },
-  { value: "Only in WA", label: "This class of robotic platform" },
+  { value: "Record", label: "Live view on robotic cleans" },
 ];
 
 const specs = [
@@ -129,18 +130,41 @@ export default function TechnologyPage() {
             <p className="gx-tech-arch-kicker">Platform</p>
             <h2>Tracks, turret, hoses — the real architecture.</h2>
             <p>
-              The third photograph is an exploded build of this platform. The 3D loop separates the
-              same assemblies: track plates, rollers, front camera barrel and the dual-hose turret.
+              Tracks, turret and hoses as they sit on the machine. Specifications below are
+              placeholders until the equipment sheet arrives.
             </p>
           </header>
 
           <ArchLine items={specs} />
 
-          <div className="gx-tech-arch-cta">
-            <Button href="/digital-evidence">Digital evidence system</Button>
-            <Button href="/methodology" variant="ghost">
-              Eight-step methodology
-            </Button>
+          <div className="gx-spec-sheet" data-aos="fade-up">
+            <header className="gx-spec-sheet-head">
+              <p>Equipment sheet</p>
+              <h3>Values to be filled from the manufacturer sheet</h3>
+            </header>
+            <dl className="gx-spec-grid">
+              {[
+                ["Smallest duct size", "[I'll send]"],
+                ["Longest run", "[I'll send]"],
+                ["Pressure and flow", "[I'll send]"],
+                ["Camera and lighting", "[I'll send]"],
+                ["How the live view works", "[I'll send]"],
+                ["Measuring device", "[I'll confirm the gauge we use]"],
+              ].map(([label, value], index) => (
+                <div key={label}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <CertifiedStrip />
+            <div className="gx-tech-arch-cta">
+              <Button href="/digital-evidence">Digital evidence system</Button>
+              <Button href="/methodology" variant="ghost">
+                Eight-step methodology
+              </Button>
+            </div>
           </div>
         </div>
       </section>

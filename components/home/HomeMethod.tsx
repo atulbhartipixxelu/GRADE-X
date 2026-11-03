@@ -8,10 +8,15 @@ export function HomeMethod() {
       <div className="gx-hmethod-wrap">
         <header className="gx-hmethod-head" data-aos="method-head">
           <p className="gx-hmethod-kicker">Our methodology</p>
-          <h2 id="gx-hmethod-heading">How Grade X actually operates</h2>
+          <h2 id="gx-hmethod-heading">
+            <span>Eight steps.</span>
+            <span>
+              Each one <em>checkable.</em>
+            </span>
+          </h2>
           <p>
-            A dedicated numbered sequence — evidence of a repeatable, professional process, not
-            folded into general service descriptions.
+            Inspect, measure, protect, steam-wash, clean, inspect, re-measure, report. Each step
+            has a pass or fail rule on the methodology page.
           </p>
           <Button href="/methodology">View full methodology</Button>
         </header>

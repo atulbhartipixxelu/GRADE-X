@@ -161,33 +161,17 @@ export function EvidencePreview() {
     >
       <div className="gx-evd-stage">
         <header className="gx-evd-head">
-          <div className="gx-evd-copy" data-aos="fade-right" data-aos-duration="850">
-            <Kicker>Digital evidence &amp; reporting</Kicker>
+          <div className="gx-evd-copy" data-aos="fade-up" data-aos-duration="850">
+            <Kicker className="justify-center">Digital evidence &amp; reporting</Kicker>
             <h2 id="gx-evd-heading" className="gx-evd-title">
-              What a client receives
-              <span>after every job.</span>
+              Every clean ends with <em>proof.</em>
             </h2>
-          </div>
-          <div
-            className="gx-evd-aside"
-            data-aos="fade-left"
-            data-aos-delay="140"
-            data-aos-duration="850"
-          >
             <p className="gx-evd-body">
-              Objective grease-thickness measurement before and after every clean, live
-              video during the clean, and photographic before/after evidence.
+              Grease thickness measured in microns before and after. Photos. A service report
+              listing what was cleaned and inspected. All of it filed against your site and ready
+              for your insurer or brand auditor. On robotic cleans you can watch the inside of the
+              duct during the clean.
             </p>
-            <p className="gx-evd-body gx-evd-body--sub">
-              This is a genuine service feature, not a generic quality claim.
-            </p>
-            <div className="gx-evd-meta">
-              <p className="gx-evd-count">
-                <span className="gx-evd-now">01</span>
-                <span>/ {pad(tiles.length)}</span>
-              </p>
-              <Button href="/digital-evidence">Digital evidence</Button>
-            </div>
           </div>
         </header>
 
@@ -232,6 +216,14 @@ export function EvidencePreview() {
               </article>
             ))}
           </div>
+        </div>
+
+        <div className="gx-evd-meta">
+          <p className="gx-evd-count">
+            <span className="gx-evd-now">01</span>
+            <span>/ {pad(tiles.length)}</span>
+          </p>
+          <Button href="/digital-evidence">Digital evidence</Button>
         </div>
 
         <div className="gx-evd-progress" aria-hidden>

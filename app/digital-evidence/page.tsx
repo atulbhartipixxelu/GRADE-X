@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
   "Digital evidence and reporting",
-  "Every Grade X job includes grease-thickness measurements, live video on robotic cleans, before/after photography and a written service report for facility files.",
+  "Every Grade X job includes grease-thickness measurements, photos and a written service report. Live video is on robotic cleans.",
   "/digital-evidence",
 );
 
@@ -16,10 +16,10 @@ export default function EvidencePage() {
       <PageHero
         index="05"
         kicker="Digital evidence & reporting"
-        title="Verification of completed work."
-        body="Objective grease-thickness measurement before and after every clean, live video during the clean itself, and before/after photographic evidence supplied with every job. This is a genuine operational differentiator, presented with the same weight as the robotic technology."
+        title="Every clean ends with proof."
+        body="Grease thickness measured in microns before and after. Photos. A service report listing what was cleaned and inspected. All of it filed against your site and ready for your insurer or brand auditor."
         media="/slides/duct-live.jpg"
-        mediaAlt="Live inspection view inside a kitchen exhaust duct"
+        mediaAlt="Live inspection view inside a kitchen exhaust duct during a robotic clean"
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/digital-evidence", label: "Digital evidence" },
@@ -37,27 +37,32 @@ export default function EvidencePage() {
             ))}
           </ul>
           <p>
-            Equipment includes a digital grease thickness gauge with external probe — such as the
-            Teinnova Grasmeter — producing instant micron readings. Before-and-after measurements
-            verify effectiveness objectively, not by visual assessment.
+            On robotic cleans you also get live footage of the inside of the duct. Live video is
+            part of the robotic service, not a claim for every non-robotic visit.
+          </p>
+          <p>
+            How the pack is delivered and how long we keep records: [to be confirmed]. Measuring
+            device: [gauge to be confirmed].
           </p>
         </div>
-        <div className="gx-inner-card" data-rise data-tilt>
-          <b>Client reporting system</b>
-          <Row k="Before-and-after photos" v="Supplied with every job" />
-          <Row k="Digital grease measurement" v="Before and after, objective micron readings" />
-          <Row k="Live video" v="During the clean itself" />
-          <Row k="Service reports" v="Areas cleaned and inspected" />
-          <Row k="Compliance documentation" v="Held with the job record" />
-          <Row k="Maintenance" v="Recommendations for future intervals" />
+        <div className="gx-inner-card" data-rise>
+          <b>Sample report</b>
           <p>
-            A visual example of a redacted real report can be added here once supplied by Grade X.
+            A redacted sample with client details removed will sit here as a download as soon as it
+            is supplied. Until then this card is the layout only.
           </p>
+          <Row k="Before-and-after photos" v="Supplied with every job" />
+          <Row k="Digital grease measurement" v="Before and after, micron readings" />
+          <Row k="Live video" v="On robotic cleans" />
+          <Row k="Service reports" v="Areas cleaned and inspected" />
+          <Row k="Recommendations" v="Next interval, on the job record" />
         </div>
       </section>
       <section className="gx-inner-wrap pt-0">
         <div className="gx-inner-cta" data-rise>
-          <Button href="/contact">Request a quote</Button>
+          <Button href="/contact" variant="urgent">
+            Request a quote
+          </Button>
           <Button href="/gallery" variant="ghost">
             Work gallery
           </Button>

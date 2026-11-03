@@ -34,7 +34,7 @@ const items = [
   {
     n: "07",
     title: "Robotic kitchen exhaust",
-    body: "Grade X is currently the only company in WA operating robotic kitchen exhaust cleaning technology.",
+    body: "Western Australia's robotic kitchen exhaust cleaning specialists.",
     Icon: Bot,
   },
 ];
@@ -48,7 +48,7 @@ export function CredentialsSlider() {
             <p className="gx-creds-kicker">Compliance &amp; WHS</p>
             <h2 id="gx-creds-heading">Credentials that sit on the job file</h2>
             <p>
-              Insurance, food-safe methods, SWMS and ISO-focused quality control — held on file and
+              Insurance, food-safe methods, SWMS and ISO 9001, 14001 and 45001 — held on file and
               supplied to facility managers on request.
             </p>
           </div>

@@ -6,7 +6,7 @@ import type { PointerEvent } from "react";
 type Props = {
   href?: string;
   children: React.ReactNode;
-  variant?: "gold" | "ghost" | "line";
+  variant?: "gold" | "ghost" | "line" | "urgent";
   className?: string;
   type?: "button" | "submit";
   disabled?: boolean;

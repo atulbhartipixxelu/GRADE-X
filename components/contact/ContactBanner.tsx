@@ -44,12 +44,12 @@ export function ContactBanner() {
         <div className="gx-hero-copy">
           <p className="gx-hero-kicker">Contact</p>
           <h1 className="gx-hero-title">
-            <span>Request a</span>
-            <span>quote.</span>
+            <span>Tell us about</span>
+            <span>your site.</span>
           </h1>
           <p className="gx-hero-body">
-            Service type, site details, and contact information. Service area: Perth metropolitan /
-            WA. Emergency response is available — call for urgent issues.
+            Let us know what you need, how many sites and your timing. We&apos;ll reply within [one
+            business day]. If it&apos;s urgent, call {site.phone}.
           </p>
           <div className="gx-hero-actions">
             <Button href="#quote">Quote details</Button>

@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/digital-evidence",
     "/gallery",
     "/compliance",
-    "/case-studies",
     "/service-area",
     "/faq",
     "/contact",

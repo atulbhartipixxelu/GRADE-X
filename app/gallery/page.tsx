@@ -21,10 +21,14 @@ export default function GalleryPage() {
         <div className="gx-gal-wrap">
           <header className="gx-gal-top" data-aos="fade-up">
             <p className="gx-gal-eyebrow">Work gallery</p>
-            <div className="gx-gal-intro">
-              <h2 id="gx-gal-heading">Gallery</h2>
-              <p>Before-and-after photography supplied with every Grade X job.</p>
-            </div>
+            <h2 id="gx-gal-heading">
+              Every job has <em>photographs.</em>
+            </h2>
+            <p>
+              Before-and-after photography supplied with every Grade X job. Exhaust and canopy
+              pairs will be added as those shots are supplied. Captions use the service and type
+              of site. No client names.
+            </p>
           </header>
           <GalleryBoard />
         </div>

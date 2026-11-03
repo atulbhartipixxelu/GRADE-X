@@ -28,9 +28,9 @@ export function InspectPlay() {
           <span>cleaning technology.</span>
         </h2>
         <p className="gx-play-body">
-          Grade X is currently the only company in WA operating robotic kitchen exhaust
-          cleaning technology. The scene shows the process inside a duct: a camera and
-          scanning element moving through the exhaust system.
+          Western Australia&apos;s robotic kitchen exhaust cleaning specialists. The scene shows
+          the process inside a duct: a camera and scanning element moving through the exhaust
+          system.
         </p>
         <ol className="gx-play-reads">
           {reads.map((row) => (

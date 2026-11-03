@@ -3,6 +3,7 @@ import { store } from "@/lib/store";
 import { InnerMotion } from "@/components/inner/InnerMotion";
 import { ServicesBanner } from "@/components/services/ServicesBanner";
 import { ServicesDeck } from "@/components/services/ServicesDeck";
+import { CertifiedStrip } from "@/components/trust/CertifiedStrip";
 import { pageMeta } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -38,6 +39,7 @@ export default async function ServicesPage() {
           groups={groups.map((g) => ({ key: g.key, title: g.title, count: g.items.length }))}
         />
       </div>
+      <CertifiedStrip />
       <ServicesDeck groups={groups} />
     </InnerMotion>
   );

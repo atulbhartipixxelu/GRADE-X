@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/brand/Logo";
+import { isoStandards } from "@/lib/iso";
 import { footerNav, site } from "@/lib/site";
+
+const rail = [...footerNav.company, ...footerNav.operations, ...footerNav.services];
 
 export function Footer() {
   const pathname = usePathname();
@@ -14,36 +17,56 @@ export function Footer() {
     <footer className="gx-foot">
       <div className="gx-foot-inner">
         <div className="gx-foot-brand">
-          <Logo variant="lockup" tone="light" />
+          <Logo variant="lockup" tone="navy" />
           <p className="gx-foot-tag">{site.tagline}</p>
           <p>
-            Advanced equipment and proven methodology for professional commercial kitchen exhaust
-            cleaning.
+            Western Australia&apos;s robotic kitchen exhaust cleaning specialists. Robotic cleaning,
+            digital grease readings and photo evidence on every job.
           </p>
         </div>
-        <FooterCol title="Company" items={footerNav.company} />
-        <FooterCol title="Operations" items={footerNav.operations} />
-        <div className="gx-foot-contact">
-          <p className="gx-foot-title">Contact</p>
-          <p className="gx-foot-legal">{site.legalName}</p>
-          <ul className="gx-foot-facts">
-            <li>
-              <MapPin strokeWidth={1.7} aria-hidden />
-              <span>{site.address.full}</span>
-            </li>
-            <li>
-              <Phone strokeWidth={1.7} aria-hidden />
-              <a href={site.phoneHref}>{site.phone}</a>
-            </li>
-            <li>
-              <Mail strokeWidth={1.7} aria-hidden />
-              <a href={site.emailHref}>{site.email}</a>
-            </li>
-          </ul>
+
+        <div className="gx-foot-call">
+          <p className="gx-foot-label">Phone</p>
+          <a className="gx-foot-phone" href={site.phoneHref}>
+            {site.phone}
+          </a>
           <p className="gx-foot-area">{site.serviceArea}</p>
-          <p className="gx-foot-abn">ABN {site.abn}</p>
+          <Button href="/contact" variant="urgent">
+            Request a quote
+          </Button>
+        </div>
+
+        <div className="gx-foot-where">
+          <p className="gx-foot-label">Base</p>
+          <p className="gx-foot-legal">{site.legalName}</p>
+          <p>{site.address.full}</p>
+          <a href={site.emailHref}>{site.email}</a>
         </div>
       </div>
+
+      <nav className="gx-foot-rail" aria-label="Footer">
+        {rail.map((item) => (
+          <Link key={item.href} href={item.href}>
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="gx-foot-meta">
+        <ul className="gx-foot-iso">
+          {isoStandards.map((item) => (
+            <li key={item.id}>
+              <Link href={item.href} className="gx-iso-stamp" aria-label={item.alt}>
+                <small>ISO</small>
+                <strong>{item.code.replace("ISO ", "")}</strong>
+                <span>{item.short}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="gx-foot-abn">ABN {site.abn}</p>
+      </div>
+
       <div className="gx-foot-bar">
         <p>
           © {new Date().getFullYear()} {site.legalName}. All rights reserved.
@@ -57,26 +80,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({
-  title,
-  items,
-}: {
-  title: string;
-  items: readonly { href: string; label: string }[];
-}) {
-  return (
-    <div>
-      <p className="gx-foot-title">{title}</p>
-      <ul>
-        {items.map((item) => (
-          <li key={item.href}>
-            <Link href={item.href}>{item.label}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

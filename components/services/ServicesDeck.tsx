@@ -98,7 +98,7 @@ export function ServicesDeck({ groups }: { groups: ServiceGroup[] }) {
                       <em>{s.excerpt}</em>
                     </span>
                     <span className="gx-svc-line-go">
-                      View
+                      View {s.name}
                       <i />
                     </span>
                   </Link>

@@ -47,18 +47,21 @@ export function AboutBanner() {
             <span>not a generalist.</span>
           </h1>
           <p className="gx-hero-body">
-            Grade X is currently the only company in WA operating robotic kitchen exhaust cleaning
-            technology.
+            Grade X is here to make commercial kitchen exhaust systems measurably safer, and to make
+            that easy to prove. We use robotic access, digital grease measurement and written
+            methods, so operators, franchisors and insurers can see the result for themselves.
           </p>
           <div className="gx-hero-actions">
-            <Button href="/contact">Request a quote</Button>
+            <Button href="/contact" variant="urgent">
+              Request a quote
+            </Button>
             <a className="gx-hero-play" href="/technology">
               <span className="gx-hero-play-icon">
                 <Play strokeWidth={2} />
                 <i />
                 <i />
               </span>
-              Inspect the crawler
+              See the robot at work
             </a>
           </div>
         </div>

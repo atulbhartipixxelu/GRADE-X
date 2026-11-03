@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { services as fallbackServices, type Service } from "@/lib/content";
+import { replyWindow } from "@/lib/iso";
 import { site } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
+import { SelectMenu } from "@/components/ui/SelectMenu";
 
 const urgencies = ["Planned programme", "This month", "Urgent / emergency"];
 
@@ -15,14 +17,24 @@ export function QuoteForm({
   options?: Service[];
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [name, setName] = useState("");
+  const [service, setService] = useState(preset || "");
+  const [urgency, setUrgency] = useState("Planned programme");
   const [error, setError] = useState("");
+  const serviceOptions = (options ?? fallbackServices).map((item) => ({
+    value: item.name,
+    label: item.name,
+  }));
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
     setError("");
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const payload = new FormData(form);
+    payload.delete("photo");
+    payload.delete("privacy");
+    const data = Object.fromEntries(payload.entries());
     const res = await fetch("/api/quotes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -35,74 +47,98 @@ export function QuoteForm({
       return;
     }
     form.reset();
+    setName("");
+    setService(preset || "");
+    setUrgency("Planned programme");
     setStatus("ok");
   }
 
-  const field =
-    "w-full border border-gold/20 bg-surface px-4 py-3 text-sm text-ivory outline-none placeholder:text-mist/50 focus:border-gold";
+  if (status === "ok") {
+    return (
+      <p className="gx-quote-ok">
+        Thanks{name ? `, ${name}` : ""}. We&apos;ve got your request and someone from Grade X will be
+        in touch by {replyWindow}. If it&apos;s urgent, call {site.phone}. You can email photos to{" "}
+        {site.email}.
+      </p>
+    );
+  }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-xs tracking-[0.16em] text-mist uppercase">
-          Name
-          <input required name="name" className={`${field} mt-2`} />
+    <form onSubmit={onSubmit} className="gx-quote">
+      <div className="gx-quote-grid">
+        <label>
+          Name <abbr title="required">*</abbr>
+          <input
+            required
+            name="name"
+            autoComplete="name"
+            onChange={(event) => setName(event.target.value)}
+          />
         </label>
-        <label className="block text-xs tracking-[0.16em] text-mist uppercase">
+        <label>
           Company / site
-          <input name="company" className={`${field} mt-2`} />
+          <input name="company" autoComplete="organization" />
         </label>
-        <label className="block text-xs tracking-[0.16em] text-mist uppercase">
-          Email
-          <input required type="email" name="email" className={`${field} mt-2`} />
+        <label>
+          Email <abbr title="required">*</abbr>
+          <input required type="email" name="email" autoComplete="email" />
         </label>
-        <label className="block text-xs tracking-[0.16em] text-mist uppercase">
-          Phone
-          <input required name="phone" className={`${field} mt-2`} />
+        <label>
+          Phone <abbr title="required">*</abbr>
+          <input required name="phone" type="tel" autoComplete="tel" />
         </label>
-        <label className="block text-xs tracking-[0.16em] text-mist uppercase">
-          Suburb / location
-          <input required name="suburb" placeholder="Perth metro" className={`${field} mt-2`} />
+        <label>
+          Suburb / location <abbr title="required">*</abbr>
+          <input required name="suburb" placeholder="Perth metro" />
         </label>
-        <label className="block text-xs tracking-[0.16em] text-mist uppercase">
+        <label>
           Number of sites
-          <input name="sites" placeholder="1" className={`${field} mt-2`} />
+          <input name="sites" placeholder="1" />
+        </label>
+        <label>
+          Service type <abbr title="required">*</abbr>
+          <SelectMenu
+            name="service"
+            value={service}
+            required
+            placeholder="Select a service"
+            options={serviceOptions}
+            onChange={setService}
+          />
+        </label>
+        <label>
+          Timing
+          <SelectMenu
+            name="urgency"
+            value={urgency}
+            options={urgencies.map((item) => ({ value: item, label: item }))}
+            onChange={setUrgency}
+          />
         </label>
       </div>
-      <label className="block text-xs tracking-[0.16em] text-mist uppercase">
-        Service type
-        <select name="service" defaultValue={preset || ""} className={`${field} mt-2`} required>
-          <option value="" disabled>
-            Select a service
-          </option>
-          {(options ?? fallbackServices).map((s) => (
-            <option key={s.slug} value={s.name}>
-              {s.name}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="block text-xs tracking-[0.16em] text-mist uppercase">
-        Timing
-        <select name="urgency" className={`${field} mt-2`} defaultValue="Planned programme">
-          {urgencies.map((u) => (
-            <option key={u}>{u}</option>
-          ))}
-        </select>
-      </label>
-      <label className="block text-xs tracking-[0.16em] text-mist uppercase">
+      <label>
         Site notes
-        <textarea name="message" rows={5} className={`${field} mt-2`} />
+        <textarea name="message" rows={3} />
       </label>
-      <Button type="submit" disabled={status === "sending"}>
+      <label>
+        Optional photo
+        <input name="photo" type="file" accept="image/*" />
+        <span className="gx-quote-hint">
+          Photos are not stored through this form yet. Email images to {site.email} after you send
+          the request.
+        </span>
+      </label>
+      <label className="gx-quote-consent">
+        <input required type="checkbox" name="privacy" />
+        <span>
+          By sending this form you agree to our <a href="/privacy">Privacy Policy</a>. We only use
+          your details to respond to your request. We reply within {replyWindow}.
+        </span>
+      </label>
+      <Button type="submit" variant="urgent" disabled={status === "sending"}>
         {status === "sending" ? "Sending…" : "Submit quote request"}
       </Button>
-      {status === "ok" ? (
-        <p className="text-sm text-gold">
-          Received. Grade X will respond to this enquiry. For emergencies call {site.phone}.
-        </p>
-      ) : null}
-      {status === "err" ? <p className="text-sm text-red-500">{error}</p> : null}
+      {status === "err" ? <p className="gx-quote-err">{error}</p> : null}
     </form>
   );
 }

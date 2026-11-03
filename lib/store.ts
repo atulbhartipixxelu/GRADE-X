@@ -85,7 +85,7 @@ async function writeJson<T>(file: string, value: T) {
 }
 
 export const store = {
-  services: () => readJson<Service[]>("services.json", services),
+  services: () => Promise.resolve(services),
   faqs: () => readJson<Faq[]>("faqs.json", faqs),
   testimonials: () => readJson<Testimonial[]>("testimonials.json", testimonials),
   caseStudies: () => readJson<CaseStudy[]>("case-studies.json", caseStudies),

@@ -41,25 +41,35 @@ export function ScrollVideoBanner() {
 
       <div className="gx-hero-inner">
         <div className="gx-hero-copy">
-          <p className="gx-hero-kicker">Western Australia&apos;s only robotic kitchen exhaust specialist</p>
-          <h1 className="gx-hero-title">
-            <span>Precision.</span>
-            <span>Technology.</span>
-            <span>Compliance.</span>
+          <p className="gx-hero-kicker">
+            Commercial kitchen exhaust specialists | Perth and Western Australia
+          </p>
+          <h1 className="gx-hero-title gx-hero-title--split">
+            <span>
+              <em>Kitchen exhaust</em>
+            </span>
+            <span className="gx-hero-accent">
+              <em>cleaning, measured</em>
+            </span>
+            <span>
+              <em>and proven.</em>
+            </span>
           </h1>
           <p className="gx-hero-body">
-            Advanced equipment and proven methodology for professional commercial kitchen exhaust
-            cleaning.
+            Robotic cleaning, digital grease readings and photo evidence on every job, so your
+            kitchen is safer and your records stand up to any audit.
           </p>
           <div className="gx-hero-actions">
-            <Button href="/contact">Request a quote</Button>
+            <Button href="/contact" variant="urgent">
+              Request a quote
+            </Button>
             <a className="gx-hero-play" href="/technology">
               <span className="gx-hero-play-icon">
                 <Play strokeWidth={2} />
                 <i />
                 <i />
               </span>
-              Inspect the crawler
+              See the robot at work
             </a>
           </div>
         </div>

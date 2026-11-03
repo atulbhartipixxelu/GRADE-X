@@ -23,6 +23,8 @@ const CARD_SEL = [
   ".gx-tech-arch-track li",
   ".gx-gal-top",
   ".gx-gal-tile",
+  ".gx-svc-block",
+  ".gx-svc-pair",
   ".gx-blog-lead",
   ".gx-blog-card",
   ".gx-foot-inner > *",

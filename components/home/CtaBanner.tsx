@@ -11,15 +11,14 @@ export function CtaBanner() {
         <div className="gx-cta-copy" data-aos="fade-up">
           <p className="gx-cta-kicker">
             <i aria-hidden />
-            Emergency response
+            Emergency
           </p>
           <h2 id="gx-sos-heading" className="gx-cta-title">
-            {site.emergency}
+            Urgent kitchen exhaust problem?
           </h2>
-          <p className="gx-cta-lead">Urgent kitchen exhaust issues.</p>
+          <p className="gx-cta-lead">Call {site.phone}.</p>
           <p className="gx-cta-note">
-            This is a genuine service Grade X offers. Request a quote for planned work, or call for
-            urgent kitchen exhaust issues.
+            We prioritise Perth metro sites. [Hours and target response time.]
           </p>
           <div className="gx-cta-actions">
             <Button href="/contact">Request a quote</Button>

@@ -13,7 +13,7 @@ const specs = [
   {
     n: "01",
     t: "Robotic exhaust cleaning platform",
-    b: "Currently the only company in WA operating this technology.",
+    b: "Western Australia's robotic kitchen exhaust cleaning specialists.",
   },
   {
     n: "02",
@@ -166,17 +166,15 @@ export function TrustStrip() {
 
         <div className="gx-core-inner">
           <div ref={copy} className="gx-core-copy">
-            <Kicker>Core differentiator</Kicker>
+            <Kicker>The robot</Kicker>
             <h2 id="gx-core-heading" className="gx-core-title">
-              <span>Robotic kitchen</span>
-              <span>exhaust cleaning</span>
-              <span>technology.</span>
+              <span>Reach what</span>
+              <span>people can&apos;t.</span>
             </h2>
             <p className="gx-core-body">
-              Grade X is currently the only company in WA operating robotic kitchen exhaust
-              cleaning technology, a genuine, verifiable point of differentiation in a category
-              most competitors service manually. Reference photos of the platform are shown
-              here; a dedicated Technology page covers the system in full.
+              Our stainless tracked crawler drives the length of the duct with twin turret jets and
+              a forward camera, so the inside is cleaned and checked without sending a person in. On
+              robotic cleans you can watch the inside of the duct during the clean.
             </p>
             <Link href="/technology" className="gx-core-link">
               View technology

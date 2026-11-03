@@ -66,8 +66,9 @@ export default async function FaqPage() {
             <p className="gx-faq-foot-kicker">Still deciding</p>
             <h2>Request a quote, or call for urgent kitchen exhaust issues.</h2>
             <p>
-              Emergency response is available across the Perth metro. Perth metropolitan sites are
-              prioritised.
+              Call {site.phone} for urgent kitchen exhaust issues. We prioritise Perth metro sites.
+              Confirm coverage on the{" "}
+              <Link href="/service-area">service area</Link> page.
             </p>
           </div>
           <div className="gx-faq-foot-actions">

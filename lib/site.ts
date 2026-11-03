@@ -18,9 +18,9 @@ export const site = {
   name: "Grade X Commercial Solutions",
   legalName: "Grade X Commercial Solutions Pty Ltd",
   shortName: "Grade X",
-  tagline: "Precision. Technology. Compliance.",
+  tagline: "Kitchen exhaust cleaning, measured and proven.",
   description:
-    "Western Australia's only robotic kitchen exhaust cleaning specialist. Commercial kitchen hygiene, digital grease measurement, and documented compliance for QSR, hospitality, and facility managers.",
+    "Western Australia's robotic kitchen exhaust cleaning specialists. Robotic cleaning, digital grease readings and photo evidence on every job, so your kitchen is safer and your records stand up to any audit.",
   url: resolveSiteUrl(),
   abn: "45 684 073 345",
   address: {
@@ -36,7 +36,7 @@ export const site = {
   phoneHref: "tel:+61430360162",
   emailHref: "mailto:gradex.perth@gmail.com",
   serviceArea: "Perth metropolitan and Western Australia",
-  emergency: "Emergency response available across the Perth metro",
+  emergency: "Urgent kitchen exhaust problem? Call 0430 360 162.",
 } as const;
 
 export const nav = [
@@ -54,7 +54,6 @@ export const nav = [
 export const footerNav = {
   company: [
     { href: "/about", label: "About Grade X" },
-    { href: "/case-studies", label: "Case studies" },
     { href: "/blog", label: "Resources" },
     { href: "/faq", label: "FAQ" },
   ],

@@ -47,9 +47,9 @@ export function TechBanner() {
             <span>exhaust cleaning.</span>
           </h1>
           <p className="gx-hero-body">
-            Grade X operates a stainless tracked crawler for kitchen exhaust interiors — dual-hose
-            high-pressure cleaning, twin turret nozzles, LED lighting and a forward inspection
-            camera. Currently the only robotic platform of this kind in WA.
+            A purpose-built stainless crawler with twin turret jets, dual high-pressure hoses and a
+            forward camera with work lights. It&apos;s built to be serviced and inspected, and it
+            leaves a record.
           </p>
           <ul className="gx-hero-chips">
             {["Tracks", "Turret", "Hoses", "Camera", "LED"].map((mark) => (

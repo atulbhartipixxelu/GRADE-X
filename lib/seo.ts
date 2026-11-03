@@ -52,5 +52,27 @@ export function localBusinessJsonLd() {
     areaServed: ["Perth", "Western Australia"],
     description: site.description,
     priceRange: "$$",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Commercial kitchen services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Kitchen exhaust cleaning",
+            areaServed: "Perth",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Robotic exhaust cleaning",
+            areaServed: "Western Australia",
+          },
+        },
+      ],
+    },
   };
 }

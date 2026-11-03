@@ -35,7 +35,7 @@ export function GalleryBanner() {
                 <i />
                 <i />
               </span>
-              View the work
+              See the photographs
             </a>
           </div>
         </div>

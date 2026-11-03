@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Loader } from "@/components/layout/Loader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { StickyCtas } from "@/components/layout/StickyCtas";
 import { localBusinessJsonLd, pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -44,14 +45,6 @@ export const metadata: Metadata = {
     apple: "/favicon.png",
     shortcut: "/favicon.png",
   },
-  keywords: [
-    "kitchen exhaust cleaning Perth",
-    "robotic exhaust cleaning Western Australia",
-    "commercial kitchen hygiene Perth",
-    "canopy cleaning WA",
-    "grease thickness measurement",
-    "commercial cleaning Perth",
-  ],
   authors: [{ name: site.legalName }],
   robots: { index: true, follow: true },
 };
@@ -63,7 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="light"
       className={`${sans.variable} ${display.variable} ${mono.variable} ${syne.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-white text-[#222222]">
+      <body className="flex min-h-full flex-col bg-white text-[#192B4C]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -75,6 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <StickyCtas />
           <AosInit />
         </SmoothScroll>
       </body>

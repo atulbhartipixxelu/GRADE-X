@@ -16,8 +16,8 @@ const overlayTitle = "Precision.\nTechnology.\nCompliance.";
 
 const steps = [
   {
-    title: "The only robotic\nexhaust cleaner in WA.",
-    body: "Grade X is currently the only company in Western Australia operating robotic kitchen exhaust cleaning technology.",
+    title: "Robotic exhaust\ncleaning in WA.",
+    body: "Western Australia's robotic kitchen exhaust cleaning specialists.",
   },
   {
     title: "A stainless\ntracked crawler.",

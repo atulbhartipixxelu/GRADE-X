@@ -73,7 +73,7 @@ export function Loader() {
   return (
     <div className={`gx-loader ${phase === "fly" ? "is-fly" : ""}`} aria-hidden={phase === "fly"}>
       <div className="gx-loader-veil" />
-      <p className="sr-only">{n} percent loaded</p>
+      <p className="sr-only">Loading</p>
       <div className="gx-loader-stage">
         <div ref={logo} className="gx-loader-logo">
           <BrandLockup className="gx-brand--boot" priority sizes="(max-width: 720px) 70vw, 360px" />
@@ -81,7 +81,6 @@ export function Loader() {
         <div className="gx-loader-meter">
           <span className="gx-loader-bar" style={{ width: `${n}%` }} />
         </div>
-        <p className="gx-loader-count">{String(n).padStart(3, "0")}</p>
       </div>
     </div>
   );

@@ -1,34 +1,35 @@
+import { Hash, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
 const facts = [
-  { value: "Only in WA", label: "Robotic kitchen exhaust technology" },
-  { value: "Digital", label: "Grease thickness evidence on every job" },
-  { value: "Live video", label: "Camera confirmation during the clean" },
-  { value: "Compliance", label: "Documented records for facility files" },
+  { value: "Robot", label: "Gets into places people can't" },
+  { value: "Measured", label: "Grease thickness before and after" },
+  { value: "Recorded", label: "Photos, readings and a report" },
+  { value: "ISO", label: "9001, 14001 and 45001 on record" },
 ];
 
 const slides = [
   {
     n: "01",
-    label: "Only in WA",
+    label: "The robot",
     video: "/robot/orbit.mp4",
     alt: "Grade X crawler driving through an exhaust run",
-    text: "Grade X is currently the only company in WA operating robotic kitchen exhaust cleaning technology, a genuine, verifiable point of differentiation in a category most competitors service manually. For clients that means safer access, verifiable results, and less disruption.",
+    text: "The robot gets into places people can't. Our stainless tracked crawler drives the length of the duct with twin turret jets and a forward camera, so the inside is cleaned and checked without sending a person in.",
   },
   {
     n: "02",
-    label: "Not a generalist",
+    label: "Measured and recorded",
     video: "/robot/platform.mp4",
     alt: "Grade X robotic platform in operation",
-    text: "This is a technology-forward, precision, and compliance-driven business, not a general cleaning company. Across the site, advanced equipment, robotic technology, digital measurement, and professional expertise are the throughline of the brand.",
+    text: "We measure the result and leave a record. Digital grease readings, photos and a service report sit against the site so operators, franchisors and insurers can see the work.",
   },
   {
     n: "03",
-    label: "Who Grade X serves",
+    label: "Who we work for",
     video: "/about/who-serves.mp4",
     alt: "Grade X robotic exhaust cleaning in service",
-    text: "Who Grade X serves: quick-service restaurant (QSR) franchises and multi-site restaurant groups; commercial kitchens in hotels, clubs, and hospitality venues; facility managers responsible for compliance across multiple sites; and property and shopping centre managers requiring general commercial cleaning alongside kitchen-specific services.",
+    text: "Quick-service restaurant groups and franchisees, hotels and clubs, shopping centres, and the facility managers who look after them. General commercial cleaning is something we do for kitchen clients we already look after.",
   },
 ] as const;
 
@@ -98,28 +99,39 @@ export function AboutStory() {
 
       <section className="gx-about-firm" aria-label="Company registration">
         <div className="gx-about-firm-wrap">
-          <header className="gx-about-firm-head" data-aos="fade-up">
-            <p className="gx-about-story-kicker">Company</p>
-            <h2>{site.legalName}</h2>
-            <p>{site.tagline}</p>
-            <p>
-              Team and leadership profiles will be published here once supplied by Grade X.
-            </p>
-          </header>
+          <div className="gx-about-firm-panel">
+            <header className="gx-about-firm-head" data-aos="fade-up">
+              <p className="gx-about-firm-kicker">Company</p>
+              <h2>
+                Grade X Commercial Solutions <em>Pty Ltd</em>
+              </h2>
+              <p className="gx-about-firm-tag">{site.tagline}</p>
+              <p>
+                Western Australia&apos;s robotic kitchen exhaust cleaning specialists. Year started:{" "}
+                [year]. Team profiles and photos: [to be added].
+              </p>
+            </header>
 
-          <div className="gx-about-firm-grid">
-            <article data-aos="fade-up">
-              <span>ABN</span>
-              <strong>{site.abn}</strong>
-            </article>
-            <article data-aos="fade-up" data-aos-delay="80">
-              <span>Base</span>
-              <strong>{site.address.full}</strong>
-            </article>
-          </div>
+            <div className="gx-about-firm-grid">
+              <article data-aos="fade-right">
+                <i aria-hidden>
+                  <Hash strokeWidth={1.8} />
+                </i>
+                <span>ABN</span>
+                <strong>{site.abn}</strong>
+              </article>
+              <article data-aos="fade-left">
+                <i aria-hidden>
+                  <MapPin strokeWidth={1.8} />
+                </i>
+                <span>Base</span>
+                <strong>{site.address.full}</strong>
+              </article>
+            </div>
 
-          <div className="gx-about-firm-action" data-aos="fade-up">
-            <Button href="/contact">Request a quote</Button>
+            <div className="gx-about-firm-action" data-aos="fade-up">
+              <Button href="/contact">Request a quote</Button>
+            </div>
           </div>
         </div>
       </section>

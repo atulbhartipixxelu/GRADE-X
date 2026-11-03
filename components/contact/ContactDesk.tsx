@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { SelectMenu } from "@/components/ui/SelectMenu";
 import { services as fallbackServices } from "@/lib/content";
+import { isoStandards, openingHours, replyWindow } from "@/lib/iso";
 import { site } from "@/lib/site";
 
 const MAP_SRC =
@@ -14,13 +16,18 @@ const urgencies = ["Planned programme", "This month", "Urgent / emergency"];
 export function ContactDesk() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const [error, setError] = useState("");
+  const [service, setService] = useState("");
+  const [urgency, setUrgency] = useState("Planned programme");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
     setError("");
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const payload = new FormData(form);
+    payload.delete("photo");
+    payload.delete("privacy");
+    const data = Object.fromEntries(payload.entries());
     const res = await fetch("/api/quotes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,6 +40,8 @@ export function ContactDesk() {
       return;
     }
     form.reset();
+    setService("");
+    setUrgency("Planned programme");
     setStatus("ok");
   }
 
@@ -42,10 +51,12 @@ export function ContactDesk() {
         <div className="gx-com-wrap">
           <header className="gx-com-head" data-aos="fade-up">
             <p className="gx-com-kicker">Contact</p>
-            <h2 id="gx-com-form-heading">Quote details</h2>
+            <h2 id="gx-com-form-heading">
+              Tell us about <em>your site.</em>
+            </h2>
             <p className="gx-com-lede">
-              Service type, site details, and contact information. Service area: Perth metropolitan /
-              WA. Emergency response is available — call for urgent issues.
+              Let us know what you need, how many sites and your timing. We&apos;ll reply within{" "}
+              {replyWindow}. If it&apos;s urgent, call {site.phone}.
             </p>
           </header>
 
@@ -53,7 +64,7 @@ export function ContactDesk() {
             <form onSubmit={onSubmit} className="gx-com-form">
               <p className="gx-com-form-title">Quote details</p>
               <label className="gx-com-item">
-                <span>Name</span>
+                <span>Name *</span>
                 <input required name="name" autoComplete="name" />
               </label>
               <label className="gx-com-item">
@@ -61,15 +72,15 @@ export function ContactDesk() {
                 <input name="company" autoComplete="organization" />
               </label>
               <label className="gx-com-item">
-                <span>Email</span>
+                <span>Email *</span>
                 <input required name="email" type="email" autoComplete="email" />
               </label>
               <label className="gx-com-item">
-                <span>Phone</span>
+                <span>Phone *</span>
                 <input required name="phone" type="tel" autoComplete="tel" />
               </label>
               <label className="gx-com-item">
-                <span>Suburb / location</span>
+                <span>Suburb / location *</span>
                 <input required name="suburb" placeholder="Perth metro" />
               </label>
               <label className="gx-com-item">
@@ -77,87 +88,103 @@ export function ContactDesk() {
                 <input name="sites" placeholder="1" />
               </label>
               <label className="gx-com-item">
-                <span>Service type</span>
-                <select name="service" defaultValue="" required>
-                  <option value="" disabled>
-                    Select a service
-                  </option>
-                  {fallbackServices.map((s) => (
-                    <option key={s.slug} value={s.name}>
-                      {s.name}
-                    </option>
-                  ))}
-                </select>
+                <span>Service type *</span>
+                <SelectMenu
+                  name="service"
+                  value={service}
+                  required
+                  placeholder="Select a service"
+                  options={fallbackServices.map((item) => ({
+                    value: item.name,
+                    label: item.name,
+                  }))}
+                  onChange={setService}
+                />
               </label>
               <label className="gx-com-item">
                 <span>Timing</span>
-                <select name="urgency" defaultValue="Planned programme">
-                  {urgencies.map((u) => (
-                    <option key={u}>{u}</option>
-                  ))}
-                </select>
+                <SelectMenu
+                  name="urgency"
+                  value={urgency}
+                  options={urgencies.map((item) => ({ value: item, label: item }))}
+                  onChange={setUrgency}
+                />
               </label>
               <label className="gx-com-item gx-com-item--full">
                 <span>Site notes</span>
                 <textarea name="message" rows={4} />
               </label>
+              <label className="gx-com-item gx-com-item--full">
+                <span>Optional photo</span>
+                <input name="photo" type="file" accept="image/*" />
+                <em>Email images to {site.email} after you send this form.</em>
+              </label>
+              <label className="gx-com-item gx-com-item--full gx-com-consent">
+                <input required type="checkbox" name="privacy" />
+                <span>
+                  By sending this form you agree to our <a href="/privacy">Privacy Policy</a>. We
+                  only use your details to respond to your request.
+                </span>
+              </label>
 
               <div className="gx-com-bottom">
                 <p className="gx-com-check">
-                  <a href={site.phoneHref}>{site.phone}</a>
-                  {" — "}
-                  {site.emergency}.
+                  We reply within {replyWindow}. If it&apos;s urgent, call{" "}
+                  <a href={site.phoneHref}>{site.phone}</a>.
                 </p>
-                <Button type="submit" className="gx-com-send" disabled={status === "sending"}>
+                <Button type="submit" variant="urgent" className="gx-com-send" disabled={status === "sending"}>
                   {status === "sending" ? "Sending…" : "Submit quote request"}
                 </Button>
               </div>
               {status === "ok" ? (
                 <p className="gx-com-note gx-com-note--ok">
-                  Received. Grade X will respond to this enquiry. For emergencies call {site.phone}.
+                  Thanks. We&apos;ve got your request and someone from Grade X will be in touch by{" "}
+                  {replyWindow}. If it&apos;s urgent, call {site.phone}.
                 </p>
               ) : null}
               {status === "err" ? <p className="gx-com-note gx-com-note--err">{error}</p> : null}
             </form>
 
             <aside className="gx-com-aside">
-              <a className="gx-com-call" href={site.phoneHref}>
-                <span className="gx-com-call-top">
-                  <span className="gx-com-call-ico" aria-hidden>
-                    <Phone strokeWidth={1.7} />
-                  </span>
-                  <span className="gx-cta-live">
-                    <i /> Direct
-                  </span>
-                </span>
-                <strong>{site.phone}</strong>
-                <em>{site.emergency}.</em>
-                <span className="gx-com-call-mail">
-                  <Mail aria-hidden />
+              <div className="gx-com-call">
+                <p className="gx-com-call-label">Phone</p>
+                <a className="gx-com-phone" href={site.phoneHref}>
+                  {site.phone}
+                </a>
+                <p className="gx-com-call-note">{site.emergency}</p>
+                <a className="gx-com-call-mail" href={site.emailHref}>
                   {site.email}
-                </span>
-              </a>
+                </a>
+              </div>
+
+              <ul className="gx-com-iso">
+                {isoStandards.map((item) => (
+                  <li key={item.id}>
+                    <Link href={item.href} className="gx-iso-stamp" aria-label={item.alt}>
+                      <small>ISO</small>
+                      <strong>{item.code.replace("ISO ", "")}</strong>
+                      <span>{item.short}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
 
               <ul className="gx-com-facts">
                 <li>
-                  <b>01</b>
                   <span>Address</span>
                   <strong>{site.address.full}</strong>
                 </li>
                 <li>
-                  <b>02</b>
-                  <span>ABN</span>
-                  <strong>{site.abn}</strong>
+                  <span>Opening hours</span>
+                  <strong>{openingHours}</strong>
                 </li>
                 <li>
-                  <b>03</b>
                   <span>Service area</span>
                   <strong>{site.serviceArea}</strong>
                 </li>
                 <li>
-                  <b>04</b>
-                  <span>Emergency</span>
-                  <strong>{site.emergency}.</strong>
+                  <span>ABN</span>
+                  <strong>{site.abn}</strong>
                 </li>
               </ul>
 
@@ -174,7 +201,7 @@ export function ContactDesk() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span>Base</span>
+                  <span>Get directions</span>
                   <strong>{site.address.full}</strong>
                 </a>
               </div>

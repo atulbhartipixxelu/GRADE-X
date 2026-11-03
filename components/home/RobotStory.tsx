@@ -12,7 +12,7 @@ const chapters = [
   {
     kicker: "Technology",
     title: "Robotic kitchen exhaust cleaning technology.",
-    body: "Grade X is currently the only company in WA operating robotic kitchen exhaust cleaning technology.",
+    body: "Western Australia's robotic kitchen exhaust cleaning specialists.",
   },
   {
     kicker: "The platform",
