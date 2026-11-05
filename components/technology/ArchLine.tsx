@@ -16,6 +16,7 @@ export function ArchLine({ items }: { items: Spec[] }) {
     if (!line) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 980px)").matches;
     const fill = line.querySelector<HTMLElement>("[data-arch-fill]");
     const bead = line.querySelector<HTMLElement>("[data-arch-bead]");
     const stops = [...line.querySelectorAll<HTMLElement>("[data-arch-stop]")];
@@ -38,6 +39,11 @@ export function ArchLine({ items }: { items: Spec[] }) {
 
       if (fill) gsap.to(fill, { scaleY: 1, ease: "none", scrollTrigger: scrub });
       if (bead) gsap.to(bead, { top: "100%", ease: "none", scrollTrigger: scrub });
+
+      if (mobile) {
+        stops.forEach((stop) => stop.classList.add("is-on"));
+        return;
+      }
 
       stops.forEach((stop) => {
         const left = stop.classList.contains("is-left");

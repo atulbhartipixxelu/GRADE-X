@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Clock, Hash, Map, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SelectMenu } from "@/components/ui/SelectMenu";
 import { services as fallbackServices } from "@/lib/content";
@@ -18,6 +19,7 @@ export function ContactDesk() {
   const [error, setError] = useState("");
   const [service, setService] = useState("");
   const [urgency, setUrgency] = useState("Planned programme");
+  const [photoName, setPhotoName] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,6 +44,7 @@ export function ContactDesk() {
     form.reset();
     setService("");
     setUrgency("Planned programme");
+    setPhotoName("");
     setStatus("ok");
   }
 
@@ -61,7 +64,7 @@ export function ContactDesk() {
           </header>
 
           <div className="gx-com-layout">
-            <form onSubmit={onSubmit} className="gx-com-form">
+            <form onSubmit={onSubmit} className="gx-com-form" data-aos="fade-right">
               <p className="gx-com-form-title">Quote details</p>
               <label className="gx-com-item">
                 <span>Name *</span>
@@ -114,12 +117,21 @@ export function ContactDesk() {
                 <span>Site notes</span>
                 <textarea name="message" rows={4} />
               </label>
-              <label className="gx-com-item gx-com-item--full">
+              <label className="gx-com-item gx-com-item--full gx-com-file">
                 <span>Optional photo</span>
-                <input name="photo" type="file" accept="image/*" />
-                <em>Email images to {site.email} after you send this form.</em>
+                <span className="gx-com-file-row">
+                  <input
+                    name="photo"
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) => setPhotoName(event.target.files?.[0]?.name ?? "")}
+                  />
+                  <em>Choose image</em>
+                  <b>{photoName || "No file chosen"}</b>
+                </span>
+                <i>Email images to {site.email} after you send this form.</i>
               </label>
-              <label className="gx-com-item gx-com-item--full gx-com-consent">
+              <label className="gx-com-consent">
                 <input required type="checkbox" name="privacy" />
                 <span>
                   By sending this form you agree to our <a href="/privacy">Privacy Policy</a>. We
@@ -145,7 +157,7 @@ export function ContactDesk() {
               {status === "err" ? <p className="gx-com-note gx-com-note--err">{error}</p> : null}
             </form>
 
-            <aside className="gx-com-aside">
+            <aside className="gx-com-aside" data-aos="fade-left">
               <div className="gx-com-call">
                 <p className="gx-com-call-label">Phone</p>
                 <a className="gx-com-phone" href={site.phoneHref}>
@@ -169,22 +181,42 @@ export function ContactDesk() {
                 ))}
               </ul>
 
-              <ul className="gx-com-facts">
+              <ul className="gx-com-ledger">
                 <li>
-                  <span>Address</span>
-                  <strong>{site.address.full}</strong>
+                  <i aria-hidden>
+                    <MapPin strokeWidth={1.8} />
+                  </i>
+                  <p>
+                    <b>Address</b>
+                    <strong>{site.address.full}</strong>
+                  </p>
                 </li>
                 <li>
-                  <span>Opening hours</span>
-                  <strong>{openingHours}</strong>
+                  <i aria-hidden>
+                    <Clock strokeWidth={1.8} />
+                  </i>
+                  <p>
+                    <b>Opening hours</b>
+                    <strong>{openingHours}</strong>
+                  </p>
                 </li>
                 <li>
-                  <span>Service area</span>
-                  <strong>{site.serviceArea}</strong>
+                  <i aria-hidden>
+                    <Map strokeWidth={1.8} />
+                  </i>
+                  <p>
+                    <b>Service area</b>
+                    <strong>{site.serviceArea}</strong>
+                  </p>
                 </li>
                 <li>
-                  <span>ABN</span>
-                  <strong>{site.abn}</strong>
+                  <i aria-hidden>
+                    <Hash strokeWidth={1.8} />
+                  </i>
+                  <p>
+                    <b>ABN</b>
+                    <strong>{site.abn}</strong>
+                  </p>
                 </li>
               </ul>
 

@@ -54,14 +54,21 @@ export function Header() {
 
       <header className="gx-nav">
         <div className="gx-nav-inner">
-          <div className="gx-nav-start">
-            <button
-              type="button"
-              onClick={() => setMenuPath(open ? null : pathname)}
-              className="gx-nav-menu lg:hidden"
-            >
-              {open ? "Close" : "Menu"}
-            </button>
+          <button
+            type="button"
+            onClick={() => setMenuPath(open ? null : pathname)}
+            className={`gx-nav-menu${open ? " is-open" : ""}`}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            <span className="gx-nav-toggle" aria-hidden>
+              <i />
+              <i />
+              <i />
+            </span>
+          </button>
+
+          <div className="gx-nav-brand">
             <Logo variant="lockup" />
           </div>
 
@@ -84,38 +91,37 @@ export function Header() {
           </nav>
 
           <div className="gx-nav-end">
-            <Button href="/contact" variant="urgent" className="gx-nav-quote hidden sm:inline-flex">
-              Request a quote
+            <Button href="/contact" variant="urgent" className="gx-nav-quote">
+              <span className="gx-nav-quote-full">Request a quote</span>
+              <span className="gx-nav-quote-short">Quote</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <div
-        className={`fixed inset-0 z-40 bg-[#0c0f16] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-          open ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-        <div className="flex h-full flex-col justify-end px-6 pb-16 sm:px-12">
-          <ul>
-            {topNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMenuPath(null)}
-                  className="font-display block py-1 text-5xl tracking-tight text-white sm:text-7xl"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10">
-            <p className="text-sm text-white/70">{site.email}</p>
-          </div>
-          <a href={site.phoneHref} className="mt-2 text-sm text-white">
-            {site.phone}
-          </a>
+      <div className={`gx-sheet${open ? " is-open" : ""}`} aria-hidden={!open}>
+        <nav className="gx-sheet-nav" aria-label="Mobile">
+          {topNav.map((item, index) => {
+            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuPath(null)}
+                className={`gx-sheet-link${active ? " is-on" : ""}`}
+              >
+                <b>{String(index + 1).padStart(2, "0")}</b>
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+        <div className="gx-sheet-foot">
+          <a href={site.phoneHref}>{site.phone}</a>
+          <a href={site.emailHref}>{site.email}</a>
+          <Button href="/contact" variant="urgent" onClick={() => setMenuPath(null)}>
+            Request a quote
+          </Button>
         </div>
       </div>
     </>

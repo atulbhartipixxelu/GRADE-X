@@ -92,7 +92,6 @@ export function TrustStrip() {
         paused: true,
         defaults: { ease: "power3.out" },
         onStart: () => stageEl.classList.add("is-in"),
-        onReverseComplete: () => stageEl.classList.remove("is-in"),
       });
 
       tl.to(copyEl, { y: 0, autoAlpha: 1, duration: 0.9 }, 0)
@@ -106,18 +105,9 @@ export function TrustStrip() {
 
       ScrollTrigger.create({
         trigger: stageEl,
-        start: "top 78%",
-        end: "bottom 16%",
-        onEnter: () => tl.restart(),
-        onEnterBack: () => tl.restart(),
-        onLeave: () => {
-          stageEl.classList.remove("is-in");
-          tl.pause(0);
-        },
-        onLeaveBack: () => {
-          stageEl.classList.remove("is-in");
-          tl.pause(0);
-        },
+        start: "top 84%",
+        once: true,
+        onEnter: () => tl.play(),
       });
     }, stageEl);
 

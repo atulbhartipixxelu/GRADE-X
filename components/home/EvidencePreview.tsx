@@ -108,49 +108,55 @@ export function EvidencePreview() {
       }
     };
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const mm = gsap.matchMedia();
+
+    mm.add("(max-width: 980px), (prefers-reduced-motion: reduce)", () => {
       root.classList.add("is-static");
       paint(0);
       cards.forEach((card) => card.classList.add("is-on"));
-      return;
-    }
-
-    let trigger: ScrollTrigger | null = null;
-    const ctx = gsap.context(() => {
-      trigger = ScrollTrigger.create({
-        trigger: root,
-        start: "top top",
-        end: () => `+=${travel() + window.innerHeight * 0.85}`,
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.55,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => paint(self.progress),
-        onRefresh: (self) => paint(self.progress),
-      });
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    }, root);
-
-    const jump = (index: number) => {
-      if (!trigger) return;
-      const next = Math.max(0, Math.min(1, index / last));
-      window.scrollTo({
-        top: trigger.start + next * (trigger.end - trigger.start),
-        behavior: "smooth",
-      });
-    };
-
-    const listeners = cards.map((card, i) => {
-      const onClick = () => jump(i);
-      card.addEventListener("click", onClick);
-      return () => card.removeEventListener("click", onClick);
+      return () => root.classList.remove("is-static");
     });
 
-    return () => {
-      listeners.forEach((off) => off());
-      ctx.revert();
-    };
+    mm.add("(min-width: 981px) and (prefers-reduced-motion: no-preference)", () => {
+      let trigger: ScrollTrigger | null = null;
+      const ctx = gsap.context(() => {
+        trigger = ScrollTrigger.create({
+          trigger: root,
+          start: "top top",
+          end: () => `+=${travel() + window.innerHeight * 0.85}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.55,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => paint(self.progress),
+          onRefresh: (self) => paint(self.progress),
+        });
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }, root);
+
+      const jump = (index: number) => {
+        if (!trigger) return;
+        const next = Math.max(0, Math.min(1, index / last));
+        window.scrollTo({
+          top: trigger.start + next * (trigger.end - trigger.start),
+          behavior: "smooth",
+        });
+      };
+
+      const listeners = cards.map((card, i) => {
+        const onClick = () => jump(i);
+        card.addEventListener("click", onClick);
+        return () => card.removeEventListener("click", onClick);
+      });
+
+      return () => {
+        listeners.forEach((off) => off());
+        ctx.revert();
+      };
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (

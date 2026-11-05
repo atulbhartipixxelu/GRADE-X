@@ -91,58 +91,63 @@ export function ServicesOverview() {
 
     const slides = [...stage.querySelectorAll<HTMLElement>("[data-reel-slide]")];
     const dots = [...stage.querySelectorAll<HTMLElement>("[data-reel-dot]")];
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (slides.length < 2) return;
 
-    if (reduce || slides.length < 2) return;
+    slides.forEach((slide) => slide.classList.add("is-live"));
 
-    const last = slides.length - 1;
-    let liveIndex = -1;
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 981px) and (prefers-reduced-motion: no-preference)", () => {
+      const last = slides.length - 1;
+      let liveIndex = -1;
 
-    const setLive = (index: number) => {
-      if (index === liveIndex) return;
-      liveIndex = index;
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("is-live", i === index);
+      const setLive = (index: number) => {
+        if (index === liveIndex) return;
+        liveIndex = index;
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("is-live", i === index);
+        });
+        dots.forEach((dot, i) => dot.classList.toggle("is-on", i === index));
+      };
+
+      const paint = (progress: number) => {
+        slides.forEach((slide, i) => {
+          if (i === 0) {
+            slide.style.transform = "translate3d(0,0,0)";
+            return;
+          }
+          const start = (i - 1) / last;
+          const end = i / last;
+          const t = gsap.utils.clamp(0, 1, (progress - start) / (end - start));
+          slide.style.transform = `translate3d(0, ${(1 - t) * 100}%, 0)`;
+        });
+        setLive(Math.min(last, Math.round(progress * last)));
+      };
+
+      const trigger = ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: `+=${last * 100}%`,
+        pin: stage,
+        pinSpacing: true,
+        scrub: 0.2,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => paint(self.progress),
+        onRefresh: (self) => paint(self.progress),
       });
-      dots.forEach((dot, i) => dot.classList.toggle("is-on", i === index));
-    };
 
-    const paint = (progress: number) => {
-      slides.forEach((slide, i) => {
-        if (i === 0) {
-          slide.style.transform = "translate3d(0,0,0)";
-          return;
-        }
-        const start = (i - 1) / last;
-        const end = i / last;
-        const t = gsap.utils.clamp(0, 1, (progress - start) / (end - start));
-        slide.style.transform = `translate3d(0, ${(1 - t) * 100}%, 0)`;
-      });
-      setLive(Math.min(last, Math.round(progress * last)));
-    };
+      paint(trigger.progress);
 
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: `+=${last * 100}%`,
-      pin: stage,
-      pinSpacing: true,
-      scrub: 0.2,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => paint(self.progress),
-      onRefresh: (self) => paint(self.progress),
+      return () => {
+        trigger.kill();
+        slides.forEach((slide) => {
+          slide.style.transform = "";
+          slide.classList.add("is-live");
+        });
+      };
     });
 
-    paint(trigger.progress);
-
-    return () => {
-      trigger.kill();
-      slides.forEach((slide) => {
-        slide.style.transform = "";
-        slide.classList.remove("is-live");
-      });
-    };
+    return () => mm.revert();
   }, []);
 
   return (

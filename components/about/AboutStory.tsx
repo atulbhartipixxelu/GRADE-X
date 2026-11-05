@@ -103,7 +103,11 @@ export function AboutStory() {
             <header className="gx-about-firm-head" data-aos="fade-up">
               <p className="gx-about-firm-kicker">Company</p>
               <h2>
-                Grade X Commercial Solutions <em>Pty Ltd</em>
+                <span>Grade X</span>
+                <span>Commercial Solutions</span>
+                <span>
+                  <em>Pty Ltd</em>
+                </span>
               </h2>
               <p className="gx-about-firm-tag">{site.tagline}</p>
               <p>
