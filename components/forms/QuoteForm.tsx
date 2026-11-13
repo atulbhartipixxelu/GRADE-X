@@ -35,36 +35,41 @@ export function QuoteForm({
     payload.delete("photo");
     payload.delete("privacy");
     const data = Object.fromEntries(payload.entries());
-    const res = await fetch("/api/quotes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      setError(body.error || "Could not send. Call us directly.");
+    try {
+      const res = await fetch("/api/quotes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setError(body.error || "Could not send. Call us directly.");
+        setStatus("err");
+        return;
+      }
+      form.reset();
+      setName("");
+      setService(preset || "");
+      setUrgency("Planned programme");
+      setStatus("ok");
+    } catch {
+      setError("Could not send. Call us directly.");
       setStatus("err");
-      return;
     }
-    form.reset();
-    setName("");
-    setService(preset || "");
-    setUrgency("Planned programme");
-    setStatus("ok");
   }
 
   if (status === "ok") {
     return (
       <p className="gx-quote-ok">
         Thanks{name ? `, ${name}` : ""}. We&apos;ve got your request and someone from Grade X will be
-        in touch by {replyWindow}. If it&apos;s urgent, call {site.phone}. You can email photos to{" "}
+        in touch {replyWindow}. If it&apos;s urgent, call {site.phone}. You can email photos to{" "}
         {site.email}.
       </p>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="gx-quote">
+    <form onSubmit={onSubmit} method="post" action="/api/quotes" className="gx-quote">
       <div className="gx-quote-grid">
         <label>
           Name <abbr title="required">*</abbr>
@@ -132,7 +137,7 @@ export function QuoteForm({
         <input required type="checkbox" name="privacy" />
         <span>
           By sending this form you agree to our <a href="/privacy">Privacy Policy</a>. We only use
-          your details to respond to your request. We reply within {replyWindow}.
+          your details to respond to your request. We reply {replyWindow}.
         </span>
       </label>
       <Button type="submit" variant="urgent" disabled={status === "sending"}>

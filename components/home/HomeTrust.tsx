@@ -59,7 +59,7 @@ export function HomeTrust() {
             </div>
             <p>
               Facility managers and QSR compliance teams look for this before engaging a contractor.
-              Exact certificate wording is supplied by Grade X.
+              ISO 9001 and ISO 14001 certificates, insurance and SWMS are on the compliance page.
             </p>
           </div>
         </header>

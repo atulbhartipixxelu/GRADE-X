@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { InnerParticles } from "@/components/inner/InnerParticles";
 import { Button } from "@/components/ui/Button";
 import { techPlates } from "./techPlates";
@@ -171,7 +172,14 @@ export function TechBay() {
                   data-shot
                   style={{ zIndex: techPlates.length - i }}
                 >
-                  <img src={plate.src} alt={plate.alt} />
+                  <Image
+                    src={plate.src}
+                    alt={plate.alt}
+                    fill
+                    sizes="(min-width: 981px) 50vw, 100vw"
+                    className={plate.fit === "map" ? "object-contain" : "object-cover"}
+                    priority={i === 0}
+                  />
                 </figure>
               ))}
             </div>
@@ -180,11 +188,17 @@ export function TechBay() {
               <div className="gx-tech-sight-track" data-sight-track>
                 {techPlates.map((plate, i) => (
                   <article key={plate.n} className="gx-tech-sight-block" data-block>
-                    <img
+                    <div
                       className={`gx-tech-sight-mobile${plate.fit === "map" ? " is-map" : ""}`}
-                      src={plate.src}
-                      alt=""
-                    />
+                    >
+                      <Image
+                        src={plate.src}
+                        alt={plate.alt}
+                        fill
+                        sizes="100vw"
+                        className={plate.fit === "map" ? "object-contain" : "object-cover"}
+                      />
+                    </div>
                     <div className="gx-tech-sight-copy">
                       <Corners />
                       <p className="gx-tech-sight-kicker">

@@ -21,7 +21,7 @@ export function GalleryBanner() {
         <div className="gx-hero-copy">
           <p className="gx-hero-kicker">Work gallery</p>
           <h1 className="gx-hero-title">
-            <span>Before-and-after</span>
+            <span>Before-and-after </span>
             <span>photography.</span>
           </h1>
           <p className="gx-hero-body">

@@ -7,6 +7,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { ServicesMega } from "@/components/layout/ServicesMega";
 import { Button } from "@/components/ui/Button";
+import { capabilityPdf } from "@/lib/iso";
 import { site } from "@/lib/site";
 
 const topNav = [
@@ -37,18 +38,26 @@ export function Header() {
     <>
       <div className="gx-topbar">
         <div className="gx-topbar-inner">
-          <a href={site.phoneHref}>
-            <Phone size={14} strokeWidth={2} />
-            {site.phone}
-          </a>
-          <a href={site.emailHref}>
-            <Mail size={14} strokeWidth={2} />
-            {site.email}
-          </a>
-          <span>
-            <MapPin size={14} strokeWidth={2} />
-            {site.address.full}
-          </span>
+          <div className="gx-topbar-links">
+            <a href={site.phoneHref}>
+              <Phone size={14} strokeWidth={2} />
+              {site.phone}
+            </a>
+            <a href={site.emailHref}>
+              <Mail size={14} strokeWidth={2} />
+              {site.email}
+            </a>
+            <span>
+              <MapPin size={14} strokeWidth={2} />
+              {site.address.full}
+            </span>
+          </div>
+          {capabilityPdf.ready ? (
+            <a className="gx-topbar-pack" href={capabilityPdf.href}>
+              {capabilityPdf.label}
+              <span>{capabilityPdf.meta}</span>
+            </a>
+          ) : null}
         </div>
       </div>
 
@@ -91,9 +100,18 @@ export function Header() {
           </nav>
 
           <div className="gx-nav-end">
-            <Button href="/contact" variant="urgent" className="gx-nav-quote">
-              <span className="gx-nav-quote-full">Request a quote</span>
-              <span className="gx-nav-quote-short">Quote</span>
+            <Button
+              href="/contact"
+              variant="urgent"
+              className="gx-nav-quote"
+              aria-label="Request a quote"
+            >
+              <span className="gx-nav-quote-full" aria-hidden="true">
+                Request a quote
+              </span>
+              <span className="gx-nav-quote-short" aria-hidden="true">
+                Quote
+              </span>
             </Button>
           </div>
         </div>

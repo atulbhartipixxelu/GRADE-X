@@ -18,7 +18,7 @@ export function CtaBanner() {
           </h2>
           <p className="gx-cta-lead">Call {site.phone}.</p>
           <p className="gx-cta-note">
-            We prioritise Perth metro sites. [Hours and target response time.]
+            We prioritise Perth metro sites. Timing is confirmed when you call.
           </p>
           <div className="gx-cta-actions">
             <Button href="/contact">Request a quote</Button>

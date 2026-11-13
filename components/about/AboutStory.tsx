@@ -6,7 +6,7 @@ const facts = [
   { value: "Robot", label: "Gets into places people can't" },
   { value: "Measured", label: "Grease thickness before and after" },
   { value: "Recorded", label: "Photos, readings and a report" },
-  { value: "ISO", label: "9001, 14001 and 45001 on record" },
+  { value: "ISO", label: "9001 and 14001 certified" },
 ];
 
 const slides = [
@@ -103,16 +103,15 @@ export function AboutStory() {
             <header className="gx-about-firm-head" data-aos="fade-up">
               <p className="gx-about-firm-kicker">Company</p>
               <h2>
-                <span>Grade X</span>
-                <span>Commercial Solutions</span>
+                <span>Grade X </span>
+                <span>Commercial Solutions </span>
                 <span>
                   <em>Pty Ltd</em>
                 </span>
               </h2>
               <p className="gx-about-firm-tag">{site.tagline}</p>
               <p>
-                Western Australia&apos;s robotic kitchen exhaust cleaning specialists. Year started:{" "}
-                [year]. Team profiles and photos: [to be added].
+                Western Australia&apos;s robotic kitchen exhaust cleaning specialists.
               </p>
             </header>
 

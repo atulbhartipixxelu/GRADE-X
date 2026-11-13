@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
   "Work gallery",
-  "Before-and-after photography from Grade X commercial kitchen hygiene. Supplied with every job.",
+  "Before-and-after photography from Grade X commercial kitchen hygiene. Every job includes photos you can file with insurers or brand auditors.",
   "/gallery",
 );
 
@@ -25,9 +25,8 @@ export default function GalleryPage() {
               Every job has <em>photographs.</em>
             </h2>
             <p>
-              Before-and-after photography supplied with every Grade X job. Exhaust and canopy
-              pairs will be added as those shots are supplied. Captions use the service and type
-              of site. No client names.
+              Before-and-after photography supplied with every Grade X job. Captions use the
+              service and type of site. No client names.
             </p>
           </header>
           <GalleryBoard />

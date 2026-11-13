@@ -31,7 +31,7 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { categoryImages } from "@/lib/categoryMedia";
+import { categoryAlts, categoryImages } from "@/lib/categoryMedia";
 import { categoryMeta, services, type ServiceCategory } from "@/lib/content";
 import { Button } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/SectionHeading";
@@ -79,6 +79,7 @@ export function ServicesOverview() {
         key,
         ...categoryMeta[key],
         image: categoryImages[key],
+        alt: categoryAlts[key],
         items: services.filter((s) => s.category === key),
       })),
     [],
@@ -164,7 +165,7 @@ export function ServicesOverview() {
             <div className="gx-reel-media">
               <Image
                 src={group.image}
-                alt=""
+                alt={group.alt}
                 fill
                 priority={i === 0}
                 className="gx-reel-photo"
@@ -196,7 +197,7 @@ export function ServicesOverview() {
               <div className="gx-reel-marquee">
                 <div className="gx-reel-track">
                   {[0, 1].map((copy) => (
-                    <div key={copy} className="gx-reel-set" aria-hidden={copy > 0}>
+                    <div key={copy} className="gx-reel-set" aria-hidden={copy > 0} inert={copy > 0 || undefined}>
                       {group.items.map((item) => {
                         const Icon = serviceIcons[item.slug] ?? Sparkles;
                         return (
@@ -246,6 +247,33 @@ export function ServicesOverview() {
             </span>
           ))}
         </div>
+      </div>
+
+      <div className="gx-reel-acc">
+        <header className="gx-reel-acc-head">
+          <Kicker>Services</Kicker>
+          <h2>Four categories. 21 services.</h2>
+          <p>Open a group for the list, or view all services.</p>
+          <Button href="/services">All 21 services</Button>
+        </header>
+        {groups.map((group) => (
+          <details key={group.key} className="gx-reel-acc-item">
+            <summary>
+              <b>{String(group.items.length).padStart(2, "0")}</b>
+              <span>
+                <strong>{group.title}</strong>
+                <em>{group.items.length} services</em>
+              </span>
+            </summary>
+            <ul>
+              {group.items.map((item) => (
+                <li key={item.slug}>
+                  <Link href={`/services/${item.slug}`}>{item.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
       </div>
     </section>
   );

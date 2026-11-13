@@ -4,10 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/brand/Logo";
-import { isoStandards } from "@/lib/iso";
+import { capabilityPdf, publishedIso } from "@/lib/iso";
 import { footerNav, site } from "@/lib/site";
 
-const rail = [...footerNav.company, ...footerNav.operations, ...footerNav.services];
+const rail = [...footerNav.company, ...footerNav.operations, ...footerNav.services].filter(
+  (item) => item.href !== capabilityPdf.href || capabilityPdf.ready,
+);
 
 export function Footer() {
   const pathname = usePathname();
@@ -54,7 +56,7 @@ export function Footer() {
 
       <div className="gx-foot-meta">
         <ul className="gx-foot-iso">
-          {isoStandards.map((item) => (
+          {publishedIso.map((item) => (
             <li key={item.id}>
               <Link href={item.href} className="gx-iso-stamp" aria-label={item.alt}>
                 <small>ISO</small>
@@ -63,6 +65,19 @@ export function Footer() {
               </Link>
             </li>
           ))}
+          {capabilityPdf.ready ? (
+            <li>
+              <a
+                className="gx-iso-stamp"
+                href={capabilityPdf.href}
+                aria-label={`${capabilityPdf.label} (${capabilityPdf.meta})`}
+              >
+                <small>PDF</small>
+                <strong>{capabilityPdf.size}</strong>
+                <span>Capability statement</span>
+              </a>
+            </li>
+          ) : null}
         </ul>
         <p className="gx-foot-abn">ABN {site.abn}</p>
       </div>

@@ -35,6 +35,7 @@ export function AboutBanner() {
           disablePictureInPicture
           controls={false}
           className="gx-hero-video"
+          aria-label="Robotic crawler passing through a commercial kitchen exhaust duct"
         />
         <div className="gx-hero-wash" aria-hidden />
       </div>
@@ -43,7 +44,7 @@ export function AboutBanner() {
         <div className="gx-hero-copy">
           <p className="gx-hero-kicker">About Grade X</p>
           <h1 className="gx-hero-title">
-            <span>A specialist,</span>
+            <span>A specialist, </span>
             <span>not a generalist.</span>
           </h1>
           <p className="gx-hero-body">

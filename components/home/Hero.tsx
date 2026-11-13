@@ -30,7 +30,7 @@ export function Hero() {
           <h1 className="font-display text-[14vw] leading-[0.86] tracking-tight text-ivory sm:text-7xl lg:text-[5.8rem]">
             <span className="block overflow-hidden">
               <span data-clip className="block">
-                Precision in
+                Precision in{" "}
               </span>
             </span>
             <span className="block overflow-hidden">

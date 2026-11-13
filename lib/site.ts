@@ -20,7 +20,7 @@ export const site = {
   shortName: "Grade X",
   tagline: "Kitchen exhaust cleaning, measured and proven.",
   description:
-    "Western Australia's robotic kitchen exhaust cleaning specialists. Robotic cleaning, digital grease readings and photo evidence on every job, so your kitchen is safer and your records stand up to any audit.",
+    "Western Australia's robotic kitchen exhaust cleaning specialists. Certified to ISO 9001 and ISO 14001. Robotic cleaning, digital grease readings and photo evidence on every job.",
   url: resolveSiteUrl(),
   abn: "45 684 073 345",
   address: {
@@ -63,6 +63,7 @@ export const footerNav = {
     { href: "/digital-evidence", label: "Digital evidence" },
     { href: "/gallery", label: "Work gallery" },
     { href: "/compliance", label: "Compliance & WHS" },
+    { href: "/capability-statement.pdf", label: "Capability statement (PDF, 0.6 MB)" },
   ],
   services: [
     { href: "/services", label: "All services" },

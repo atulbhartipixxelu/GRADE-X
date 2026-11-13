@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/check-placeholders.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:copy": "node scripts/check-placeholders.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",

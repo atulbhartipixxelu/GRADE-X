@@ -18,7 +18,7 @@ const specs = [
   {
     n: "02",
     t: "Digital grease thickness gauge",
-    b: "Instant, real-time micron readings, including technology such as the Teinnova Grasmeter.",
+    b: "Instant, real-time micron readings from a digital grease thickness gauge.",
   },
   {
     n: "03",
@@ -158,7 +158,7 @@ export function TrustStrip() {
           <div ref={copy} className="gx-core-copy">
             <Kicker>The robot</Kicker>
             <h2 id="gx-core-heading" className="gx-core-title">
-              <span>Reach what</span>
+              <span>Reach what </span>
               <span>people can&apos;t.</span>
             </h2>
             <p className="gx-core-body">

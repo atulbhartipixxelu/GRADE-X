@@ -6,7 +6,7 @@ import { Clock, Hash, Map, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SelectMenu } from "@/components/ui/SelectMenu";
 import { services as fallbackServices } from "@/lib/content";
-import { isoStandards, openingHours, replyWindow } from "@/lib/iso";
+import { capabilityPdf, isoReady, openingHours, publishedIso, replyWindow } from "@/lib/iso";
 import { site } from "@/lib/site";
 
 const MAP_SRC =
@@ -30,22 +30,27 @@ export function ContactDesk() {
     payload.delete("photo");
     payload.delete("privacy");
     const data = Object.fromEntries(payload.entries());
-    const res = await fetch("/api/quotes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      setError(body.error || "Could not send. Call us directly.");
+    try {
+      const res = await fetch("/api/quotes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setError(body.error || "Could not send. Call us directly.");
+        setStatus("err");
+        return;
+      }
+      form.reset();
+      setService("");
+      setUrgency("Planned programme");
+      setPhotoName("");
+      setStatus("ok");
+    } catch {
+      setError("Could not send. Call us directly.");
       setStatus("err");
-      return;
     }
-    form.reset();
-    setService("");
-    setUrgency("Planned programme");
-    setPhotoName("");
-    setStatus("ok");
   }
 
   return (
@@ -58,13 +63,26 @@ export function ContactDesk() {
               Tell us about <em>your site.</em>
             </h2>
             <p className="gx-com-lede">
-              Let us know what you need, how many sites and your timing. We&apos;ll reply within{" "}
+              Let us know what you need, how many sites and your timing. We&apos;ll reply{" "}
               {replyWindow}. If it&apos;s urgent, call {site.phone}.
             </p>
           </header>
 
           <div className="gx-com-layout">
-            <form onSubmit={onSubmit} className="gx-com-form" data-aos="fade-right">
+            {status === "ok" ? (
+              <p className="gx-com-form gx-com-note gx-com-note--ok" data-aos="fade-right">
+                Thanks. We&apos;ve got your request and someone from Grade X will be in touch{" "}
+                {replyWindow}. If it&apos;s urgent, call {site.phone}. You can email photos to{" "}
+                {site.email}.
+              </p>
+            ) : (
+            <form
+              onSubmit={onSubmit}
+              method="post"
+              action="/api/quotes"
+              className="gx-com-form"
+              data-aos="fade-right"
+            >
               <p className="gx-com-form-title">Quote details</p>
               <label className="gx-com-item">
                 <span>Name *</span>
@@ -141,21 +159,16 @@ export function ContactDesk() {
 
               <div className="gx-com-bottom">
                 <p className="gx-com-check">
-                  We reply within {replyWindow}. If it&apos;s urgent, call{" "}
+                  We reply {replyWindow}. If it&apos;s urgent, call{" "}
                   <a href={site.phoneHref}>{site.phone}</a>.
                 </p>
                 <Button type="submit" variant="urgent" className="gx-com-send" disabled={status === "sending"}>
                   {status === "sending" ? "Sending…" : "Submit quote request"}
                 </Button>
               </div>
-              {status === "ok" ? (
-                <p className="gx-com-note gx-com-note--ok">
-                  Thanks. We&apos;ve got your request and someone from Grade X will be in touch by{" "}
-                  {replyWindow}. If it&apos;s urgent, call {site.phone}.
-                </p>
-              ) : null}
               {status === "err" ? <p className="gx-com-note gx-com-note--err">{error}</p> : null}
             </form>
+            )}
 
             <aside className="gx-com-aside" data-aos="fade-left">
               <div className="gx-com-call">
@@ -169,17 +182,24 @@ export function ContactDesk() {
                 </a>
               </div>
 
-              <ul className="gx-com-iso">
-                {isoStandards.map((item) => (
-                  <li key={item.id}>
-                    <Link href={item.href} className="gx-iso-stamp" aria-label={item.alt}>
-                      <small>ISO</small>
-                      <strong>{item.code.replace("ISO ", "")}</strong>
-                      <span>{item.short}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {isoReady ? (
+                <ul className="gx-com-iso">
+                  {publishedIso.map((item) => (
+                    <li key={item.id}>
+                      <Link href={item.href} className="gx-iso-stamp" aria-label={item.alt}>
+                        <small>ISO</small>
+                        <strong>{item.code.replace("ISO ", "")}</strong>
+                        <span>{item.short}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {capabilityPdf.ready ? (
+                <a className="gx-com-call-mail" href={capabilityPdf.href}>
+                  {capabilityPdf.label} ({capabilityPdf.meta})
+                </a>
+              ) : null}
 
               <ul className="gx-com-ledger">
                 <li>
@@ -191,15 +211,17 @@ export function ContactDesk() {
                     <strong>{site.address.full}</strong>
                   </p>
                 </li>
-                <li>
-                  <i aria-hidden>
-                    <Clock strokeWidth={1.8} />
-                  </i>
-                  <p>
-                    <b>Opening hours</b>
-                    <strong>{openingHours}</strong>
-                  </p>
-                </li>
+                {openingHours ? (
+                  <li>
+                    <i aria-hidden>
+                      <Clock strokeWidth={1.8} />
+                    </i>
+                    <p>
+                      <b>Opening hours</b>
+                      <strong>{openingHours}</strong>
+                    </p>
+                  </li>
+                ) : null}
                 <li>
                   <i aria-hidden>
                     <Map strokeWidth={1.8} />

@@ -287,7 +287,7 @@ export const services: Service[] = [
     category: "lobby",
     excerpt: "Hygienic cleaning of play environments as a defined service, not an add-on to a lobby run.",
     description:
-      "Play places sit at the intersection of hygiene, parent confidence and site compliance. Grade X cleans these environments as a defined service. Staff licences and checks for this work: [to be confirmed]. Scope, frequency and evidence are agreed with the operator.",
+      "Play places sit at the intersection of hygiene, parent confidence and site compliance. Grade X cleans these environments as a defined service. Scope, frequency and evidence are agreed with the operator.",
     outcomes: [
       "Defined play-area hygiene scope",
       "Staff checks confirmed per site before attendance",
@@ -405,7 +405,7 @@ export const methodology: MethodStep[] = [
   {
     step: "02",
     title: "Grease thickness measurement and documentation",
-    body: "A digital grease thickness gauge with an external probe captures micron readings on nominated surfaces. This is the baseline the after-clean reading is compared against. Measuring device: [gauge to be confirmed].",
+    body: "A digital grease thickness gauge with an external probe captures micron readings on nominated surfaces. This is the baseline the after-clean reading is compared against.",
     pass: "Pass: a before reading is on file for the nominated surfaces. Fail: no number, only a visual note.",
   },
   {
@@ -451,7 +451,7 @@ export const faqs: Faq[] = [
     id: "frequency",
     question: "How often should a commercial kitchen exhaust system be cleaned?",
     answer:
-      "Frequency depends on cooking volume, fuel type and insurer or brand requirements. High-volume QSR cooklines typically need a tighter cycle than a club kitchen with limited fryer use. Grade X sets the interval after the first inspection and grease-thickness baseline, then records the recommendation in the job report. [Usual ranges to be added.]",
+      "Frequency depends on cooking volume, fuel type and insurer or brand requirements. High-volume QSR cooklines typically need a tighter cycle than a club kitchen with limited fryer use. Grade X sets the interval after the first inspection and grease-thickness baseline, then records the recommendation in the job report.",
   },
   {
     id: "robotic",
@@ -463,7 +463,7 @@ export const faqs: Faq[] = [
     id: "urgent",
     question: "How fast is urgent response?",
     answer:
-      "Call 0430 360 162. We prioritise Perth metro sites for urgent grease, odour, discharge and after-hours failures, and we aim to be there within [X hours]. Outside the metro, we'll confirm timing when you call. Opening hours: [to be confirmed].",
+      "Call 0430 360 162. We prioritise Perth metro sites for urgent grease, odour, discharge and after-hours failures. Outside the metro, we'll confirm timing when you call.",
   },
   {
     id: "evidence",
@@ -475,7 +475,7 @@ export const faqs: Faq[] = [
     id: "wa-only",
     question: "Is Grade X the only robotic exhaust cleaner in WA?",
     answer:
-      "Grade X runs robotic duct-cleaning equipment that, as far as we know, no other WA provider offers [keep this only once it is backed up]. Whoever you use, ask to see interior video and micron readings from the same visit.",
+      "Grade X runs robotic duct-cleaning equipment for Western Australian kitchen exhaust work. Whoever you use, ask to see interior video and micron readings from the same visit.",
   },
   {
     id: "chemicals",
@@ -525,7 +525,7 @@ export const caseStudies: CaseStudy[] = [];
 export const posts: BlogPost[] = [
   {
     slug: "why-grease-thickness-beats-visual-inspection",
-    title: "Why grease thickness measurement beats a visual exhaust inspection",
+    title: "Grease thickness vs a visual exhaust check",
     excerpt:
       "Visual ‘looks clean’ is not a fire-risk metric. Micron readings give facility managers something an insurer or brand auditor can actually use.",
     date: "2026-03-12",
@@ -533,12 +533,12 @@ export const posts: BlogPost[] = [
     body: [
       "Most kitchen exhaust reports still lean on photographs and a sentence that the system was cleaned. Photographs matter — Grade X supplies them on every job — but they do not quantify soil. A digital grease thickness gauge with an external probe produces an instant micron reading on the surface you actually care about.",
       "That reading, taken before and after the clean, is the difference between a contractor’s opinion and a compliance artefact. QSR and hotel facility managers are increasingly asked to prove that interior soil was reduced, not that the canopy face was shined.",
-      "Grade X uses this method as a standard step, not an optional extra, including technology such as the Teinnova Grasmeter. If your current contractor cannot show you numbers, you do not have a verification system. You have a clean that looks convincing in a gallery.",
+      "Grade X uses this method as a standard step, not an optional extra. If your current contractor cannot show you numbers, you do not have a verification system. You have a clean that looks convincing in a gallery.",
     ],
   },
   {
     slug: "robotic-exhaust-cleaning-wa",
-    title: "What robotic kitchen exhaust cleaning changes for WA operators",
+    title: "What robotic exhaust cleaning changes in WA",
     excerpt:
       "Western Australia's robotic kitchen exhaust cleaning specialists. Here is what the crawler changes on a live site.",
     date: "2026-04-02",
@@ -551,14 +551,14 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "exhaust-cleaning-frequency-perth-kitchens",
-    title: "How often Perth commercial kitchens should clean exhaust systems",
+    title: "How often Perth kitchens should clean exhausts",
     excerpt:
       "Interval is a risk decision. Cooking volume, fryer load and insurer expectations should set the cycle — not the cheapest annual visit.",
     date: "2026-05-18",
     category: "Operations",
     body: [
       "There is no single calendar that fits every Perth kitchen. A high-volume fryer line in a QSR will load an exhaust system faster than a hotel pastry kitchen. Insurers, brand standards and local fire-risk practice all pull the interval in different directions.",
-      "The practical approach is a baseline inspection with grease-thickness measurement, a documented recommendation, and a programme that facility managers can show. Grade X writes that recommendation into the job report. [Usual frequency ranges to be added once confirmed.]",
+      "The practical approach is a baseline inspection with grease-thickness measurement, a documented recommendation, and a programme that facility managers can show. Grade X writes that recommendation into the job report.",
       "If a site has had a fire-related scare, a failed inspection, or a change in menu volume, do not wait for the anniversary of the last clean. Call 0430 360 162 for urgent kitchen exhaust issues.",
     ],
   },
@@ -577,31 +577,31 @@ export const credentials = [
   {
     id: "iso",
     title: "ISO certificates",
-    body: "ISO 9001, ISO 14001 and ISO 45001. Certified by [certification body]. Scope: [exact scope]. Certificate numbers and expiry dates: [to be published]. Download the pack, or ask us to send it to your procurement team.",
+    body: "ISO 9001:2015 and ISO 14001:2015 are held with Globus Certifications Private Limited. Download the certificates from this page, or ask us to send the current pack.",
   },
   {
     id: "public-liability",
-    title: "Public liability insurance",
-    body: "Cover in place for commercial site work. Insurer: [insurer]. Policy and expiry: [to be published]. Certificate supplied to facility managers on request.",
+    title: "Public and product liability",
+    body: "Public and product liability cover is in place for commercial site work. The certificate of currency is supplied on request.",
   },
   {
     id: "workers-comp",
     title: "Workers compensation insurance",
-    body: "Workers compensation insurance is maintained so host sites are not absorbing contractor injury risk. Insurer and expiry: [to be published].",
+    body: "Workers compensation insurance is maintained so host sites are not absorbing contractor injury risk. The certificate of currency is supplied on request.",
   },
   {
     id: "whs-swms",
     title: "WHS and SWMS",
-    body: "Risk assessments, Safe Work Method Statements and site-specific procedures are produced where the job requires them. A sample SWMS: [to be published].",
+    body: "Risk assessments, Safe Work Method Statements and site-specific procedures are produced where the job requires them.",
   },
   {
     id: "chemicals",
     title: "Food-safe chemicals",
-    body: "Methods are selected for commercial kitchen environments — steam-led interior work, controlled chemistry, and protection of food-production surfaces. Product list: [to be published].",
+    body: "Methods are selected for commercial kitchen environments — steam-led interior work, controlled chemistry, and protection of food-production surfaces.",
   },
   {
     id: "staff",
     title: "Staff licences and checks",
-    body: "Staff licences and checks where they apply. Play Place and similar sites: [to be confirmed before we keep a specific check on the page].",
+    body: "Staff licences and checks are confirmed against the site requirements before attendance.",
   },
 ];

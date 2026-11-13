@@ -75,9 +75,19 @@ export function ArchLine({ items }: { items: Spec[] }) {
 
     const refresh = () => ScrollTrigger.refresh();
     const timer = window.setTimeout(refresh, 400);
+    const failsafe = window.setTimeout(() => {
+      stops.forEach((stop) => {
+        stop.classList.add("is-on");
+        const node = stop.querySelector<HTMLElement>("[data-arch-node]");
+        const card = stop.querySelector<HTMLElement>("article");
+        if (node) gsap.set(node, { scale: 1, opacity: 1 });
+        if (card) gsap.set(card, { x: 0, opacity: 1 });
+      });
+    }, 2400);
 
     return () => {
       window.clearTimeout(timer);
+      window.clearTimeout(failsafe);
       ctx.revert();
     };
   }, []);

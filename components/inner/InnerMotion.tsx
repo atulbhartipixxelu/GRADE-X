@@ -1,16 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { showIfStillHidden, showMotion } from "@/lib/showMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function InnerMotion({ children }: { children: React.ReactNode }) {
+  const rootRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const root = document.querySelector(".gx-inner");
+    const root = rootRef.current;
     if (!root) return;
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 980px)").matches;
     const bar = root.querySelector<HTMLElement>(".gx-inner-progress i");
 
     const ctx = gsap.context(() => {
@@ -28,33 +33,50 @@ export function InnerMotion({ children }: { children: React.ReactNode }) {
         });
       }
 
-      if (reduce) return;
+      if (reduce || mobile) return;
 
-      gsap.utils.toArray<HTMLElement>("[data-rise]").forEach((el, i) => {
+      const vh = window.innerHeight || 800;
+
+      root.querySelectorAll<HTMLElement>("[data-rise]").forEach((el, i) => {
+        const inView = el.getBoundingClientRect().top < vh * 0.94;
         gsap.fromTo(
           el,
-          { y: 56, opacity: 0, rotateX: 8 },
+          { y: 40, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            rotateX: 0,
-            duration: 1.05,
+            duration: 0.9,
             delay: Number(el.dataset.delay || 0) + (i % 4) * 0.04,
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%" },
+            scrollTrigger: inView
+              ? undefined
+              : {
+                  trigger: el,
+                  start: "top 92%",
+                  once: true,
+                  toggleActions: "play none none none",
+                },
           },
         );
       });
 
-      gsap.utils.toArray<HTMLElement>("[data-clip]").forEach((el) => {
+      root.querySelectorAll<HTMLElement>("[data-clip]").forEach((el) => {
+        const inView = (el.parentElement ?? el).getBoundingClientRect().top < vh * 0.96;
         gsap.fromTo(
           el,
           { yPercent: 110 },
           {
             yPercent: 0,
-            duration: 1.2,
+            duration: 1.05,
             ease: "power4.out",
-            scrollTrigger: { trigger: el.parentElement, start: "top 90%" },
+            scrollTrigger: inView
+              ? undefined
+              : {
+                  trigger: el.parentElement,
+                  start: "top 94%",
+                  once: true,
+                  toggleActions: "play none none none",
+                },
           },
         );
       });
@@ -84,16 +106,31 @@ export function InnerMotion({ children }: { children: React.ReactNode }) {
       });
     };
 
-    if (!reduce) {
+    if (!reduce && !mobile) {
       window.addEventListener("pointermove", onMove, { passive: true });
       window.addEventListener("pointerleave", onLeave);
     }
 
     const refresh = () => ScrollTrigger.refresh();
-    const t = window.setTimeout(refresh, 700);
+    const raf = window.requestAnimationFrame(() => refresh());
+    const later = window.setTimeout(refresh, 400);
+
+    const near = window.setTimeout(() => {
+      root.querySelectorAll<HTMLElement>("[data-rise], [data-clip]").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 80) showIfStillHidden(el);
+      });
+    }, 1100);
+
+    const hard = window.setTimeout(() => {
+      showMotion(root);
+    }, 2400);
 
     return () => {
-      window.clearTimeout(t);
+      window.cancelAnimationFrame(raf);
+      window.clearTimeout(later);
+      window.clearTimeout(near);
+      window.clearTimeout(hard);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
       ctx.revert();
@@ -101,7 +138,7 @@ export function InnerMotion({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="gx-inner">
+    <div className="gx-inner" ref={rootRef}>
       <div className="gx-inner-progress" aria-hidden>
         <i />
       </div>

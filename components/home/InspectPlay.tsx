@@ -24,7 +24,7 @@ export function InspectPlay() {
           <span>WA only</span>
         </p>
         <h2 id="gx-play-heading" className="gx-play-title">
-          <span>Robotic kitchen exhaust</span>
+          <span>Robotic kitchen exhaust </span>
           <span>cleaning technology.</span>
         </h2>
         <p className="gx-play-body">

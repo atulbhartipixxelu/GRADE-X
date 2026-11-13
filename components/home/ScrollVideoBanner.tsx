@@ -35,6 +35,7 @@ export function ScrollVideoBanner() {
           disablePictureInPicture
           controls={false}
           className="gx-hero-video"
+          aria-label="Grade X robotic crawler cleaning a commercial kitchen exhaust duct"
         />
         <div className="gx-hero-wash" aria-hidden />
       </div>
@@ -46,10 +47,10 @@ export function ScrollVideoBanner() {
           </p>
           <h1 className="gx-hero-title gx-hero-title--split">
             <span>
-              <em>Kitchen exhaust</em>
+              <em>Kitchen exhaust </em>
             </span>
             <span className="gx-hero-accent">
-              <em>cleaning, measured</em>
+              <em>cleaning, measured </em>
             </span>
             <span>
               <em>and proven.</em>

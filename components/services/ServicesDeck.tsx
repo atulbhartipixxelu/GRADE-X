@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { categoryImages } from "@/lib/categoryMedia";
+import { categoryAlts, categoryImages } from "@/lib/categoryMedia";
 import { ServicesParticles } from "@/components/services/ServicesParticles";
 import type { ServiceCategory } from "@/lib/content";
 
@@ -62,7 +62,7 @@ export function ServicesDeck({ groups }: { groups: ServiceGroup[] }) {
             <ServicesParticles className="gx-svc-bay-particles" />
             <Image
               src={categoryImages[g.key]}
-              alt={g.title}
+              alt={categoryAlts[g.key]}
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 44vw, 100vw"

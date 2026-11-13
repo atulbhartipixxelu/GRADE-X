@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
   "Request a Quote",
-  "Tell us about your site. We reply within [one business day]. Urgent kitchen exhaust help: 0430 360 162.",
+  "Tell us about your kitchen site, how many locations and your timing. We'll reply after we review the request. Urgent exhaust help: 0430 360 162.",
   "/contact",
 );
 

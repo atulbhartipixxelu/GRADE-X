@@ -24,6 +24,7 @@ export type QuoteRequest = {
   id: string;
   createdAt: string;
   status: "new" | "read" | "closed";
+  emailed: boolean;
   name: string;
   email: string;
   phone: string;

@@ -80,8 +80,7 @@ export function GalleryBoard() {
       </div>
       {filter !== "All" && shots.length === 0 ? (
         <p className="gx-gal-empty">
-          No {filter.toLowerCase()} photographs on file yet. Those pairs will be added with the same
-          camera angle, a service caption and a date once they are supplied.
+          No {filter.toLowerCase()} photographs in this gallery.
         </p>
       ) : null}
       <div className="gx-gal-board" id="gallery-board">
@@ -118,7 +117,7 @@ export function GalleryBoard() {
           <div className="gx-gal-lite-meta">
             <p className="gx-gal-lite-name">{shot.title}</p>
             <p>{shot.caption}</p>
-            <p>Reading: [before / after microns to be added next to each pair].</p>
+            <p>Before-and-after photographs from the job record.</p>
             <Link href={shot.serviceHref} onClick={(event) => event.stopPropagation()}>
               View {shot.title.replace(" — Before", "").replace(" — After", "")}
             </Link>

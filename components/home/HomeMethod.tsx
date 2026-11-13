@@ -9,7 +9,7 @@ export function HomeMethod() {
         <header className="gx-hmethod-head" data-aos="method-head">
           <p className="gx-hmethod-kicker">Our methodology</p>
           <h2 id="gx-hmethod-heading">
-            <span>Eight steps.</span>
+            <span>Eight steps. </span>
             <span>
               Each one <em>checkable.</em>
             </span>
@@ -18,7 +18,6 @@ export function HomeMethod() {
             Inspect, measure, protect, steam-wash, clean, inspect, re-measure, report. Each step
             has a pass or fail rule on the methodology page.
           </p>
-          <Button href="/methodology">View full methodology</Button>
         </header>
 
         <ol className="gx-hmethod-path">
@@ -43,6 +42,23 @@ export function HomeMethod() {
             </li>
           ))}
         </ol>
+
+        <div className="gx-hmethod-acc">
+          {methodology.map((item) => (
+            <details key={item.step} className="gx-hmethod-acc-item">
+              <summary>
+                <b>{item.step}</b>
+                <span>{item.title}</span>
+              </summary>
+              <p>{item.body}</p>
+              <p>{item.pass}</p>
+            </details>
+          ))}
+        </div>
+
+        <footer className="gx-hmethod-foot">
+          <Button href="/methodology">View full methodology</Button>
+        </footer>
       </div>
     </section>
   );

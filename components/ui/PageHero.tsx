@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { InnerParticles } from "@/components/inner/InnerParticles";
 
@@ -98,9 +99,15 @@ export function PageHero({
             {index}
           </p>
           <div className="gx-inner-hero-plate">
-            {media ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={media} alt={mediaAlt} />
+            {media && mediaAlt ? (
+              <Image
+                src={media}
+                alt={mediaAlt}
+                fill
+                priority
+                sizes="(min-width: 860px) 34rem, 92vw"
+                className="object-cover"
+              />
             ) : (
               <div className="gx-inner-hero-void" />
             )}

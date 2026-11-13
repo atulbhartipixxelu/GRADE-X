@@ -36,6 +36,7 @@ export function ContactBanner() {
           disablePictureInPicture
           controls={false}
           className="gx-hero-video"
+          aria-label="Robotic crawler passing through a commercial kitchen exhaust duct"
         />
         <div className="gx-hero-wash" aria-hidden />
       </div>
@@ -44,12 +45,12 @@ export function ContactBanner() {
         <div className="gx-hero-copy">
           <p className="gx-hero-kicker">Contact</p>
           <h1 className="gx-hero-title">
-            <span>Tell us about</span>
+            <span>Tell us about </span>
             <span>your site.</span>
           </h1>
           <p className="gx-hero-body">
-            Let us know what you need, how many sites and your timing. We&apos;ll reply within [one
-            business day]. If it&apos;s urgent, call {site.phone}.
+            Let us know what you need, how many sites and your timing. We&apos;ll reply after we
+            review your request. If it&apos;s urgent, call {site.phone}.
           </p>
           <div className="gx-hero-actions">
             <Button href="#quote">Quote details</Button>

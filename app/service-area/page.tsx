@@ -1,17 +1,21 @@
+import { AreaBanner } from "@/components/area/AreaBanner";
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { InnerMotion } from "@/components/inner/InnerMotion";
-import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const metros = [
-  "Perth CBD",
-  "North: Joondalup, Stirling, Wanneroo, Balga",
-  "South: Fremantle, Cockburn, Rockingham",
-  "East: Midland, Belmont, Canning",
-  "West: Scarborough, Cambridge, Nedlands",
-  "Wider WA by arrangement",
-];
+const MAP_SRC =
+  "https://maps.google.com/maps?q=5%20Elward%20Way%2C%20Balga%20WA%206061&hl=en&z=16&output=embed";
+
+const coverage = [
+  { tag: "CBD", places: "Perth CBD" },
+  { tag: "North", places: "Joondalup, Stirling, Wanneroo, Balga" },
+  { tag: "South", places: "Fremantle, Cockburn, Rockingham" },
+  { tag: "East", places: "Midland, Belmont, Canning" },
+  { tag: "West", places: "Scarborough, Cambridge, Nedlands" },
+  { tag: "Wider WA", places: "By arrangement" },
+] as const;
 
 export const metadata = pageMeta(
   "Service area — Perth and Western Australia",
@@ -22,53 +26,91 @@ export const metadata = pageMeta(
 export default function ServiceAreaPage() {
   return (
     <InnerMotion>
-      <PageHero
-        index="07"
-        kicker="Service Area"
-        title="Perth metropolitan / Western Australia."
-        body="A prospective client can confirm Grade X services their location: Perth metropolitan and Western Australia, based at 5 Elward Way, Balga WA 6061."
-        crumbs={[
-          { href: "/", label: "Home" },
-          { href: "/service-area", label: "Service area" },
-        ]}
-      />
-      <section className="gx-inner-wrap gx-inner-split">
-        <div className="gx-inner-copy" data-rise>
-          <h2>Coverage</h2>
-          <ul className="mt-6 space-y-3">
-            {metros.map((m) => (
-              <li key={m} className="border-l border-gold pl-4 text-mist">
-                {m}
+      <div className="gx-hero-stack">
+        <AreaBanner />
+      </div>
+
+      <section className="gx-area-page" aria-labelledby="gx-area-heading">
+        <div className="gx-about-story-wrap">
+          <header className="gx-about-story-head" data-aos="fade-up">
+            <p className="gx-about-story-kicker">Coverage</p>
+            <h2 id="gx-area-heading">Where we work</h2>
+          </header>
+
+          <ol className="gx-area-grid">
+            {coverage.map((item, i) => (
+              <li key={item.tag}>
+                <article
+                  className="gx-area-card"
+                  data-aos="fade-up"
+                  data-aos-delay={String((i % 3) * 70)}
+                >
+                  <p className="gx-area-kicker">
+                    <b>{String(i + 1).padStart(2, "0")}</b>
+                    <span>{item.tag}</span>
+                  </p>
+                  <h3>{item.places}</h3>
+                </article>
               </li>
             ))}
-          </ul>
-          <p>
-            Base: {site.address.full}. Emergency response is offered across the Perth metro.
-          </p>
-          <div className="gx-inner-cta">
-            <Button href="/contact">Confirm your site</Button>
-          </div>
-        </div>
-        <div className="gx-inner-card min-h-[360px]" data-rise data-tilt>
-          <svg viewBox="0 0 400 360" className="h-full w-full text-gold">
-            <rect x="40" y="30" width="320" height="300" fill="none" stroke="currentColor" strokeOpacity="0.25" />
-            <path
-              d="M120 80 L280 70 L310 160 L260 280 L140 290 L90 180 Z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.4"
-            />
-            <circle cx="188" cy="150" r="7" fill="currentColor" />
-            <text x="202" y="154" fill="#f4f7fb" fontSize="12">
-              Balga HQ
-            </text>
-            <circle cx="200" cy="175" r="48" fill="none" stroke="currentColor" strokeDasharray="4 4" />
-            <text x="70" y="330" fill="#5a6b82" fontSize="11">
-              Perth metropolitan schematic — not a street map
-            </text>
-          </svg>
+          </ol>
         </div>
       </section>
+
+      <section className="gx-area-base" aria-labelledby="gx-area-base-heading">
+        <div className="gx-about-story-wrap">
+          <header className="gx-about-story-head" data-aos="fade-up">
+            <p className="gx-about-story-kicker">Base</p>
+            <h2 id="gx-area-base-heading">The Balga base</h2>
+          </header>
+
+          <div className="gx-area-split">
+            <div className="gx-area-facts" data-aos="fade-up">
+              <dl>
+                <div>
+                  <dt>Address</dt>
+                  <dd>{site.address.full}</dd>
+                </div>
+                <div>
+                  <dt>Coverage</dt>
+                  <dd>{site.serviceArea}</dd>
+                </div>
+                <div>
+                  <dt>Urgent work</dt>
+                  <dd>
+                    We prioritise Perth metro sites. Outside the metro, we&apos;ll confirm timing
+                    when you call.
+                  </dd>
+                </div>
+              </dl>
+              <p className="gx-area-note">
+                Confirm your suburb and the number of kitchens when you request a quote.
+              </p>
+              <Button href="/contact">Confirm your site</Button>
+            </div>
+
+            <div className="gx-area-map" data-aos="fade-up">
+              <iframe
+                title="Grade X, Balga WA"
+                src={MAP_SRC}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a
+                className="gx-area-pin"
+                href="https://maps.google.com/?q=5+Elward+Way,+Balga+WA+6061"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>Get directions</span>
+                <strong>{site.address.full}</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CtaBanner />
     </InnerMotion>
   );
 }

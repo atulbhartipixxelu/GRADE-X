@@ -1,7 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { posts } from "@/lib/content";
+import { BlogBanner } from "@/components/blog/BlogBanner";
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { InnerMotion } from "@/components/inner/InnerMotion";
+import { noteMedia, stamp } from "@/lib/blog";
+import { posts } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
@@ -10,68 +14,57 @@ export const metadata = pageMeta(
   "/blog",
 );
 
-function stamp(iso: string) {
-  return new Date(`${iso}T00:00:00`).toLocaleDateString("en-AU", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
-
 export default function BlogPage() {
-  const [lead, ...rest] = posts;
-
   return (
     <InnerMotion>
-      <section className="gx-blog" aria-label="Resources">
-        <header className="gx-blog-head">
-          <p className="gx-blog-crumbs">
-            <Link href="/">Home</Link>
-            {" / "}
-            <span>Resources</span>
-          </p>
-          <p className="gx-blog-kicker">Blog / Resources</p>
-          <h1>Kitchen exhaust compliance and technology notes.</h1>
-          <p className="gx-blog-lede">
-            Kitchen exhaust compliance, fire-risk measurement, and robotic cleaning for Western
-            Australian sites.
-          </p>
-        </header>
+      <div className="gx-hero-stack">
+        <BlogBanner />
+      </div>
 
-        {lead ? (
-          <Link href={`/blog/${lead.slug}`} className="gx-blog-lead" data-rise>
-            <span className="gx-blog-meta">
-              <em>{lead.category}</em>
-              <time dateTime={lead.date}>{stamp(lead.date)}</time>
-            </span>
-            <h2>{lead.title}</h2>
-            <p>{lead.excerpt}</p>
-            <span className="gx-blog-more">
-              Read note
-              <ArrowUpRight strokeWidth={1.8} />
-            </span>
-          </Link>
-        ) : null}
-
-        {rest.length ? (
-          <div className="gx-blog-grid">
-            {rest.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="gx-blog-card" data-rise>
-                <span className="gx-blog-meta">
-                  <em>{post.category}</em>
+      <section className="gx-about-story gx-blog-notes" id="notes" aria-label="Resource notes">
+        <div className="gx-about-story-wrap">
+          {posts.map((post, i) => {
+            const media = noteMedia[post.slug];
+            return (
+              <article
+                key={post.slug}
+                className={`gx-about-row${i % 2 ? " is-flip" : ""}`}
+                data-aos={i % 2 ? "fade-left" : "fade-right"}
+              >
+                {media ? (
+                  <figure className="gx-about-row-media">
+                    <Image
+                      src={media.src}
+                      alt={media.alt}
+                      width={960}
+                      height={600}
+                      sizes="(min-width: 860px) 34rem, 92vw"
+                    />
+                  </figure>
+                ) : (
+                  <div className="gx-about-row-media" aria-hidden />
+                )}
+                <div className="gx-about-row-copy">
+                  <p className="gx-about-row-kicker">
+                    {String(i + 1).padStart(2, "0")} <span>{post.category}</span>
+                  </p>
                   <time dateTime={post.date}>{stamp(post.date)}</time>
-                </span>
-                <h2>{post.title}</h2>
-                <p>{post.excerpt}</p>
-                <span className="gx-blog-more">
-                  Read note
-                  <ArrowUpRight strokeWidth={1.8} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        ) : null}
+                  <h3>
+                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  </h3>
+                  <p>{post.excerpt}</p>
+                  <Link href={`/blog/${post.slug}`} className="gx-blog-more">
+                    Read note
+                    <ArrowUpRight strokeWidth={1.8} />
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </section>
+
+      <CtaBanner />
     </InnerMotion>
   );
 }

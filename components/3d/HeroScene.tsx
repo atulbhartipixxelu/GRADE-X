@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { SceneMode } from "./ExhaustCanvas";
@@ -53,9 +54,13 @@ export function HeroScene({ mode = "hero" }: { mode?: SceneMode }) {
 export function HeroFallback() {
   return (
     <div className="absolute inset-0 overflow-hidden bg-brand">
-      <div
-        className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-80"
-        style={{ backgroundImage: "url('/robot/front.jpg')" }}
+      <Image
+        src="/robot/front.jpg"
+        alt="Stainless crawler robot inside an exhaust duct, with work lights on the front face"
+        fill
+        sizes="100vw"
+        className="object-contain opacity-80"
+        priority
       />
     </div>
   );

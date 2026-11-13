@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { categoryImages } from "@/lib/categoryMedia";
+import { categoryAlts, categoryImages } from "@/lib/categoryMedia";
 import type { ServiceCategory } from "@/lib/content";
 
 export function ServicesBanner({
@@ -16,7 +16,7 @@ export function ServicesBanner({
       <div className="gx-hero-media">
         <Image
           src="/services/kitchen-exhaust-hood.jpg"
-          alt="Commercial kitchen exhaust canopy"
+          alt={categoryAlts["kitchen-exhaust"]}
           fill
           priority
           className="gx-hero-video gx-svc-hero-still"
@@ -29,7 +29,7 @@ export function ServicesBanner({
         <div className="gx-hero-copy">
           <p className="gx-hero-kicker">Services</p>
           <h1 className="gx-hero-title">
-            <span>All 21</span>
+            <span>All 21 </span>
             <span>Grade X services.</span>
           </h1>
           <p className="gx-hero-body">
@@ -57,7 +57,7 @@ export function ServicesBanner({
                 <span className="gx-svc-hero-shot">
                   <Image
                     src={categoryImages[g.key]}
-                    alt={g.title}
+                    alt={categoryAlts[g.key]}
                     fill
                     className="object-cover"
                     sizes="(min-width: 1024px) 25vw, 50vw"

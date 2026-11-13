@@ -9,11 +9,14 @@ import { ServicesOverview } from "@/components/home/ServicesOverview";
 import { TrustStrip } from "@/components/home/TrustStrip";
 import { ComplianceBand } from "@/components/trust/ComplianceBand";
 import { TrustBar } from "@/components/trust/TrustBar";
+import { isoClaim, isoReady } from "@/lib/iso";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
   "Commercial Kitchen Exhaust Cleaning Perth",
-  "Robotic kitchen exhaust cleaning in Perth with digital grease readings, photo evidence and ISO-certified systems. Request a quote.",
+  isoReady
+    ? `Robotic kitchen exhaust cleaning in Perth. Certified to ${isoClaim}, with digital grease readings, photo evidence and a written report on every job.`
+    : "Robotic kitchen exhaust cleaning in Perth with digital grease readings, photo evidence and a written report on every job.",
   "/",
 );
 

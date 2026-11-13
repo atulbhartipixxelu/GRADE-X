@@ -12,19 +12,19 @@ import { RevealParticles } from "@/components/home/RevealParticles";
 import { VoidParticles } from "@/components/home/VoidParticles";
 import { revealDrive } from "@/lib/storyDrive";
 
-const overlayTitle = "Precision.\nTechnology.\nCompliance.";
+const overlayTitle = "Precision. \nTechnology. \nCompliance.";
 
 const steps = [
   {
-    title: "Robotic exhaust\ncleaning in WA.",
+    title: "Robotic exhaust \ncleaning in WA.",
     body: "Western Australia's robotic kitchen exhaust cleaning specialists.",
   },
   {
-    title: "A stainless\ntracked crawler.",
+    title: "A stainless \ntracked crawler.",
     body: "Chevron drive plates, dual high-pressure hoses, an articulating turret with twin nozzles, LED work lights and a forward inspection camera.",
   },
   {
-    title: "Evidence on record,\nnot just the canopy.",
+    title: "Evidence on record, \nnot just the canopy.",
     body: "Objective grease-thickness measurement before and after every clean, live video during the clean, and photographic before/after evidence.",
   },
 ] as const;
@@ -64,7 +64,7 @@ function SplitHeadline({
 
   return (
     <h2 className={`gx-reveal-title gx-reveal-title--${align}`}>
-      <span className="sr-only">{text.replaceAll("\n", " ")}</span>
+      <span className="sr-only">{text.replaceAll("\n", " ").replace(/\s+/g, " ").trim()}</span>
       <span aria-hidden>
         {lines.map((line, li) => (
           <span className="gx-reveal-line" key={`${line}-${li}`}>
@@ -112,6 +112,7 @@ function SplitHeadline({
                 </span>
               );
             })}
+            {li < lines.length - 1 ? " " : null}
           </span>
         ))}
       </span>

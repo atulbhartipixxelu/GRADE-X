@@ -3,76 +3,82 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+function reveal(el: Element) {
+  el.classList.add("aos-animate");
+}
+
 export function AosInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    let io: IntersectionObserver | undefined;
     let cancelled = false;
-    let started = false;
-    let fallback = 0;
-    let readyWait = 0;
-    let hard = 0;
+    let io: IntersectionObserver | undefined;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const reveal = (el: Element) => {
-      el.classList.add("aos-animate");
-      io?.unobserve(el);
-    };
-
-    const start = () => {
-      if (cancelled || started) return;
-      started = true;
-
-      const nodes = [...document.querySelectorAll("[data-aos]")];
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+    const watch = (el: Element) => {
+      if (!(el instanceof HTMLElement) || el.classList.contains("aos-animate")) return;
       if (reduce) {
-        nodes.forEach(reveal);
+        reveal(el);
         return;
       }
-
-      io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) reveal(entry.target);
-          });
-        },
-        { threshold: 0.04, rootMargin: "0px 0px -4% 0px" },
-      );
-
       const vh = window.innerHeight || 800;
-      nodes.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < vh * 0.96 && rect.bottom > 24) {
-          reveal(el);
-          return;
-        }
-        io?.observe(el);
-      });
-
-      fallback = window.setTimeout(() => {
-        nodes.forEach(reveal);
-      }, 3500);
-    };
-
-    const kick = () => {
-      if (cancelled) return;
-      const root = document.documentElement;
-      if (root.dataset.gxReady === "1" || root.dataset.gxLoading !== "1") {
-        start();
+      const rect = el.getBoundingClientRect();
+      if (rect.top < vh * 0.98 && rect.bottom > 0) {
+        reveal(el);
         return;
       }
-      readyWait = window.setTimeout(kick, 100);
+      io?.observe(el);
     };
 
-    kick();
-    hard = window.setTimeout(start, 2600);
+    const scan = () => {
+      if (cancelled) return;
+      document.querySelectorAll("[data-aos]").forEach(watch);
+    };
+
+    io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reveal(entry.target);
+            io?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.01, rootMargin: "80px 0px 25% 0px" },
+    );
+
+    const main = document.getElementById("main") ?? document.body;
+    const mo = new MutationObserver(scan);
+    mo.observe(main, { childList: true, subtree: true });
+
+    scan();
+    const raf = window.requestAnimationFrame(() => {
+      scan();
+      window.requestAnimationFrame(scan);
+    });
+
+    const near = window.setTimeout(scan, 350);
+    const hard = window.setTimeout(() => {
+      document.querySelectorAll("[data-aos]").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 160) reveal(el);
+      });
+    }, 1600);
+
+    const onShow = () => scan();
+    window.addEventListener("pageshow", onShow);
+    window.addEventListener("scroll", onShow, { passive: true });
+    window.addEventListener("resize", onShow);
 
     return () => {
       cancelled = true;
-      window.clearTimeout(fallback);
-      window.clearTimeout(readyWait);
+      window.cancelAnimationFrame(raf);
+      window.clearTimeout(near);
       window.clearTimeout(hard);
+      window.removeEventListener("pageshow", onShow);
+      window.removeEventListener("scroll", onShow);
+      window.removeEventListener("resize", onShow);
+      mo.disconnect();
       io?.disconnect();
     };
   }, [pathname]);

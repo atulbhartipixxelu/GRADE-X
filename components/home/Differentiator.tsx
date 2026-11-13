@@ -17,7 +17,7 @@ export function Differentiator() {
         <h2 className="font-display mt-2 text-[12vw] leading-[0.86] tracking-tight text-ivory sm:text-7xl lg:text-8xl">
           <span className="block overflow-hidden">
             <span data-clip className="block">
-              Source of
+              Source of{" "}
             </span>
           </span>
           <span className="block overflow-hidden">

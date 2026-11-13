@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ClipboardList, ShieldCheck } from "lucide-react";
-import { isoStandards } from "@/lib/iso";
+import { isoReady, publishedIso } from "@/lib/iso";
 
 const extras = {
   Insured: {
@@ -21,7 +21,7 @@ export function CertifiedStrip({
   return (
     <div className="gx-cert-strip" aria-label="Certified systems">
       <ul className="gx-cert-marks">
-        {isoStandards.map((item) => (
+        {(isoReady ? publishedIso : []).map((item) => (
           <li key={item.id}>
             <Link href={item.href} aria-label={item.alt}>
               <b>

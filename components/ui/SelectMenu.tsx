@@ -47,13 +47,20 @@ export function SelectMenu({
         className="gx-select-btn"
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-controls={`gx-select-${name}`}
         onClick={() => setOpen((next) => !next)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+            event.preventDefault();
+            setOpen(true);
+          }
+        }}
       >
         <span className={current ? "" : "is-ph"}>{current?.label || placeholder}</span>
         <ChevronDown strokeWidth={2} aria-hidden />
       </button>
       {open ? (
-        <ul className="gx-select-menu" role="listbox">
+        <ul id={`gx-select-${name}`} className="gx-select-menu" role="listbox">
           {options.map((item) => (
             <li key={item.value}>
               <button

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { isoStandards } from "@/lib/iso";
+import { IsoFacts } from "@/components/trust/IsoFacts";
+import { capabilityPdf, isoClaim, isoReady, publishedIso } from "@/lib/iso";
 
 export function ComplianceBand() {
   return (
@@ -9,47 +10,57 @@ export function ComplianceBand() {
         <header className="gx-cmp-band-head" data-aos="fade-up">
           <p className="gx-cmp-band-kicker">Compliance</p>
           <h2 id="gx-cmp-band-heading">
-            <span>Three ISO certifications.</span>
+            <span>Insurance, SWMS and evidence. </span>
             <span>
               All of it <em>on record.</em>
             </span>
           </h2>
           <p>
-            Certified by [certification body]. Scope: [exact scope]. Certificate numbers and expiry
-            dates are in our certificate pack.
+            {isoReady ? `Certified to ${isoClaim}. ` : null}
+            Public and product liability and workers compensation are held for commercial site work. SWMS are
+            produced where the job requires them. Ask us to send the current files to your
+            procurement team.
           </p>
         </header>
 
-        <ul className="gx-cmp-dockets">
-          {isoStandards.map((item, index) => (
-            <li key={item.id} data-aos={index % 2 ? "fade-left" : "fade-right"}>
-              <Link href={item.href} className="gx-cmp-docket" aria-label={item.alt}>
-                <span className="gx-cmp-docket-idx">{String(index + 1).padStart(2, "0")}</span>
-                <span className="gx-cmp-docket-mark">ISO</span>
-                <strong>{item.code.replace("ISO ", "")}</strong>
-                <b>{item.short}</b>
-                <em>{item.line}</em>
-                <dl>
-                  <div>
-                    <dt>Number</dt>
-                    <dd>{item.number}</dd>
+        {isoReady ? (
+          <ul className="gx-cmp-dockets">
+            {publishedIso.map((item, index) => (
+              <li key={item.id} data-aos={index % 2 ? "fade-left" : "fade-right"}>
+                <article className="gx-cmp-docket" aria-labelledby={`${item.id}-band`}>
+                  <span className="gx-cmp-docket-idx">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="gx-cmp-docket-mark">ISO</span>
+                  <strong id={`${item.id}-band`}>{item.code.replace("ISO ", "")}</strong>
+                  <b>
+                    {item.short}
+                    {item.edition ? ` · ${item.edition}` : ""}
+                  </b>
+                  <div className="gx-iso-desk">
+                    <IsoFacts item={item} />
                   </div>
-                  <div>
-                    <dt>Expiry</dt>
-                    <dd>{item.expiry}</dd>
-                  </div>
-                </dl>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                  <details className="gx-iso-acc">
+                    <summary>Certificate details</summary>
+                    <IsoFacts item={item} />
+                  </details>
+                </article>
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
         <footer className="gx-cmp-band-foot" data-aos="fade-up">
           <p>
-            Placeholder labels only. The certifier&apos;s marks go up when the certificate files
-            arrive. <Link href="/compliance">See the six-tile compliance page</Link>.
+            {capabilityPdf.ready ? (
+              <>
+                <a href={capabilityPdf.href}>
+                  {capabilityPdf.label} ({capabilityPdf.meta})
+                </a>
+                .{" "}
+              </>
+            ) : null}
+            <Link href="/compliance">See the compliance page</Link>.
           </p>
-          <Button href="/compliance">Download certificate pack</Button>
+          <Button href="/contact">Request the files</Button>
         </footer>
       </div>
     </section>

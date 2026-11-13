@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Figtree, Space_Grotesk, JetBrains_Mono, Syne } from "next/font/google";
 import { AosInit } from "@/components/layout/AosInit";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Loader } from "@/components/layout/Loader";
+import { SkipLink } from "@/components/layout/SkipLink";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { StickyCtas } from "@/components/layout/StickyCtas";
 import { localBusinessJsonLd, pageMeta } from "@/lib/seo";
@@ -15,6 +16,8 @@ const sans = Figtree({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  adjustFontFallback: true,
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
 });
 
 const display = Space_Grotesk({
@@ -22,12 +25,15 @@ const display = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  adjustFontFallback: true,
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
 });
 
 const mono = JetBrains_Mono({
   variable: "--font-mono-jb",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: true,
 });
 
 const syne = Syne({
@@ -35,11 +41,21 @@ const syne = Syne({
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
   display: "swap",
+  adjustFontFallback: true,
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
 });
+
+export const viewport: Viewport = {
+  themeColor: "#192B4C",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   ...pageMeta(site.tagline, site.description, "/"),
   metadataBase: new URL(site.url),
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
     apple: "/favicon.png",
@@ -57,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${display.variable} ${mono.variable} ${syne.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-[#192B4C]">
+        <SkipLink />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -66,7 +83,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Loader />
         <SmoothScroll>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="flex-1">
+            {children}
+          </main>
           <Footer />
           <StickyCtas />
           <AosInit />

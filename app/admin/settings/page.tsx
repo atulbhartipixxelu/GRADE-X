@@ -45,6 +45,10 @@ export default function AdminSettingsPage() {
               value={settings.notifyEmail}
               onChange={(e) => setSettings({ ...settings, notifyEmail: e.target.value })}
             />
+            <span className="mt-2 block normal-case tracking-normal text-mist">
+              Quote requests always save in Quote requests. Inbox delivery needs RESEND_API_KEY on
+              the server.
+            </span>
           </label>
           <label className="block text-xs tracking-widest text-mist uppercase">
             Emergency note

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categoryImages } from "@/lib/categoryMedia";
+import { mediaForService } from "@/lib/serviceMedia";
 import {
   categoryMeta,
   methodology,
@@ -40,7 +40,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
-  return pageMeta(service.name, service.excerpt, `/services/${slug}`);
+  return pageMeta(service.name, service.description, `/services/${slug}`);
 }
 
 export default async function ServiceDetailPage({
@@ -58,8 +58,7 @@ export default async function ServiceDetailPage({
     ? services.filter((item) => service.related?.includes(item.slug))
     : services.filter((item) => item.category === service.category && item.slug !== service.slug)
   ).slice(0, 3);
-  const image = categoryImages[service.category];
-  const alt = service.heroAlt || `${service.name} — ${categoryMeta[service.category].title}`;
+  const { src: image, alt } = mediaForService(service);
 
   return (
     <InnerMotion>
@@ -187,7 +186,7 @@ export default async function ServiceDetailPage({
                   Request this <em>service.</em>
                 </h2>
                 <p>
-                  The form below is already set to {service.name}. We reply within {replyWindow}.
+                  The form below is already set to {service.name}. We reply {replyWindow}.
                 </p>
               </div>
             </div>

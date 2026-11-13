@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { categoryMeta, services, type ServiceCategory } from "@/lib/content";
-import { categoryImages } from "@/lib/categoryMedia";
+import { categoryAlts, categoryImages } from "@/lib/categoryMedia";
 
 const order: ServiceCategory[] = [
   "kitchen-exhaust",
@@ -27,6 +28,7 @@ const groups = order.map((id, i) => ({
   title: categoryMeta[id].title,
   description: categoryMeta[id].description,
   image: categoryImages[id],
+  alt: categoryAlts[id],
   items: services.filter((item) => item.category === id),
 }));
 
@@ -158,7 +160,7 @@ export function ServicesMega({ active }: { active: boolean }) {
             <p className="gx-mega-kicker">
               {group.n} / {String(groups.length).padStart(2, "0")}
             </p>
-            <h3 className="gx-mega-title">{group.title}</h3>
+            <p className="gx-mega-title">{group.title}</p>
             <p className="gx-mega-copy">{group.description}</p>
             <ul>
               {group.items.map((item, i) => (
@@ -177,8 +179,13 @@ export function ServicesMega({ active }: { active: boolean }) {
             className="gx-mega-shot"
             onClick={() => setOpen(false)}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={group.image} alt="" />
+            <Image
+              src={group.image}
+              alt={group.alt}
+              fill
+              sizes="(min-width: 1100px) 28vw, 100vw"
+              className="object-cover"
+            />
             <span>
               <b>{String(group.items.length).padStart(2, "0")}</b>
               services in this category

@@ -21,7 +21,7 @@ export const techPlates = [
     n: "03",
     label: "Service view",
     title: "Tracks, motors, turret",
-    src: "/technology/exploded-map.jpg?v=2",
+    src: "/technology/exploded-map.jpg",
     alt: "Exploded service view of tracks, chassis, drive motor, turret and fittings",
     fit: "map",
     text: "Drive motors, track assemblies, rollers and turret are built to be serviced. The exploded build matches this platform, not a generic robot.",

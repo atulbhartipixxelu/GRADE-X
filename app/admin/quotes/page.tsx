@@ -57,7 +57,9 @@ export default function AdminQuotesPage() {
                   · {q.phone} · {q.sites} site(s)
                 </p>
                 {q.message ? <p className="mt-3 text-sm text-ivory/80">{q.message}</p> : null}
-                <p className="mt-3 font-mono text-[10px] text-mist">{q.createdAt}</p>
+                <p className="mt-3 font-mono text-[10px] text-mist">
+                  {q.createdAt} · Inbox email {q.emailed ? "sent" : "not sent"}
+                </p>
                 <div className="mt-4 flex gap-2">
                   {(["new", "read", "closed"] as const).map((s) => (
                     <button

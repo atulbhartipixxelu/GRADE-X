@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
+import Image from "next/image";
 import {
   Camera,
   ClipboardList,
@@ -11,62 +12,20 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { reportContents } from "@/lib/content";
+import { evidencePair, evidenceSlides } from "@/lib/evidence";
 import { Kicker } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const tiles = [
-  {
-    t: reportContents[0],
-    n: "Supplied with every job",
-    mark: "photo",
-    tag: "Photographs",
-    icon: Camera,
-    image: "/slides/kitchen-hood.jpg",
-  },
-  {
-    t: reportContents[1],
-    n: "Before and after, objective micron readings",
-    mark: "gauge",
-    tag: "Measurement",
-    icon: Gauge,
-    image: "/slides/duct-interior.jpg",
-  },
-  {
-    t: "Live video during the clean",
-    n: "During the clean itself",
-    mark: "live",
-    tag: "Live video",
-    icon: Video,
-    image: "/slides/duct-live.jpg",
-  },
-  {
-    t: reportContents[2],
-    n: "Written service report for facility files",
-    mark: "file",
-    tag: "Report",
-    icon: FileText,
-    image: "/slides/exploded-bench.jpg",
-  },
-  {
-    t: reportContents[4],
-    n: "Held with the job record",
-    mark: "shield",
-    tag: "Compliance",
-    icon: ShieldCheck,
-    image: "/slides/plant-flange.jpg",
-  },
-  {
-    t: reportContents[5],
-    n: "Recommendations for future intervals",
-    mark: "list",
-    tag: "Recommendations",
-    icon: ClipboardList,
-    image: "/slides/cylinder-brush.jpg",
-  },
-] as const;
+const icons = {
+  photo: Camera,
+  gauge: Gauge,
+  live: Video,
+  file: FileText,
+  shield: ShieldCheck,
+  list: ClipboardList,
+} as const;
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -86,7 +45,7 @@ export function EvidencePreview() {
     const cards = [...trackEl.querySelectorAll<HTMLElement>(".gx-evd-card")];
     const count = root.querySelector(".gx-evd-now");
     const fillBar = root.querySelector<HTMLElement>(".gx-evd-fill");
-    const last = Math.max(tiles.length - 1, 1);
+    const last = Math.max(evidenceSlides.length - 1, 1);
     let shown = 0;
 
     const travel = () => Math.max(0, trackEl.scrollWidth - viewEl.clientWidth);
@@ -113,7 +72,6 @@ export function EvidencePreview() {
     mm.add("(max-width: 980px), (prefers-reduced-motion: reduce)", () => {
       root.classList.add("is-static");
       paint(0);
-      cards.forEach((card) => card.classList.add("is-on"));
       return () => root.classList.remove("is-static");
     });
 
@@ -160,11 +118,7 @@ export function EvidencePreview() {
   }, []);
 
   return (
-    <section
-      ref={stage}
-      className="gx-evd"
-      aria-labelledby="gx-evd-heading"
-    >
+    <section ref={stage} className="gx-evd" aria-labelledby="gx-evd-heading">
       <div className="gx-evd-stage">
         <header className="gx-evd-head">
           <div className="gx-evd-copy" data-aos="fade-up" data-aos-duration="850">
@@ -183,51 +137,78 @@ export function EvidencePreview() {
 
         <div ref={view} className="gx-evd-view" data-aos="fade-up" data-aos-delay="210" data-aos-duration="850">
           <div ref={track} className="gx-evd-track">
-            {tiles.map((tile, i) => (
-              <article
-                key={tile.t}
-                className={`gx-evd-card gx-evd-card--${tile.mark}${i === 0 ? " is-on" : ""}`}
-                style={{ ["--i" as string]: String(i) }}
-              >
-                <div className="gx-evd-media">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="gx-evd-bg" src={tile.image} alt="" decoding="async" />
-                  <b className="gx-evd-ghost" aria-hidden>
-                    {pad(i + 1)}
-                  </b>
-                  <i className="gx-evd-corner" aria-hidden />
-                  <i className="gx-evd-corner is-rt" aria-hidden />
-                  <i className="gx-evd-corner is-lb" aria-hidden />
-                  <i className="gx-evd-corner is-rb" aria-hidden />
-                  <span className="gx-evd-chip">
-                    <tile.icon strokeWidth={1.7} />
-                    {tile.tag}
-                    {tile.mark === "live" ? (
-                      <em className="gx-evd-rec" aria-hidden>
-                        <i /> Rec
-                      </em>
+            {evidenceSlides.map((tile, i) => {
+              const Icon = icons[tile.mark];
+              const hasPair = tile.pair.length === 2;
+              const hasImage = Boolean(tile.image);
+              return (
+                <article
+                  key={tile.t}
+                  className={`gx-evd-card gx-evd-card--${tile.mark}${i === 0 ? " is-on" : ""}${hasPair || hasImage ? "" : " is-plain"}`}
+                  style={{ ["--i" as string]: String(i) }}
+                >
+                  <div className="gx-evd-media">
+                    {hasPair ? (
+                      <div className="gx-evd-pair">
+                        {evidencePair.map((shot) => (
+                          <figure key={shot.label}>
+                            <Image
+                              src={shot.src}
+                              alt={shot.alt}
+                              fill
+                              sizes="(min-width: 900px) 18vw, 45vw"
+                              className="object-cover"
+                            />
+                            <figcaption>{shot.label}</figcaption>
+                          </figure>
+                        ))}
+                      </div>
+                    ) : hasImage ? (
+                      <Image
+                        className="gx-evd-bg"
+                        src={tile.image}
+                        alt={tile.alt}
+                        fill
+                        sizes="(min-width: 900px) 36vw, 90vw"
+                      />
                     ) : null}
-                  </span>
-                  <div className="gx-evd-info">
-                    <span className="gx-evd-idx">{pad(i + 1)}</span>
-                    <div>
-                      <h3 className="gx-evd-name">{tile.t}</h3>
-                      <p className="gx-evd-note">{tile.n}</p>
+                    <b className="gx-evd-ghost" aria-hidden>
+                      {pad(i + 1)}
+                    </b>
+                    <i className="gx-evd-corner" aria-hidden />
+                    <i className="gx-evd-corner is-rt" aria-hidden />
+                    <i className="gx-evd-corner is-lb" aria-hidden />
+                    <i className="gx-evd-corner is-rb" aria-hidden />
+                    <span className="gx-evd-chip">
+                      <Icon strokeWidth={1.7} />
+                      {tile.tag}
+                      {tile.mark === "live" ? (
+                        <em className="gx-evd-rec" aria-hidden>
+                          <i /> Rec
+                        </em>
+                      ) : null}
+                    </span>
+                    <div className="gx-evd-info">
+                      <span className="gx-evd-idx">{pad(i + 1)}</span>
+                      <div>
+                        <h3 className="gx-evd-name">{tile.t}</h3>
+                        <p className="gx-evd-note">{tile.n}</p>
+                      </div>
+                      <em className="gx-evd-go" aria-hidden>
+                        <i />
+                      </em>
                     </div>
-                    <em className="gx-evd-go" aria-hidden>
-                      <i />
-                    </em>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
 
         <div className="gx-evd-meta">
           <p className="gx-evd-count">
             <span className="gx-evd-now">01</span>
-            <span>/ {pad(tiles.length)}</span>
+            <span>/ {pad(evidenceSlides.length)}</span>
           </p>
           <Button href="/digital-evidence">Digital evidence</Button>
         </div>

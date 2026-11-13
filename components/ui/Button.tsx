@@ -11,6 +11,7 @@ type Props = {
   type?: "button" | "submit";
   disabled?: boolean;
   onClick?: () => void;
+  "aria-label"?: string;
 };
 
 function trackPointer(event: PointerEvent<HTMLElement>) {
@@ -34,19 +35,27 @@ export function Button({
   type = "button",
   disabled,
   onClick,
+  "aria-label": ariaLabel,
 }: Props) {
   const cls = `gx-btn gx-btn--${variant} ${className}`;
 
   if (href) {
     return (
-      <Link href={href} className={cls} {...pointer}>
+      <Link href={href} className={cls} aria-label={ariaLabel} {...pointer}>
         <span className="gx-btn-label">{children}</span>
       </Link>
     );
   }
 
   return (
-    <button type={type} className={cls} disabled={disabled} onClick={onClick} {...pointer}>
+    <button
+      type={type}
+      className={cls}
+      disabled={disabled}
+      onClick={onClick}
+      aria-label={ariaLabel}
+      {...pointer}
+    >
       <span className="gx-btn-label">{children}</span>
     </button>
   );

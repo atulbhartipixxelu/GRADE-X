@@ -2,9 +2,9 @@ import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const shots = [
-  { src: "/robot/front.jpg", alt: "Grade X robot front with LED lights and turret" },
-  { src: "/robot/side.jpg", alt: "Grade X crawler side with dual hoses" },
-  { src: "/robot/exploded.jpg", alt: "Exploded architecture of the Grade X crawler" },
+  { src: "/robot/front.jpg", alt: "Crawler robot head-on with LED work lights and turret jets" },
+  { src: "/robot/side.jpg", alt: "Crawler robot from the side, showing dual high-pressure hoses" },
+  { src: "/robot/exploded.jpg", alt: "Exploded view of the crawler tracks, chassis, motors and turret" },
 ];
 
 export function PhotoGrid() {

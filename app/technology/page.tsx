@@ -9,7 +9,7 @@ import { CertifiedStrip } from "@/components/trust/CertifiedStrip";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(
-  "Robotic Exhaust Cleaning Technology",
+  "The Grade X robotic platform",
   "See how our tracked crawler cleans and inspects kitchen ducts with a live camera, twin jets and before and after readings.",
   "/technology",
 );
@@ -130,34 +130,14 @@ export default function TechnologyPage() {
             <p className="gx-tech-arch-kicker">Platform</p>
             <h2>Tracks, turret, hoses — the real architecture.</h2>
             <p>
-              Tracks, turret and hoses as they sit on the machine. Specifications below are
-              placeholders until the equipment sheet arrives.
+              Tracks, turret and hoses as they sit on the machine. The exploded view on this page
+              matches the real platform.
             </p>
           </header>
 
           <ArchLine items={specs} />
 
           <div className="gx-spec-sheet" data-aos="fade-up">
-            <header className="gx-spec-sheet-head">
-              <p>Equipment sheet</p>
-              <h3>Values to be filled from the manufacturer sheet</h3>
-            </header>
-            <dl className="gx-spec-grid">
-              {[
-                ["Smallest duct size", "[I'll send]"],
-                ["Longest run", "[I'll send]"],
-                ["Pressure and flow", "[I'll send]"],
-                ["Camera and lighting", "[I'll send]"],
-                ["How the live view works", "[I'll send]"],
-                ["Measuring device", "[I'll confirm the gauge we use]"],
-              ].map(([label, value], index) => (
-                <div key={label}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <dt>{label}</dt>
-                  <dd>{value}</dd>
-                </div>
-              ))}
-            </dl>
             <CertifiedStrip />
             <div className="gx-tech-arch-cta">
               <Button href="/digital-evidence">Digital evidence system</Button>

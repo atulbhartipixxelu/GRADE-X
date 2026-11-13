@@ -48,8 +48,8 @@ export function CredentialsSlider() {
             <p className="gx-creds-kicker">Compliance &amp; WHS</p>
             <h2 id="gx-creds-heading">Credentials that sit on the job file</h2>
             <p>
-              Insurance, food-safe methods, SWMS and ISO 9001, 14001 and 45001 — held on file and
-              supplied to facility managers on request.
+              Insurance, food-safe methods and SWMS — held on file and supplied to facility
+              managers on request.
             </p>
           </div>
           <Button href="/compliance">View credentials</Button>
@@ -58,7 +58,7 @@ export function CredentialsSlider() {
         <figure className="gx-creds-photo">
           <Image
             src="/slides/duct-live.jpg"
-            alt="Grade X robotic kitchen exhaust crawler"
+            alt="Crawler robot inside a stainless exhaust duct, spraying the walls while grease is still visible"
             fill
             sizes="(max-width: 1500px) 92vw, 1500px"
             className="gx-creds-photo-img"
@@ -83,7 +83,7 @@ export function CredentialsSlider() {
         </ul>
 
         <p className="gx-creds-note">
-          Exact certificate wording is supplied by Grade X.
+          ISO 9001 and ISO 14001 certificates are on the compliance page.
           <Link href="/compliance">Compliance &amp; WHS</Link>
         </p>
       </div>

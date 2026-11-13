@@ -43,7 +43,7 @@ export function ServiceBanner({
                 key={line}
                 className={index === lines.length - 1 ? "gx-hero-accent" : undefined}
               >
-                <em>{line}</em>
+                <em>{index === lines.length - 1 ? line : `${line} `}</em>
               </span>
             ))}
           </h1>

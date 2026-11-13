@@ -15,14 +15,14 @@ export function HomeQuote() {
                 Tell us about <em>your site.</em>
               </h2>
               <p>
-                Let us know what you need, how many sites and your timing. We&apos;ll reply within{" "}
+                Let us know what you need, how many sites and your timing. We&apos;ll reply{" "}
                 {replyWindow}. If it&apos;s urgent, call {site.phone}.
               </p>
             </div>
             <ul className="gx-home-quote-facts">
               <li>
                 <b>Reply</b>
-                <span>Within {replyWindow}</span>
+                <span>{replyWindow}</span>
               </li>
               <li>
                 <b>Urgent</b>
