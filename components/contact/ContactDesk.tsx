@@ -196,8 +196,9 @@ export function ContactDesk() {
                 </ul>
               ) : null}
               {capabilityPdf.ready ? (
-                <a className="gx-com-call-mail" href={capabilityPdf.href}>
-                  {capabilityPdf.label} ({capabilityPdf.meta})
+                <a className="gx-com-pack" href={capabilityPdf.href}>
+                  {capabilityPdf.label}
+                  <span>{capabilityPdf.meta}</span>
                 </a>
               ) : null}
 

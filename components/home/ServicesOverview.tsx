@@ -3,62 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useMemo, useRef } from "react";
-import type { LucideIcon } from "lucide-react";
-import {
-  AppWindow,
-  Bot,
-  Brush,
-  Building2,
-  ChefHat,
-  CookingPot,
-  DoorOpen,
-  Droplets,
-  Fan,
-  Flame,
-  Layers,
-  Minus,
-  Moon,
-  Plus,
-  Puzzle,
-  ShieldCheck,
-  ShowerHead,
-  Snowflake,
-  Sparkles,
-  Spline,
-  UtensilsCrossed,
-  Warehouse,
-  Wine,
-} from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { categoryAlts, categoryImages } from "@/lib/categoryMedia";
 import { categoryMeta, services, type ServiceCategory } from "@/lib/content";
+import { serviceIconFallback, serviceIcons } from "@/lib/serviceIcons";
 import { Button } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/SectionHeading";
-
-const serviceIcons: Record<string, LucideIcon> = {
-  "kitchen-exhaust-cleaning": Fan,
-  "canopy-cleaning": ChefHat,
-  "robotic-exhaust-cleaning": Bot,
-  "steam-cleaning": Droplets,
-  "kitchen-equipment-hygiene": UtensilsCrossed,
-  "grill-recovery": Flame,
-  "fryer-vat-boil-outs": CookingPot,
-  "shake-machine-cleaning": Wine,
-  "cool-room-cleaning": Snowflake,
-  "nightly-kitchen-maintenance": Moon,
-  "monthly-kitchen-deep-cleaning": Sparkles,
-  "lobby-cleaning": DoorOpen,
-  "monthly-lobby-deep-cleaning": Building2,
-  "play-place": Puzzle,
-  "floor-detailing-scrubbing": Layers,
-  "exterior-high-pressure-washing": ShowerHead,
-  "building-drive-thru-pressure-cleaning": Warehouse,
-  "window-cleaning": AppWindow,
-  "line-marking": Spline,
-  "general-commercial-cleaning": Brush,
-  "hygiene-sanitation-services": ShieldCheck,
-};
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -199,7 +151,7 @@ export function ServicesOverview() {
                   {[0, 1].map((copy) => (
                     <div key={copy} className="gx-reel-set" aria-hidden={copy > 0} inert={copy > 0 || undefined}>
                       {group.items.map((item) => {
-                        const Icon = serviceIcons[item.slug] ?? Sparkles;
+                        const Icon = serviceIcons[item.slug] ?? serviceIconFallback;
                         return (
                           <article key={`${copy}-${item.slug}`} className="gx-reel-chip">
                             <span className="gx-reel-flip">

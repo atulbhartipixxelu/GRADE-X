@@ -1,6 +1,7 @@
 import { categoryMeta, type ServiceCategory } from "@/lib/content";
 import { store } from "@/lib/store";
 import { InnerMotion } from "@/components/inner/InnerMotion";
+import { CtaBanner } from "@/components/home/CtaBanner";
 import { ServicesBanner } from "@/components/services/ServicesBanner";
 import { ServicesDeck } from "@/components/services/ServicesDeck";
 import { CertifiedStrip } from "@/components/trust/CertifiedStrip";
@@ -35,12 +36,11 @@ export default async function ServicesPage() {
   return (
     <InnerMotion>
       <div className="gx-hero-stack">
-        <ServicesBanner
-          groups={groups.map((g) => ({ key: g.key, title: g.title, count: g.items.length }))}
-        />
+        <ServicesBanner />
       </div>
       <CertifiedStrip />
       <ServicesDeck groups={groups} />
+      <CtaBanner />
     </InnerMotion>
   );
 }

@@ -2,10 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { categoryAlts, categoryImages } from "@/lib/categoryMedia";
-import { ServicesParticles } from "@/components/services/ServicesParticles";
 import type { ServiceCategory } from "@/lib/content";
+import { serviceIconFallback, serviceIcons } from "@/lib/serviceIcons";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type ServiceGroup = {
   key: ServiceCategory;
@@ -15,6 +20,7 @@ export type ServiceGroup = {
 };
 
 export function ServicesDeck({ groups }: { groups: ServiceGroup[] }) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(groups[0]?.key ?? "kitchen-exhaust");
 
   useEffect(() => {
@@ -31,15 +37,49 @@ export function ServicesDeck({ groups }: { groups: ServiceGroup[] }) {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (vis?.target.id) setActive(vis.target.id as ServiceCategory);
       },
-      { rootMargin: "-28% 0px -48% 0px", threshold: [0.12, 0.28, 0.5] },
+      { rootMargin: "-12% 0px -28% 0px", threshold: [0.08, 0.22, 0.45] },
     );
     nodes.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [groups]);
 
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const layers = [...root.querySelectorAll<HTMLElement>(".gx-svc-cat-parallax")];
+    const ctx = gsap.context(() => {
+      layers.forEach((layer) => {
+        const frame = layer.parentElement;
+        if (!frame) return;
+        gsap.fromTo(
+          layer,
+          { yPercent: -16 },
+          {
+            yPercent: 16,
+            ease: "none",
+            scrollTrigger: {
+              trigger: frame,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          },
+        );
+      });
+    }, root);
+
+    const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 240);
+    return () => {
+      window.clearTimeout(refresh);
+      ctx.revert();
+    };
+  }, [groups]);
+
   return (
-    <div className="gx-svc-deck">
-      <nav className="gx-svc-index" aria-label="Service categories">
+    <div className="gx-svc-cats" ref={rootRef}>
+      <nav className="gx-svc-tabs" aria-label="Service categories">
         {groups.map((g) => (
           <a
             key={g.key}
@@ -53,57 +93,56 @@ export function ServicesDeck({ groups }: { groups: ServiceGroup[] }) {
       </nav>
 
       {groups.map((g, i) => (
-        <section
-          key={g.key}
-          id={g.key}
-          className={`gx-svc-bay ${i % 2 === 1 ? "gx-svc-bay--flip gx-svc-bay--gold" : "gx-svc-bay--ink"}`}
-        >
-          <div className="gx-svc-bay-visual">
-            <ServicesParticles className="gx-svc-bay-particles" />
-            <Image
-              src={categoryImages[g.key]}
-              alt={categoryAlts[g.key]}
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 44vw, 100vw"
-            />
-            <div className="gx-svc-bay-veil" aria-hidden>
-              <i className="gx-svc-bay-tick gx-svc-bay-tick-tl" />
-              <i className="gx-svc-bay-tick gx-svc-bay-tick-tr" />
-              <i className="gx-svc-bay-tick gx-svc-bay-tick-bl" />
-              <i className="gx-svc-bay-tick gx-svc-bay-tick-br" />
+        <section key={g.key} id={g.key} className="gx-svc-cat">
+          <figure className="gx-svc-cat-media relative">
+            <div className="gx-svc-cat-parallax">
+              <Image
+                src={categoryImages[g.key]}
+                alt={categoryAlts[g.key]}
+                fill
+                sizes="100vw"
+              />
             </div>
-            <p className="gx-svc-bay-no" aria-hidden>
-              {String(i + 1).padStart(2, "0")}
-            </p>
-            <div className="gx-svc-bay-caption">
-              <p>Category {String(i + 1).padStart(2, "0")} / 04</p>
+            <figcaption>
+              <p>
+                {String(i + 1).padStart(2, "0")} / 04
+                <span>{String(g.items.length).padStart(2, "0")} services</span>
+              </p>
               <h2>{g.title}</h2>
-            </div>
-          </div>
+            </figcaption>
+          </figure>
 
-          <div className="gx-svc-bay-copy">
-            <p className="gx-svc-bay-kicker">
-              {String(g.items.length).padStart(2, "0")} services
+          <div className="gx-about-story-wrap gx-svc-cat-body">
+            <p className="gx-svc-cat-lede" data-aos="fade-up">
+              {g.description}
             </p>
-            <h3>{g.title}</h3>
-            <p className="gx-svc-bay-lede">{g.description}</p>
-            <ol className="gx-svc-manifest">
-              {g.items.map((s, n) => (
-                <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="gx-svc-line" data-rise>
-                    <span className="gx-svc-line-no">{String(n + 1).padStart(2, "0")}</span>
-                    <span className="gx-svc-line-copy">
+            <ol className="gx-svc-items">
+              {g.items.map((s, n) => {
+                const Icon = serviceIcons[s.slug] ?? serviceIconFallback;
+                return (
+                  <li key={s.slug}>
+                    <Link
+                      href={`/services/${s.slug}`}
+                      className="gx-svc-item"
+                      data-aos="fade-up"
+                      data-aos-delay={String((n % 2) * 70)}
+                    >
+                      <span className="gx-svc-item-top">
+                        <i className="gx-svc-item-ico" aria-hidden>
+                          <Icon strokeWidth={1.7} />
+                        </i>
+                        <b>{String(n + 1).padStart(2, "0")}</b>
+                      </span>
                       <strong>{s.name}</strong>
                       <em>{s.excerpt}</em>
-                    </span>
-                    <span className="gx-svc-line-go">
-                      View {s.name}
-                      <i />
-                    </span>
-                  </Link>
-                </li>
-              ))}
+                      <i className="gx-svc-view">
+                        View
+                        <ArrowUpRight strokeWidth={2.2} aria-hidden />
+                      </i>
+                    </Link>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         </section>
